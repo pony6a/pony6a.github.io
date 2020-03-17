@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://pony6a.GitHub.io</id>
-    <title>Gridea</title>
-    <updated>2020-03-17T05:22:58.134Z</updated>
+    <id>https://http://ls6z.tk/</id>
+    <title>pony686</title>
+    <updated>2020-03-17T05:41:00.739Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://pony6a.GitHub.io"/>
-    <link rel="self" href="https://pony6a.GitHub.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>https://pony6a.GitHub.io/images/avatar.png</logo>
-    <icon>https://pony6a.GitHub.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <link rel="alternate" href="https://http://ls6z.tk/"/>
+    <link rel="self" href="https://http://ls6z.tk/atom.xml"/>
+    <subtitle>pony686</subtitle>
+    <logo>https://http://ls6z.tk/images/avatar.png</logo>
+    <icon>https://http://ls6z.tk/favicon.ico</icon>
+    <rights>All rights reserved 2020, pony686</rights>
+    <entry>
+        <title type="html"><![CDATA[fasf]]></title>
+        <id>https://http://ls6z.tk/post/fasf/</id>
+        <link href="https://http://ls6z.tk/post/fasf/">
+        </link>
+        <updated>2020-03-17T05:26:12.000Z</updated>
+        <content type="html"><![CDATA[<p>v必须必须买cxsfa<br>
+fasdg</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://pony6a.GitHub.io/post/hello-gridea/</id>
-        <link href="https://pony6a.GitHub.io/post/hello-gridea/">
+        <id>https://http://ls6z.tk/post/hello-gridea/</id>
+        <link href="https://http://ls6z.tk/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>

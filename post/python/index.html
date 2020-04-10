@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>pony686</title>
+<title>python | pony686</title>
 <meta name="description" content="pony686">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://http://ls6z.tk/">pony686</a></h3>
@@ -76,61 +77,139 @@
   </div>
 </nav>
 
-
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>python</h1>
+            <p class="article-meta">
+              2020-04-10
+              
+            </p>
+            
+            <div class="post-content">
+              <p>day01<br>
+. 用户交互input</p>
+<pre><code>why:	网页上，app 输入账号与密码。
+
+what： 用户交互input
+
+how：
+
+```python
+# input: 出来的全部都是字符串类型。
+username = input('请输入用户名：')
+password = input('请输入密码：')
+print(username,type(username))
+print(password,type(password))
+```
+</code></pre>
+<p>流程控制语句if</p>
+<pre><code>why:  生活中选择，回家，n条路，你走那条路，取决于心情。
+
+what: if。
+
+how：
+
++ 基本结构：
+
++ ```
+  if 条件:
+      结果
+      
+  # c: if{条件}{结果}
+  ```
+
+1.  单独if
+
+   ```python
+   print(111)
+   if 2 &lt; 1:
+       print(666)
+       print(333)
+   print(222)
+   ```
+
+   
+
+2. if else 二选一
+
+   ```python 
+   s1 = '100'
+   i1 = int(s1)
+   print(i1,type(l1))
+   
+   age = input('请输入年龄：')
+   if int(age) &gt; 18:
+       print('恭喜你，成年了')
+   else:
+       print('小屁孩儿')
+   
+   ```
+
+3. if elif elif .... 多选一
+
+   ```python
+   num = int(input('猜点数：'))
+   
+   if num == 1:
+       print('晚上请你吃饭')
+   elif num == 3:
+       print('一起溜达')
+   elif num == 2:
+       print('请你大宝剑')
+   ```
+
+   
+
+4. if elif elif .... else 多选一
+
+   ```python
+   num = int(input('猜点数：'))
+   
+   if num == 1:
+       print('晚上请你吃饭')
+   	
+   elif num == 3:
+       print('一起溜达')
+   	
+   elif num == 2:
+       print('请你大宝剑')
+   else:
+       print('太笨了....')
+   
+   print('组合')
+   ```
+
+   
+
+5. 嵌套的if
+
+   ```python
+   
+   username = input('请输入用户名：')
+   password = input('请输入密码：')
+   code = 'qwer'
+   your_code = input('请输入验证码：')
+   
+   if your_code == code:
+       if username == 'taibai' and password == '123':
+   	    print('登录成功')
+       else:
+   	    print('账号或者密码错误')
+   else:
+       print('验证码错误')
+   ```</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
           
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://http://ls6z.tk/post/python02/">python02</a>
-    </h2>
-    <p class="article-meta">
-      2020-04-10
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://http://ls6z.tk/post/python02/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://http://ls6z.tk/post/python/">python</a>
-    </h2>
-    <p class="article-meta">
-      2020-04-10
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://http://ls6z.tk/post/python/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
         </div>
         
-        <div class="row flex-edges">
-  
-  
-</div>
-
       </div>
-      
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://http://ls6z.tk//images/avatar.png?v=1586511988386" class="no-responsive avatar">
@@ -190,7 +269,9 @@
   </div>
 </div>
 
+
     </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">

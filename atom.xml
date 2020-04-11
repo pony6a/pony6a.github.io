@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://pony6a.github.io</id>
+    <id>http://itxz.fun</id>
     <title>pony686</title>
-    <updated>2020-04-11T07:51:56.228Z</updated>
+    <updated>2020-04-11T07:52:22.831Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://pony6a.github.io"/>
-    <link rel="self" href="http://pony6a.github.io/atom.xml"/>
+    <link rel="alternate" href="http://itxz.fun"/>
+    <link rel="self" href="http://itxz.fun/atom.xml"/>
     <subtitle>pony686</subtitle>
-    <logo>http://pony6a.github.io/images/avatar.png</logo>
-    <icon>http://pony6a.github.io/favicon.ico</icon>
+    <logo>http://itxz.fun/images/avatar.png</logo>
+    <icon>http://itxz.fun/favicon.ico</icon>
     <rights>All rights reserved 2020, pony686</rights>
     <entry>
         <title type="html"><![CDATA[python02]]></title>
-        <id>http://pony6a.github.io/post/python02/</id>
-        <link href="http://pony6a.github.io/post/python02/">
+        <id>http://itxz.fun/post/python02/</id>
+        <link href="http://itxz.fun/post/python02/">
         </link>
         <updated>2020-04-10T09:43:46.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[python]]></title>
-        <id>http://pony6a.github.io/post/python/</id>
-        <link href="http://pony6a.github.io/post/python/">
+        <id>http://itxz.fun/post/python/</id>
+        <link href="http://itxz.fun/post/python/">
         </link>
         <updated>2020-04-10T09:34:25.000Z</updated>
     </entry>

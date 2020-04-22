@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itxz.fun</id>
     <title>pony686</title>
-    <updated>2020-04-22T09:27:10.203Z</updated>
+    <updated>2020-04-22T09:30:21.682Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itxz.fun"/>
     <link rel="self" href="https://itxz.fun/atom.xml"/>
@@ -16,6 +16,45 @@
         <link href="https://itxz.fun/post/day03for-xun-huan/">
         </link>
         <updated>2020-04-22T09:25:56.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="s1-老男孩edu">s1 = '老男孩edu'</h1>
+<h1 id="print老-in-s1">print('老' in s1)</h1>
+<h1 id="print老男-in-s1">print('老男' in s1)</h1>
+<h1 id="print老ed-in-s1">print('老ed' in s1)</h1>
+<h1 id="print老ed-not-in-s1">print('老ed' not in s1)</h1>
+<p>s1 = '老男孩教育最好的讲师：太白'<br>
+'''<br>
+老      s1[0]<br>
+男      s1[1]<br>
+孩      s1[2]<br>
+教      s1[3]<br>
+育      ....<br>
+最<br>
+...<br>
+'''</p>
+<h1 id="0~12">0~12</h1>
+<h1 id="len-获取可迭代对象的元素总个数">len :获取可迭代对象的元素总个数</h1>
+<h1 id="printlens1">print(len(s1))</h1>
+<h1 id="s1-老男孩教育最好的讲师太白">s1 = '老男孩教育最好的讲师：太白'</h1>
+<h1 id="index-0">index = 0</h1>
+<h1 id="while-index-lens1">while index &lt; len(s1):</h1>
+<h1 id="prints1index">print(s1[index])</h1>
+<h1 id="index-1">index += 1</h1>
+<h1 id="for-循环">for 循环</h1>
+<p>'''<br>
+有限循环<br>
+for 变量 in iterable:<br>
+pass<br>
+'''<br>
+s1 = '老男孩教育最好的讲师：太白'</p>
+<h1 id="for-i-in-s1">for i in s1:</h1>
+<h1 id="printi">print(i)</h1>
+<p>for i in s1:<br>
+print(i)<br>
+if i == '好':<br>
+break</p>
+<h1 id="break-continue">break continue</h1>
+<h1 id="for-else-while-else用法一样">for else: while else:用法一样。</h1>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[day03(str&&切片)]]></title>
@@ -23,6 +62,124 @@
         <link href="https://itxz.fun/post/day03strandqie-pian/">
         </link>
         <updated>2020-04-22T09:24:16.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="s1-python全栈22期">s1 = 'python全栈22期'</h1>
+<h1 id="对字符串进行索引切片出来的数据都是字符串类型"># 对字符串进行索引，切片出来的数据都是字符串类型。</h1>
+<h1 id="按照索引取值"># 按照索引取值</h1>
+<h1 id="从左至右有顺序下标索引"># 从左至右有顺序，下标，索引。</h1>
+<h1 id="s2-s10">s2 = s1[0]</h1>
+<h1 id="prints2types2">print(s2,type(s2))</h1>
+<h1 id="s3-s12">s3 = s1[2]</h1>
+<h1 id="prints3">print(s3)</h1>
+<h1 id="s4-s1-1">s4 = s1[-1]</h1>
+<h1 id="prints4">print(s4)</h1>
+<h1 id=""></h1>
+<h1 id="按照切片取值"># 按照切片取值。</h1>
+<h1 id="顾头不顾腚"># 顾头不顾腚</h1>
+<h1 id="s5-s106">s5 = s1[0:6]</h1>
+<h1 id="s5-s16">s5 = s1[:6]</h1>
+<h1 id="prints5">print(s5)</h1>
+<h1 id="s6-s16">s6 = s1[6:]</h1>
+<h1 id="prints6">print(s6)</h1>
+<h1 id="-2"></h1>
+<h1 id="切片步长"># 切片步长</h1>
+<h1 id="s7-s152">s7 = s1[:5:2]</h1>
+<h1 id="prints7">print(s7)</h1>
+<h1 id="prints1">print(s1[:])</h1>
+<h1 id="倒序"># 倒序：</h1>
+<h1 id="s8-s1-1-6-1">s8 = s1[-1:-6:-1]</h1>
+<h1 id="prints8">print(s8)</h1>
+<h1 id="按索引s1index">按索引：s1[index]</h1>
+<h1 id="按照切片-s1start_index-end_index1">按照切片： s1[start_index: end_index+1]</h1>
+<h1 id="按照切片步长-s1start_index-end_index12">按照切片步长： s1[start_index: end_index+1:2]</h1>
+<h1 id="反向按照切片步长-s1start_index-end_index后延一位2">反向按照切片步长： s1[start_index: end_index后延一位:2]</h1>
+<h1 id="思考题倒序全部取出来">思考题：倒序全部取出来？</h1>
+<p>s = 'taiBAifdsa'</p>
+<h1 id="字符串的常用操作方法">字符串的常用操作方法</h1>
+<h1 id="不会对原字符串进行任何操作都是产生一个新的字符串">不会对原字符串进行任何操作，都是产生一个新的字符串</h1>
+<h1 id="upper-lower">upper lower</h1>
+<h1 id="s1-supper">s1 = s.upper()</h1>
+<h1 id="s1-slower"># s1 = s.lower()</h1>
+<h1 id="prints1types1">print(s1,type(s1))</h1>
+<h1 id="应用">应用：</h1>
+<h1 id="username-input用户名">username = input('用户名')</h1>
+<h1 id="password-input密码">password = input('密码')</h1>
+<h1 id="code-qwea">code = 'QweA'</h1>
+<h1 id="printcode">print(code)</h1>
+<h1 id="your_code-input请输入验证码不区分大小写">your_code = input('请输入验证码：不区分大小写')</h1>
+<h1 id="if-your_codeupper-codeupper">if your_code.upper() == code.upper():</h1>
+<h1 id="if-username-太白-and-password-123">if username == '太白' and password == '123':</h1>
+<h1 id="print登录成功">print('登录成功')</h1>
+<h1 id="else">else:</h1>
+<h1 id="print用户名密码错误">print('用户名密码错误')</h1>
+<h1 id="else-2">else:</h1>
+<h1 id="print验证码错误">print('验证码错误')</h1>
+<h1 id="-3"></h1>
+<h1 id="startswith-endswith">startswith endswith</h1>
+<h1 id="printsstartswitht">print(s.startswith('t'))  ***</h1>
+<h1 id="printsstartswithtaibai">print(s.startswith('taiBAi'))  ***</h1>
+<h1 id="了解">了解</h1>
+<h1 id="printsstartswithb36">print(s.startswith('B',3,6))</h1>
+<h1 id="replace">replace</h1>
+<p>msg = 'alex 很nb,alex是老男孩教育的创始人之一，alex长得很帅'</p>
+<h1 id="msg1-msgreplacealex太白-默认全部替换">msg1 = msg.replace('alex','太白')  # 默认全部替换</h1>
+<h1 id="msg1-msgreplacealex太白2">msg1 = msg.replace('alex','太白',2)</h1>
+<h1 id="printmsg">print(msg)</h1>
+<h1 id="printmsg1">print(msg1)</h1>
+<h1 id="strip空白空格t-n">strip:空白：空格，\t \n</h1>
+<h1 id="s4-n太白t">s4 = '  \n太白\t'</h1>
+<h1 id="prints4-2"># print(s4)</h1>
+<h1 id="s5-s4strip">s5 = s4.strip()</h1>
+<h1 id="prints5-2">print(s5)</h1>
+<h1 id="了解-2">了解</h1>
+<h1 id="可以去除指定的字符">可以去除指定的字符</h1>
+<h1 id="s4-rre太r白qsd">s4 = 'rre太r白qsd'</h1>
+<h1 id="s5-s4stripqrsed">s5 = s4.strip('qrsed')</h1>
+<h1 id="prints5-3">print(s5)</h1>
+<h1 id="split-非常重要">split  非常重要</h1>
+<h1 id="默认按照空格分隔返回一个列表">默认按照空格分隔，返回一个列表</h1>
+<h1 id="指定分隔符">指定分隔符</h1>
+<h1 id="str-list">str ---&gt; list</h1>
+<h1 id="s6-太白-女神-吴超">s6 = '太白 女神 吴超'</h1>
+<h1 id="s6-太白女神吴超">s6 = '太白:女神:吴超'</h1>
+<h1 id="l-s6split">l = s6.split('😂</h1>
+<h1 id="printl">print(l)</h1>
+<h1 id="了解-3">了解：</h1>
+<h1 id="s6-barrynvshenwu">s6 = ':barry:nvshen:wu'</h1>
+<h1 id="prints6split"># print(s6.split('😂)</h1>
+<h1 id="prints6split2">print(s6.split(&quot;:&quot;,2))</h1>
+<h1 id="join-非常好用">join 非常好用</h1>
+<h1 id="s1-alex">s1 = 'alex'</h1>
+<h1 id="s2-joins1">s2 = '+'.join(s1)</h1>
+<h1 id="prints2types2-2">print(s2,type(s2))</h1>
+<h1 id="l1-太白-女神-吴超">l1 = ['太白', '女神', '吴超']</h1>
+<h1 id="前提列表里面的元素必须都是str类型"># 前提：列表里面的元素必须都是str类型</h1>
+<h1 id="s3-joinl1">s3 = ':'.join(l1)</h1>
+<h1 id="prints3-2">print(s3)</h1>
+<h1 id="count">count</h1>
+<h1 id="s8-sdfsdagsfdagfdhgfhgfhfghfdagsaa">s8 = 'sdfsdagsfdagfdhgfhgfhfghfdagsaa'</h1>
+<h1 id="prints8counta">print(s8.count('a'))</h1>
+<h1 id="format-格式化输出">format: 格式化输出</h1>
+<h1 id="第一种用法"># 第一种用法：</h1>
+<h1 id="msg-我叫今年性别format大壮25男">msg = '我叫{}今年{}性别{}'.format('大壮',25,'男')</h1>
+<h1 id="第二种用法">第二种用法：</h1>
+<h1 id="msg-我叫0今年1性别2我依然叫0format大壮-25男">msg = '我叫{0}今年{1}性别{2}我依然叫{0}'.format('大壮', 25,'男')</h1>
+<h1 id="printmsg-2">print(msg)</h1>
+<h1 id="第三种用法">第三种用法：</h1>
+<h1 id="a-100">a = 100</h1>
+<h1 id="msg-我叫name今年age性别sexformatageasex男name大壮">msg = '我叫{name}今年{age}性别{sex}'.format(age=a,sex='男',name='大壮')</h1>
+<h1 id="printmsg-3">print(msg)</h1>
+<h1 id="is-系列">is 系列：</h1>
+<h1 id="name-taibai123">name = 'taibai123'</h1>
+<h1 id="name-1001">name = '100①'</h1>
+<h1 id="printnameisalnum-字符串由字母或数字组成"># print(name.isalnum()) #字符串由字母或数字组成</h1>
+<h1 id="printnameisalpha-字符串只由字母组成"># print(name.isalpha()) #字符串只由字母组成</h1>
+<h1 id="printnameisdecimal-字符串只由十进制组成">print(name.isdecimal()) #字符串只由十进制组成</h1>
+<h1 id="s1-input请输入您的金额">s1 = input('请输入您的金额：')</h1>
+<h1 id="if-s1isdecimal">if s1.isdecimal():</h1>
+<h1 id="printints1">print(int(s1))</h1>
+<h1 id="else-3">else:</h1>
+<h1 id="print输入有误">print('输入有误')</h1>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[pythonday03（作业）]]></title>
@@ -30,6 +187,127 @@
         <link href="https://itxz.fun/post/pythonday03zuo-ye/">
         </link>
         <updated>2020-04-22T09:20:20.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="while-true"># while True:</h1>
+<h1 id="print1">#     print(1)</h1>
+<h1 id=""></h1>
+<h1 id="-2"></h1>
+<h1 id="-3">'''</h1>
+<h1 id="如何终止循环">如何终止循环？</h1>
+<h1 id="1标志位">1，标志位</h1>
+<h1 id="-4">'''</h1>
+<h1 id="n-true"># n = True</h1>
+<h1 id="while-n"># while n:</h1>
+<h1 id="print111">#     print(111)</h1>
+<h1 id="print222">#     print(222)</h1>
+<h1 id="n-false">#     n = False</h1>
+<h1 id="print333">#     print(333)</h1>
+<h1 id="-5"></h1>
+<h1 id="break-直接终止循环"># break: 直接终止循环</h1>
+<h1 id="continue终止本次循环继续下一次循环"># continue：终止本次循环，继续下一次循环</h1>
+<h1 id="-6">'''</h1>
+<h1 id="while-else">while  else:</h1>
+<h1 id="-7">'''</h1>
+<h1 id="-8"></h1>
+<h1 id="-9"></h1>
+<h1 id="day2作业及默写">Day2作业及默写</h1>
+<h1 id="-10"></h1>
+<h1 id="1-判断下列逻辑语句的truefalse">1. 判断下列逻辑语句的True,False.</h1>
+<h1 id="11-1-or-3-4-or-4-5-and-2-1-and-9-8-or-7-6">1）1 &gt; 1 or 3 &lt; 4 or 4 &gt; 5 and 2 &gt; 1 and 9 &gt; 8 or 7 &lt; 6</h1>
+<h1 id="2not-2-1-and-3-4-or-4-5-and-2-1-and-9-8-or-7-6">2）not 2 &gt; 1 and 3 &lt; 4 or 4 &gt; 5 and 2 &gt; 1 and 9 &gt; 8 or 7 &lt; 6</h1>
+<h1 id="2-求出下列逻辑语句的值">2. 求出下列逻辑语句的值。</h1>
+<h1 id="18-or-3-and-4-or-2-and-0-or-9-and-7">1),8 or 3 and 4 or 2 and 0 or 9 and 7</h1>
+<h1 id="20-or-2-and-3-and-4-or-6-and-0-or-3">2),0 or 2 and 3 and 4 or 6 and 0 or 3</h1>
+<h1 id="3-下列结果是什么">3. 下列结果是什么？</h1>
+<h1 id="1-6-or-2-1">1)、6 or 2 &gt; 1</h1>
+<h1 id="2-3-or-2-1">2)、3 or 2 &gt; 1</h1>
+<h1 id="3-0-or-5-4">3)、0 or 5 &lt; 4</h1>
+<h1 id="4-5-4-or-3">4)、5 &lt; 4 or 3</h1>
+<h1 id="5-2-1-or-6">5)、2 &gt; 1 or 6</h1>
+<h1 id="6-3-and-2-1">6)、3 and 2 &gt; 1</h1>
+<h1 id="7-0-and-3-1">7)、0 and 3 &gt; 1</h1>
+<h1 id="8-2-1-and-3">8)、2 &gt; 1 and 3</h1>
+<h1 id="9-3-1-and-0">9)、3 &gt; 1 and 0</h1>
+<h1 id="10-3-1-and-2-or-2-3-and-3-and-4-or-3-2">10)、3 &gt; 1 and 2 or 2 &lt; 3 and 3 and 4 or 3 &gt; 2</h1>
+<h1 id="4-while循环语句基本结构">4. while循环语句基本结构？</h1>
+<h1 id="5-利用while语句写出猜大小的游戏">5. 利用while语句写出猜大小的游戏：</h1>
+<h1 id="设定一个理想数字比如66让用户输入数字如果比66大则显示猜测的结果大了如果比66小则显示猜测的结果小了只有等于66显示猜测结果正确然后退出循环">设定一个理想数字比如：66，让用户输入数字，如果比66大，则显示猜测的结果大了；如果比66小，则显示猜测的结果小了;只有等于66，显示猜测结果正确，然后退出循环。</h1>
+<h1 id="6-在5题的基础上进行升级">6. 在5题的基础上进行升级：</h1>
+<h1 id="给用户三次猜测机会如果三次之内猜测对了">给用户三次猜测机会，如果三次之内猜测对了，</h1>
+<h1 id="则显示猜测正确退出循环">则显示猜测正确，退出循环，</h1>
+<h1 id="如果三次之内没有猜测正确">如果三次之内没有猜测正确，</h1>
+<h1 id="则自动退出循环并显示太笨了你">则自动退出循环，并显示‘太笨了你....’。</h1>
+<h1 id="while">while</h1>
+<h1 id="3-次">3 次</h1>
+<h1 id="input">input</h1>
+<h1 id="if-elif-else">if elif else</h1>
+<h1 id="count-1">count = 1</h1>
+<h1 id="while-count-4">while count &lt; 4:</h1>
+<h1 id="num-intinput请输入数字">num = int(input('请输入数字：'))</h1>
+<h1 id="if-num-66">if num &gt; 66:</h1>
+<h1 id="print猜大了">print('猜大了')</h1>
+<h1 id="elif-num-66">elif num &lt; 66:</h1>
+<h1 id="print猜小了">print('猜小了')</h1>
+<h1 id="else">else:</h1>
+<h1 id="print恭喜你猜对了">print('恭喜你猜对了')</h1>
+<h1 id="break">break</h1>
+<h1 id="count-1-2">count += 1</h1>
+<h1 id="else-2">else:</h1>
+<h1 id="print太笨了">print('太笨了')</h1>
+<h1 id="7-使用while循环输出-1-2-3-4-5-6-8-9-10">7. 使用while循环输出 1 2 3 4 5 6 8 9 10</h1>
+<h1 id="count-1-3">count = 1</h1>
+<h1 id="while-count-11">while count &lt; 11:</h1>
+<h1 id="if-count-7">if count == 7:</h1>
+<h1 id="print">print('')</h1>
+<h1 id="else-3">else:</h1>
+<h1 id="printcount">print(count)</h1>
+<h1 id="count-1-4">count += 1</h1>
+<h1 id="count-1-5">count = 1</h1>
+<h1 id="while-count-11-2">while count &lt; 11:</h1>
+<h1 id="if-count-7-2">if count == 7:</h1>
+<h1 id="pass">pass</h1>
+<h1 id="else-4">else:</h1>
+<h1 id="printcount-2">print(count)</h1>
+<h1 id="count-1-6">count += 1</h1>
+<h1 id="count-1-7">count = 1</h1>
+<h1 id="while-count-11-3"># while count &lt; 11:</h1>
+<h1 id="if-count-7-3">#     if count == 7:</h1>
+<h1 id="count-1-8">#         count += 1</h1>
+<h1 id="printcount-3">#     print(count)</h1>
+<h1 id="count-1-9">#     count += 1</h1>
+<h1 id="count-0">count = 0</h1>
+<h1 id="while-count-10">while count &lt; 10:</h1>
+<h1 id="count-1-10">count += 1</h1>
+<h1 id="if-count-7-4">if count == 7:</h1>
+<h1 id="continue">continue</h1>
+<h1 id="printcount-4">print(count)</h1>
+<h1 id="8-求1-100的所有数的和">8. 求1-100的所有数的和</h1>
+<h1 id="9-输出-1-100-内的所有奇数">9. 输出 1-100 内的所有奇数</h1>
+<h1 id="10-输出-1-100-内的所有偶数">10. 输出 1-100 内的所有偶数</h1>
+<h1 id="11-求1-23-45-99的所有数的和">11. 求1-2+3-4+5 ... 99的所有数的和</h1>
+<h1 id="count-1-11">count = 1</h1>
+<h1 id="s-0">s = 0</h1>
+<h1 id="while-count-100">while count &lt; 100:</h1>
+<h1 id="if-count-2-0">if count % 2 == 0:</h1>
+<h1 id="s-s-count">s = s - count</h1>
+<h1 id="else-5">else:</h1>
+<h1 id="s-s-count-2">s = s + count</h1>
+<h1 id="count-1-12">count += 1</h1>
+<h1 id="prints">print(s)</h1>
+<h1 id="12-用户登录三次输错机会且每次输错误时显示剩余错误次数提示使用字符串格式化">12. 用户登录（三次输错机会）且每次输错误时显示剩余错误次数（提示：使用字符串格式化）</h1>
+<h1 id="count-1-13">count = 1</h1>
+<h1 id="while-count-3">while count &lt;= 3:</h1>
+<h1 id="username-input用户名">username = input('用户名')</h1>
+<h1 id="password-input密码">password = input('密码')</h1>
+<h1 id="if-username-alex-and-password-123">if username == 'alex' and password == '123':</h1>
+<h1 id="print登录成功">print('登录成功')</h1>
+<h1 id="else-6">else:</h1>
+<h1 id="print用户名或者密码错误还剩s机会-3-count">print('用户名或者密码错误,还剩%s机会' % (3-count))</h1>
+<h1 id="count-count-1">count = count + 1</h1>
+<h1 id="13-简述ascii-unicode-utf-8编码">13. 简述ASCII、Unicode、utf-8编码</h1>
+<h1 id="14-简述位和字节的关系">14. 简述位和字节的关系？</h1>
+<h1 id="-11"></h1>
+<h1 id="-12"></h1>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[度盘倍速方法]]></title>
@@ -37,6 +315,8 @@
         <link href="https://itxz.fun/post/du-pan-bei-su-fang-fa/">
         </link>
         <updated>2020-04-20T01:28:29.000Z</updated>
+        <content type="html"><![CDATA[<p>javascript:videojs.getPlayers(&quot;video-player&quot;) .html5player.tech_.setPlaybackRate(2)</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[python02]]></title>
@@ -44,6 +324,372 @@
         <link href="https://itxz.fun/post/python02/">
         </link>
         <updated>2020-04-10T09:43:46.000Z</updated>
+        <content type="html"><![CDATA[<p>day02<br>
+day2 内容大纲</p>
+<ol>
+<li>
+<h2 id="今日内容大纲">今日内容大纲</h2>
+<ul>
+<li>pycharm的安装以及简单使用
+<ul>
+<li>辅助开发软件，代码逐行调试，设置高端，不会提示，你在书写代码时，他不提示，debug的模式，最好用的还是pycharm。</li>
+</ul>
+</li>
+<li><strong>格式化输出</strong></li>
+<li><strong>while循环</strong></li>
+<li>运算符  and or not</li>
+<li>编码的初识</li>
+</ul>
+</li>
+<li>
+<h2 id="昨日内容回顾">昨日内容回顾</h2>
+<ul>
+<li>
+<p>编译型与解释型</p>
+<ul>
+<li>编译型：一次性编译成2进制，在执行
+<ul>
+<li>优点：执行效率高</li>
+<li>缺点：不能跨平台，开发效率低</li>
+<li>代表语言：C</li>
+</ul>
+</li>
+<li>解释型：逐行解释成二进制，在执行
+<ul>
+<li>优点：可以跨平台，开发效率高</li>
+<li>缺点：执行效率低。
+<ul>
+<li>代表语言：python</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>变量：</p>
+<ul>
+<li>
+<p>数字，字母，下划线任意组合。</p>
+</li>
+<li>
+<p>不能以数字开头。</p>
+</li>
+<li>
+<p>不能用Python的关键字：print if...</p>
+</li>
+<li>
+<p>不能使用中文。</p>
+</li>
+<li>
+<p>描述性。</p>
+</li>
+<li>
+<p>区分变量与数据类型的区别。</p>
+</li>
+<li>
+<pre><code class="language-python">name = 'Alex'
+name = '太白'
+print(name)
+name = 'wusir'
+print(name)
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>常量</p>
+<ul>
+<li>一直不变的量，与变量几乎一样。</li>
+</ul>
+</li>
+<li>
+<p>注释：解释说明</p>
+</li>
+<li>
+<p>基础数据类型：</p>
+<ul>
+<li>1， 2， 3， 4000，int 数字， +-*/ % ** ....</li>
+<li>'fdsalk中国'   str  字符串  +   *int</li>
+<li>True False   bool 布尔值</li>
+</ul>
+</li>
+<li>
+<p>用户输入input</p>
+</li>
+<li>
+<pre><code>name = input('&gt;&gt;&gt;')
+print(type(name))
+</code></pre>
+</li>
+<li>
+<p>if</p>
+<ul>
+<li>
+<p>if  条件:</p>
+</li>
+<li>
+<p>if  else:</p>
+</li>
+<li>
+<p>if elif elif .....</p>
+</li>
+<li>
+<p>if elif elif ..... else</p>
+</li>
+<li>
+<p>if  嵌套</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-今日内容">3. 今日内容</h2>
+<ol>
+<li>
+<p>while 循环</p>
+<ul>
+<li>
+<p>why：大气循环， 吃饭，上课，睡觉，日复一日，歌曲列表循序环，程序中：输入用户名密码，</p>
+</li>
+<li>
+<p>what：while 无限循环。</p>
+</li>
+<li>
+<p>how：</p>
+<ol>
+<li>
+<p>基本结构：</p>
+<pre><code class="language-python">while 条件:
+    循环体
+</code></pre>
+</li>
+<li>
+<p>初识循环</p>
+<pre><code class="language-python">while True:
+    print('狼的诱惑')
+    print('我们不一样')
+    print('月亮之上')
+    print('庐州月')
+    print('人间')
+    
+</code></pre>
+</li>
+<li>
+<p>基本原理：</p>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Coldboy%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1556418225772.png" alt="1556418225772" loading="lazy"></figure>
+</li>
+<li>
+<p>循环如何终止？</p>
+<ol>
+<li>
+<p>改变条件。</p>
+<pre><code class="language-python">flag = True
+while flag:
+    print('狼的诱惑')
+    print('我们不一样')
+    print('月亮之上')
+    flag = False
+    print('庐州月')
+    print('人间')
+
+</code></pre>
+<pre><code class="language-python"># 练习题： 1~ 100 所有的数字
+count = 1
+flag = True
+while flag:
+    print(count)
+    count = count + 1
+    if count == 101:
+        flag = False
+        
+count = 1
+while count &lt; 101:
+    print(count)
+    count = count + 1
+
+</code></pre>
+<pre><code class="language-python"># 1 + 2 + 3 + ...... 100  的最终结果：
+
+s = 0
+count = 1
+while count &lt; 101:
+    s = s + count
+    count = count + 1
+print(s)
+
+</code></pre>
+</li>
+</ol>
+<p>​</p>
+<ol start="2">
+<li>break</li>
+</ol>
+<pre><code class="language-python"># while True:
+#     print('狼的诱惑')
+#     print('我们不一样')
+#     print('月亮之上')
+#     break
+#     print('庐州月')
+#     print('人间')
+# print(111)
+</code></pre>
+<ol start="3">
+<li>
+<p>系统命令（今天不讲）</p>
+</li>
+<li>
+<p>continue</p>
+<pre><code class="language-python"># continue ： 退出本次循环，继续下一次循环
+flag = True
+while flag:
+    print(111)
+    print(222)
+    flag = False
+    continue
+    print(333)
+
+</code></pre>
+<pre><code class="language-python"># while else： while 循环如果被break打断，则不执行else语句。
+count = 1
+while count &lt; 5:
+    print(count)
+    if count == 2:
+        break
+    count = count + 1
+else:
+    print(666)
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>where： 你需要重复之前的动作，输入用户名密码，考虑到while循环。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>格式化输出</p>
+<ul>
+<li>当你遇到这样的需求：字符串中想让某些位置变成动态可传入的，首先要考虑到格式化输出。</li>
+</ul>
+</li>
+<li>
+<p>运算符：算数运算符 + -，比较运算符 &gt; ==，赋值运算符=,+=,逻辑运算符，and or， 成员运算符。</p>
+<pre><code class="language-python">i1 = 2
+i2 = 3
+print(2 ** 3)
+print(10 // 3)
+print(10 % 3)
+
+print(3 != 4)
+
+count = 1
+count = count + 1
+count += 1
+print(count)
+
+</code></pre>
+<pre><code class="language-python"># and or not
+
+# 1 在没有()的情况下，优先级：not &gt; and &gt; or，同一优先级从左至右依次计算
+# 情况1：两边都是比较运算
+# print(2 &gt; 1 and 3 &lt; 4 or 4 &gt; 5 and 2 &lt; 1)
+# print(True or False)
+
+# 情况2：两边都是整数
+'''
+x or y , x为真，值就是x，x为假，值是y
+'''
+# print(1 or 2)
+# print(3 or 2)
+# print(4 or 2)
+# print(-1 or 2)
+# print(0 or 2)
+
+# print(1 and 2)
+
+</code></pre>
+<p>数据类型之间的转换</p>
+<pre><code class="language-python"># str ---&gt; int  : 只能是纯数字组成的字符串
+s1 = '00100'
+print(int(s1))
+# int ----&gt; str
+i1 = 100
+print(str(i1),type(str(i1)))
+
+# int  ---&gt; bool  : 非零即True ，0为False。
+i = 0
+print(bool(i))
+# bool ---&gt; int
+print(int(True))  # 1
+print(int(False))  # 0
+
+</code></pre>
+</li>
+<li>
+<p>编码的初识<strong>重点</strong></p>
+</li>
+</ol>
+<p>计算机存储文件，存储数据，以及将一些数据信息通过网络发送出去，存储发送数据什么内容？底层都是01010101.</p>
+<p>我带这张珵穿越，1937，我俩研究电报：</p>
+<p>真正密码本：</p>
+<p>​		滴滴      走</p>
+<p>​	滴滴滴       跑</p>
+<p>第一版： 没有段位，</p>
+<p>​	101		     今</p>
+<p>​	1101            晚</p>
+<p>​	1                吃</p>
+<p>​	11		     鸡</p>
+<p>1011101111</p>
+<p>第二版：</p>
+<p>​	0000101		     今</p>
+<p>​	0001101             晚</p>
+<p>​	0000001             吃</p>
+<p>​	0000011		     鸡</p>
+<p>0000101	0001101	0000001	0000011</p>
+<p>密码本：01010110 二进制与 文字之间的对应关系。</p>
+<p>最早起的密码本：</p>
+<p>​	ASCII码：只包含：英文字母，数字，特殊字符。</p>
+<p>0000 0001  ：             a</p>
+<p>0000 0101  ：             ;</p>
+<p>8bit == 1byte</p>
+<p>'hello123':   8byte</p>
+<p>gbk: 英文字母，数字，特殊字符和中文。国标</p>
+<p>一个英文字母：      0000 0001  ：             a</p>
+<p>一个中文 中：        0000 0001  0100 0001  ： 中</p>
+<p>Unicode: 万国码：把世界上所有的文字都记录到这个密码本。</p>
+<p>​	起初一个字符用2个字节表示：</p>
+<p>0000 0001  0000 0011：             a</p>
+<p>0000 0001  0100 0001  ：           中</p>
+<p>后来为了涵盖全部文字：</p>
+<p>0000 0001  0000 0011  0000 0001  0000 0011：             a</p>
+<p>0000 0001  0100 0001  0000 0001  0000 0011  ：           中</p>
+<p>浪费空间，浪费资源。</p>
+<p>Utf-8:升级：最少用8bit1个字节表示一个字符。</p>
+<p>​	0000 0011：             				a   1字节</p>
+<p>​	0000 0011 0000 0011   		欧洲 2个字节</p>
+<p>0000 0011 0000 0011 0000 0011         中： 3个字节。</p>
+<h1 id="重点"><strong>重点：</strong></h1>
+<p>'中国12he'  ： GBK:    8个字节</p>
+<p>'中国12he'  ： UTF-8:    10个字节</p>
+<pre><code>8bit = 1byte
+1024byte = 1KB
+1024KB = 1MB
+1024MB = 1GB
+1024GB = 1TB
+1024TB = 1PB
+1024TB = 1EB
+1024EB = 1ZB
+1024ZB = 1YB
+1024YB = 1NB
+1024NB = 1DB    
+</code></pre>
+<p>7.6MB  ----&gt; 7.6 * 1024 * 1024 * 8</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[python]]></title>
@@ -51,5 +697,118 @@
         <link href="https://itxz.fun/post/python/">
         </link>
         <updated>2020-04-10T09:34:25.000Z</updated>
+        <content type="html"><![CDATA[<p>day01<br>
+. 用户交互input</p>
+<pre><code>why:	网页上，app 输入账号与密码。
+
+what： 用户交互input
+
+how：
+
+```python
+# input: 出来的全部都是字符串类型。
+username = input('请输入用户名：')
+password = input('请输入密码：')
+print(username,type(username))
+print(password,type(password))
+```
+</code></pre>
+<p>流程控制语句if</p>
+<pre><code>why:  生活中选择，回家，n条路，你走那条路，取决于心情。
+
+what: if。
+
+how：
+
++ 基本结构：
+
++ ```
+  if 条件:
+      结果
+      
+  # c: if{条件}{结果}
+  ```
+
+1.  单独if
+
+   ```python
+   print(111)
+   if 2 &lt; 1:
+       print(666)
+       print(333)
+   print(222)
+   ```
+
+   
+
+2. if else 二选一
+
+   ```python 
+   s1 = '100'
+   i1 = int(s1)
+   print(i1,type(l1))
+   
+   age = input('请输入年龄：')
+   if int(age) &gt; 18:
+       print('恭喜你，成年了')
+   else:
+       print('小屁孩儿')
+   
+   ```
+
+3. if elif elif .... 多选一
+
+   ```python
+   num = int(input('猜点数：'))
+   
+   if num == 1:
+       print('晚上请你吃饭')
+   elif num == 3:
+       print('一起溜达')
+   elif num == 2:
+       print('请你大宝剑')
+   ```
+
+   
+
+4. if elif elif .... else 多选一
+
+   ```python
+   num = int(input('猜点数：'))
+   
+   if num == 1:
+       print('晚上请你吃饭')
+   	
+   elif num == 3:
+       print('一起溜达')
+   	
+   elif num == 2:
+       print('请你大宝剑')
+   else:
+       print('太笨了....')
+   
+   print('组合')
+   ```
+
+   
+
+5. 嵌套的if
+
+   ```python
+   
+   username = input('请输入用户名：')
+   password = input('请输入密码：')
+   code = 'qwer'
+   your_code = input('请输入验证码：')
+   
+   if your_code == code:
+       if username == 'taibai' and password == '123':
+   	    print('登录成功')
+       else:
+   	    print('账号或者密码错误')
+   else:
+       print('验证码错误')
+   ```</code></pre>
+]]></content>
     </entry>
 </feed>

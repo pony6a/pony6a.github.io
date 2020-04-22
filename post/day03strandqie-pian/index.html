@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>day03(str&amp;&amp;切片) | pony686</title>
+<meta name="description" content="pony686">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1587547576028">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://itxz.fun">pony686</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                python
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>day03(str&amp;&amp;切片)</h1>
+            <p class="article-meta">
+              2020-04-22
+              
+            </p>
+            
+            <div class="post-content">
+              <h1 id="s1-python全栈22期">s1 = 'python全栈22期'</h1>
+<h1 id="对字符串进行索引切片出来的数据都是字符串类型"># 对字符串进行索引，切片出来的数据都是字符串类型。</h1>
+<h1 id="按照索引取值"># 按照索引取值</h1>
+<h1 id="从左至右有顺序下标索引"># 从左至右有顺序，下标，索引。</h1>
+<h1 id="s2-s10">s2 = s1[0]</h1>
+<h1 id="prints2types2">print(s2,type(s2))</h1>
+<h1 id="s3-s12">s3 = s1[2]</h1>
+<h1 id="prints3">print(s3)</h1>
+<h1 id="s4-s1-1">s4 = s1[-1]</h1>
+<h1 id="prints4">print(s4)</h1>
+<h1 id=""></h1>
+<h1 id="按照切片取值"># 按照切片取值。</h1>
+<h1 id="顾头不顾腚"># 顾头不顾腚</h1>
+<h1 id="s5-s106">s5 = s1[0:6]</h1>
+<h1 id="s5-s16">s5 = s1[:6]</h1>
+<h1 id="prints5">print(s5)</h1>
+<h1 id="s6-s16">s6 = s1[6:]</h1>
+<h1 id="prints6">print(s6)</h1>
+<h1 id="-2"></h1>
+<h1 id="切片步长"># 切片步长</h1>
+<h1 id="s7-s152">s7 = s1[:5:2]</h1>
+<h1 id="prints7">print(s7)</h1>
+<h1 id="prints1">print(s1[:])</h1>
+<h1 id="倒序"># 倒序：</h1>
+<h1 id="s8-s1-1-6-1">s8 = s1[-1:-6:-1]</h1>
+<h1 id="prints8">print(s8)</h1>
+<h1 id="按索引s1index">按索引：s1[index]</h1>
+<h1 id="按照切片-s1start_index-end_index1">按照切片： s1[start_index: end_index+1]</h1>
+<h1 id="按照切片步长-s1start_index-end_index12">按照切片步长： s1[start_index: end_index+1:2]</h1>
+<h1 id="反向按照切片步长-s1start_index-end_index后延一位2">反向按照切片步长： s1[start_index: end_index后延一位:2]</h1>
+<h1 id="思考题倒序全部取出来">思考题：倒序全部取出来？</h1>
+<p>s = 'taiBAifdsa'</p>
+<h1 id="字符串的常用操作方法">字符串的常用操作方法</h1>
+<h1 id="不会对原字符串进行任何操作都是产生一个新的字符串">不会对原字符串进行任何操作，都是产生一个新的字符串</h1>
+<h1 id="upper-lower">upper lower</h1>
+<h1 id="s1-supper">s1 = s.upper()</h1>
+<h1 id="s1-slower"># s1 = s.lower()</h1>
+<h1 id="prints1types1">print(s1,type(s1))</h1>
+<h1 id="应用">应用：</h1>
+<h1 id="username-input用户名">username = input('用户名')</h1>
+<h1 id="password-input密码">password = input('密码')</h1>
+<h1 id="code-qwea">code = 'QweA'</h1>
+<h1 id="printcode">print(code)</h1>
+<h1 id="your_code-input请输入验证码不区分大小写">your_code = input('请输入验证码：不区分大小写')</h1>
+<h1 id="if-your_codeupper-codeupper">if your_code.upper() == code.upper():</h1>
+<h1 id="if-username-太白-and-password-123">if username == '太白' and password == '123':</h1>
+<h1 id="print登录成功">print('登录成功')</h1>
+<h1 id="else">else:</h1>
+<h1 id="print用户名密码错误">print('用户名密码错误')</h1>
+<h1 id="else-2">else:</h1>
+<h1 id="print验证码错误">print('验证码错误')</h1>
+<h1 id="-3"></h1>
+<h1 id="startswith-endswith">startswith endswith</h1>
+<h1 id="printsstartswitht">print(s.startswith('t'))  ***</h1>
+<h1 id="printsstartswithtaibai">print(s.startswith('taiBAi'))  ***</h1>
+<h1 id="了解">了解</h1>
+<h1 id="printsstartswithb36">print(s.startswith('B',3,6))</h1>
+<h1 id="replace">replace</h1>
+<p>msg = 'alex 很nb,alex是老男孩教育的创始人之一，alex长得很帅'</p>
+<h1 id="msg1-msgreplacealex太白-默认全部替换">msg1 = msg.replace('alex','太白')  # 默认全部替换</h1>
+<h1 id="msg1-msgreplacealex太白2">msg1 = msg.replace('alex','太白',2)</h1>
+<h1 id="printmsg">print(msg)</h1>
+<h1 id="printmsg1">print(msg1)</h1>
+<h1 id="strip空白空格t-n">strip:空白：空格，\t \n</h1>
+<h1 id="s4-n太白t">s4 = '  \n太白\t'</h1>
+<h1 id="prints4-2"># print(s4)</h1>
+<h1 id="s5-s4strip">s5 = s4.strip()</h1>
+<h1 id="prints5-2">print(s5)</h1>
+<h1 id="了解-2">了解</h1>
+<h1 id="可以去除指定的字符">可以去除指定的字符</h1>
+<h1 id="s4-rre太r白qsd">s4 = 'rre太r白qsd'</h1>
+<h1 id="s5-s4stripqrsed">s5 = s4.strip('qrsed')</h1>
+<h1 id="prints5-3">print(s5)</h1>
+<h1 id="split-非常重要">split  非常重要</h1>
+<h1 id="默认按照空格分隔返回一个列表">默认按照空格分隔，返回一个列表</h1>
+<h1 id="指定分隔符">指定分隔符</h1>
+<h1 id="str-list">str ---&gt; list</h1>
+<h1 id="s6-太白-女神-吴超">s6 = '太白 女神 吴超'</h1>
+<h1 id="s6-太白女神吴超">s6 = '太白:女神:吴超'</h1>
+<h1 id="l-s6split">l = s6.split('😂</h1>
+<h1 id="printl">print(l)</h1>
+<h1 id="了解-3">了解：</h1>
+<h1 id="s6-barrynvshenwu">s6 = ':barry:nvshen:wu'</h1>
+<h1 id="prints6split"># print(s6.split('😂)</h1>
+<h1 id="prints6split2">print(s6.split(&quot;:&quot;,2))</h1>
+<h1 id="join-非常好用">join 非常好用</h1>
+<h1 id="s1-alex">s1 = 'alex'</h1>
+<h1 id="s2-joins1">s2 = '+'.join(s1)</h1>
+<h1 id="prints2types2-2">print(s2,type(s2))</h1>
+<h1 id="l1-太白-女神-吴超">l1 = ['太白', '女神', '吴超']</h1>
+<h1 id="前提列表里面的元素必须都是str类型"># 前提：列表里面的元素必须都是str类型</h1>
+<h1 id="s3-joinl1">s3 = ':'.join(l1)</h1>
+<h1 id="prints3-2">print(s3)</h1>
+<h1 id="count">count</h1>
+<h1 id="s8-sdfsdagsfdagfdhgfhgfhfghfdagsaa">s8 = 'sdfsdagsfdagfdhgfhgfhfghfdagsaa'</h1>
+<h1 id="prints8counta">print(s8.count('a'))</h1>
+<h1 id="format-格式化输出">format: 格式化输出</h1>
+<h1 id="第一种用法"># 第一种用法：</h1>
+<h1 id="msg-我叫今年性别format大壮25男">msg = '我叫{}今年{}性别{}'.format('大壮',25,'男')</h1>
+<h1 id="第二种用法">第二种用法：</h1>
+<h1 id="msg-我叫0今年1性别2我依然叫0format大壮-25男">msg = '我叫{0}今年{1}性别{2}我依然叫{0}'.format('大壮', 25,'男')</h1>
+<h1 id="printmsg-2">print(msg)</h1>
+<h1 id="第三种用法">第三种用法：</h1>
+<h1 id="a-100">a = 100</h1>
+<h1 id="msg-我叫name今年age性别sexformatageasex男name大壮">msg = '我叫{name}今年{age}性别{sex}'.format(age=a,sex='男',name='大壮')</h1>
+<h1 id="printmsg-3">print(msg)</h1>
+<h1 id="is-系列">is 系列：</h1>
+<h1 id="name-taibai123">name = 'taibai123'</h1>
+<h1 id="name-1001">name = '100①'</h1>
+<h1 id="printnameisalnum-字符串由字母或数字组成"># print(name.isalnum()) #字符串由字母或数字组成</h1>
+<h1 id="printnameisalpha-字符串只由字母组成"># print(name.isalpha()) #字符串只由字母组成</h1>
+<h1 id="printnameisdecimal-字符串只由十进制组成">print(name.isdecimal()) #字符串只由十进制组成</h1>
+<h1 id="s1-input请输入您的金额">s1 = input('请输入您的金额：')</h1>
+<h1 id="if-s1isdecimal">if s1.isdecimal():</h1>
+<h1 id="printints1">print(int(s1))</h1>
+<h1 id="else-3">else:</h1>
+<h1 id="print输入有误">print('输入有误')</h1>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://itxz.fun/post/pythonday03zuo-ye/">
+                <h3 class="post-title">
+                  pythonday03（作业）
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://itxz.fun/images/avatar.png?v=1587547576028" class="no-responsive avatar">
+    <div class="text-muted">pony686</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://itxz.fun/post/day03for-xun-huan/">day03（for循环）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://itxz.fun/post/day03strandqie-pian/">day03(str&amp;&amp;切片)</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://itxz.fun/post/pythonday03zuo-ye/">pythonday03（作业）</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://itxz.fun/post/du-pan-bei-su-fang-fa/">度盘倍速方法</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://itxz.fun/post/python02/">python02</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://itxz.fun/post/python/">python</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://itxz.fun/post/about/">关于</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

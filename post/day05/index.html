@@ -1,0 +1,414 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>day05 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1587616761066">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="day05 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="今日内容大纲
+字典的初识
+字典的使用（增删改查）
+字典的嵌套
+02 内容回顾以及作业讲解
+列表：容器型数据类型，可以承载大量的数据，有序的数据。
+增：
+append 追加
+insert 插入
+extend 迭代着追加
+删：
+pop 按照索引..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1587616761066" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              day05
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-22
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>今日内容大纲<br>
+字典的初识<br>
+字典的使用（增删改查）<br>
+字典的嵌套<br>
+02 内容回顾以及作业讲解<br>
+列表：容器型数据类型，可以承载大量的数据，有序的数据。<br>
+增：<br>
+append 追加<br>
+insert 插入<br>
+extend 迭代着追加<br>
+删：<br>
+pop 按照索引删除。有返回值，默认删除最后一个<br>
+remove 按照元素删除<br>
+clear 清空<br>
+del 索引，切片（步长）<br>
+改：<br>
+l1[1] = '大壮'<br>
+l1[1:3] = 'fdsafdsafdhsjkf'<br>
+l1[1:4:2] = '太白'<br>
+查：索引，切片，for循环<br>
+元组：只读列表，(), 拆包<br>
+range：看做：可以自己控制范围的数字列表，但是它不是列表。<br>
+03 具体内容<br>
+字典的初识：</p>
+<p>why：</p>
+<p>列表可以存储大量的数据，数据之间的关联性不强<br>
+['太白', 18, '男', '大壮', 3, '男']<br>
+列表的查询速度比较慢。<br>
+what：容器型数据类型：dict。</p>
+<p>how：</p>
+<p>数据类型的分类（可变与不可变）：</p>
+<p>可变（不可哈希）的数据类型：list dict set<br>
+不可变（可哈希）的数据类型： str bool int tuple<br>
+字典：{}括起来，以键值对形式存储的容器型数据类型：</p>
+<p>dic = {'太白':<br>
+{'name': '太白金星','age': 18, 'sex': '男'},<br>
+'python22期':<br>
+['朱光亚', '大壮', '雪飞', '岑哥'],<br>
+}<br>
+键必须是不可变的数据类型：int , str (bool tuple几乎不用) 唯一的。</p>
+<p>值可以是任意数据类型，对象。</p>
+<p>字典3.5x版本之前（包括3.5）是无序的。</p>
+<p>字典3.6x会按照初次建立字典的顺序排列，学术上不认为是有序的。</p>
+<p>字典3.7x以后都是有序的。</p>
+<p>字典的优点：查询速度非常快，存储关联性的数据。</p>
+<p>字典的缺点：以空间换时间。</p>
+<p>字典的创建方式：</p>
+<h1 id="面试会考">面试会考</h1>
+<h1 id="方式一">方式一：</h1>
+<h1 id="dic-dictone-1-two-2-three-3">dic = dict((('one', 1), ('two', 2), ('three', 3)))</h1>
+<h1 id="printdic-one-1-two-2-three-3">print(dic)  # {'one': 1, 'two': 2, 'three': 3}</h1>
+<h1 id="方式二">方式二：</h1>
+<h1 id="dic-dictone1-two2-three3">dic = dict(one=1, two=2, three=3)</h1>
+<h1 id="printdic">print(dic)</h1>
+<h1 id="方式三">方式三：</h1>
+<h1 id="dic-dictone-1-two-2-three-3-2">dic = dict({'one': 1, 'two': 2, 'three': 3})</h1>
+<h1 id="printdic-2">print(dic)</h1>
+<p>验证字典的合法性：</p>
+<p>dic = {[1,2,3]: 'alex', 1: 666}  # 键要不可变的数据类型<br>
+print(dic)<br>
+dic = {1: 'alex', 1: '太白', 2: 'wusir'}  # 键要唯一<br>
+print(dic)<br>
+字典的增删改查</p>
+<p>dic = {'name': '太白', 'age': 18, 'hobby_list': ['直男', '钢管', '开车']}</p>
+<h1 id="增">增：</h1>
+<h1 id="直接增加-有则改之无则增加">直接增加 有则改之，无则增加</h1>
+<h1 id="dicsex-男">dic['sex'] = '男'</h1>
+<h1 id="dicage-23-改">dic['age'] = 23  # 改</h1>
+<h1 id="printdic-3">print(dic)</h1>
+<h1 id="setdefault-有则不变无则增加">setdefault  有则不变，无则增加</h1>
+<h1 id="dicsetdefaulthobby">dic.setdefault('hobby')</h1>
+<h1 id="dicsetdefaulthobby-球类运动">dic.setdefault('hobby', '球类运动')</h1>
+<h1 id="dicsetdefaultage-45">dic.setdefault('age', 45)</h1>
+<h1 id="printdic-4">print(dic)</h1>
+<h1 id="删">删</h1>
+<h1 id="pop-按照键删除键值对-有返回值">pop 按照键删除键值对, 有返回值  ***</h1>
+<h1 id="设置第二个参数则无论字典中有无此键都不会报错">设置第二个参数则无论字典中有无此键都不会报错</h1>
+<h1 id="dicpopage">dic.pop('age')</h1>
+<h1 id="ret-dicpopage">ret = dic.pop('age')</h1>
+<h1 id="ret-dicpophobby没有此键">ret = dic.pop('hobby','没有此键')</h1>
+<h1 id="printret">print(ret)</h1>
+<h1 id="printdic-5">print(dic)</h1>
+<h1 id="clear-清空">clear  清空  **</h1>
+<h1 id="dicclear">dic.clear()</h1>
+<h1 id="printdic-6">print(dic)</h1>
+<h1 id="del">del  **</h1>
+<h1 id="del-dicage"># del dic['age']</h1>
+<h1 id="del-dicage1">del dic['age1']</h1>
+<h1 id="printdic-7">print(dic)</h1>
+<h1 id="改">改</h1>
+<h1 id="dicname-alex">dic['name'] = 'alex'</h1>
+<h1 id="printdic-8">print(dic)</h1>
+<h1 id="查">查</h1>
+<h1 id="printdichobby_list">print(dic['hobby_list'])</h1>
+<h1 id="printdichobby_list1">print(dic['hobby_list1'])</h1>
+<h1 id="get">get  ***</h1>
+<h1 id="l1-dicgethobby_list">l1 = dic.get('hobby_list')</h1>
+<h1 id="l1-dicgethobby_list1没有此键sb-可以设置返回值">l1 = dic.get('hobby_list1','没有此键sb')  # 可以设置返回值</h1>
+<h1 id="printl1">print(l1)</h1>
+<h1 id="三个特殊的">三个特殊的</h1>
+<h1 id="keys-values-items">keys() values() items()</h1>
+<h1 id="printdickeystypedickeys">print(dic.keys(),type(dic.keys()))</h1>
+<h1 id="可以转化成列表">可以转化成列表</h1>
+<h1 id="printlistdickeys">print(list(dic.keys()))</h1>
+<h1 id="for-key-in-dickeys">for key in dic.keys():</h1>
+<h1 id="printkey">print(key)</h1>
+<h1 id="for-key-in-dic">for key in dic:</h1>
+<h1 id="printkey-2">print(key)</h1>
+<h1 id="values">values()</h1>
+<h1 id="printdicvalues">print(dic.values())</h1>
+<h1 id="printlistdicvalues">print(list(dic.values()))</h1>
+<h1 id="for-value-in-dicvalues">for value in dic.values():</h1>
+<h1 id="printvalue">print(value)</h1>
+<h1 id="items">items()</h1>
+<h1 id="printdicitems">print(dic.items())</h1>
+<h1 id="for-keyvalue-in-dicitems">for key,value in dic.items():</h1>
+<h1 id="printkeyvalue">print(key,value)</h1>
+<h1 id="ab-name-太白">a,b = ('name', '太白')</h1>
+<h1 id="printab">print(a,b)</h1>
+<h1 id="面试题">面试题</h1>
+<h1 id="a-18">a = 18</h1>
+<h1 id="b-12">b = 12</h1>
+<h1 id="ab-ba">a,b = b,a</h1>
+<h1 id="ab-1218"># a,b = 12,18</h1>
+<h1 id="printab-2">print(a,b)</h1>
+<p>相关练习题：</p>
+<p>dic = {'k1': &quot;v1&quot;, &quot;k2&quot;: &quot;v2&quot;, &quot;k3&quot;: [11,22,33]}</p>
+<h1 id="请在字典中添加一个键值对k4-v4输出添加后的字典">请在字典中添加一个键值对，&quot;k4&quot;: &quot;v4&quot;，输出添加后的字典</h1>
+<h1 id="请在修改字典中-k1-对应的值为-alex输出修改后的字典">请在修改字典中 &quot;k1&quot; 对应的值为 &quot;alex&quot;，输出修改后的字典</h1>
+<h1 id="请在k3对应的值中追加一个元素-44输出修改后的字典">请在k3对应的值中追加一个元素 44，输出修改后的字典</h1>
+<h1 id="printdick3">print(dic['k3'])</h1>
+<h1 id="l1-dicgetk3">l1 = dic.get('k3')</h1>
+<h1 id="printl1-2">print(l1)</h1>
+<h1 id="dicgetk3append44">dic.get('k3').append(44)</h1>
+<h1 id="printdic-9">print(dic)</h1>
+<h1 id="请在k3对应的值的第-1-个位置插入个元素-18输出修改后的字典">请在k3对应的值的第 1 个位置插入个元素 18，输出修改后的字典</h1>
+<p>字典的嵌套</p>
+<p>dic = {<br>
+'name': '汪峰',<br>
+'age': 48,<br>
+'wife': [{'name': '国际章', 'age': 38},],<br>
+'children': {'girl_first': '小苹果','girl_second': '小怡','girl_three': '顶顶'}<br>
+}</p>
+<h1 id="1-获取汪峰的名字">1. 获取汪峰的名字。</h1>
+<h1 id=""></h1>
+<h1 id="2获取这个字典name国际章age38">2.获取这个字典：{'name':'国际章','age':38}。</h1>
+<h1 id="-2"></h1>
+<h1 id="3-获取汪峰妻子的名字">3. 获取汪峰妻子的名字。</h1>
+<h1 id="4-获取汪峰的第三个孩子名字">4. 获取汪峰的第三个孩子名字。</h1>
+<p>04 今日总结<br>
+字典：查询速度快，数据的关联性强。<br>
+键不可变得数据类型，（str int），唯一。<br>
+值：任意数据类型，对象。<br>
+增删改查（全部都要会默写）***<br>
+字典的嵌套。***<br>
+05 明日预习内容<br>
+明天讲理论性偏多：id is == 小数据池，集合。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%9D%A2%E8%AF%95%E4%BC%9A%E8%80%83">面试会考</a></li>
+<li><a href="#%E6%96%B9%E5%BC%8F%E4%B8%80">方式一：</a></li>
+<li><a href="#dic-dictone-1-two-2-three-3">dic = dict((('one', 1), ('two', 2), ('three', 3)))</a></li>
+<li><a href="#printdic-one-1-two-2-three-3">print(dic)  # {'one': 1, 'two': 2, 'three': 3}</a></li>
+<li><a href="#%E6%96%B9%E5%BC%8F%E4%BA%8C">方式二：</a></li>
+<li><a href="#dic-dictone1-two2-three3">dic = dict(one=1, two=2, three=3)</a></li>
+<li><a href="#printdic">print(dic)</a></li>
+<li><a href="#%E6%96%B9%E5%BC%8F%E4%B8%89">方式三：</a></li>
+<li><a href="#dic-dictone-1-two-2-three-3-2">dic = dict({'one': 1, 'two': 2, 'three': 3})</a></li>
+<li><a href="#printdic-2">print(dic)</a></li>
+<li><a href="#%E5%A2%9E">增：</a></li>
+<li><a href="#%E7%9B%B4%E6%8E%A5%E5%A2%9E%E5%8A%A0-%E6%9C%89%E5%88%99%E6%94%B9%E4%B9%8B%E6%97%A0%E5%88%99%E5%A2%9E%E5%8A%A0">直接增加 有则改之，无则增加</a></li>
+<li><a href="#dicsex-%E7%94%B7">dic['sex'] = '男'</a></li>
+<li><a href="#dicage-23-%E6%94%B9">dic['age'] = 23  # 改</a></li>
+<li><a href="#printdic-3">print(dic)</a></li>
+<li><a href="#setdefault-%E6%9C%89%E5%88%99%E4%B8%8D%E5%8F%98%E6%97%A0%E5%88%99%E5%A2%9E%E5%8A%A0">setdefault  有则不变，无则增加</a></li>
+<li><a href="#dicsetdefaulthobby">dic.setdefault('hobby')</a></li>
+<li><a href="#dicsetdefaulthobby-%E7%90%83%E7%B1%BB%E8%BF%90%E5%8A%A8">dic.setdefault('hobby', '球类运动')</a></li>
+<li><a href="#dicsetdefaultage-45">dic.setdefault('age', 45)</a></li>
+<li><a href="#printdic-4">print(dic)</a></li>
+<li><a href="#%E5%88%A0">删</a></li>
+<li><a href="#pop-%E6%8C%89%E7%85%A7%E9%94%AE%E5%88%A0%E9%99%A4%E9%94%AE%E5%80%BC%E5%AF%B9-%E6%9C%89%E8%BF%94%E5%9B%9E%E5%80%BC">pop 按照键删除键值对, 有返回值  ***</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0%E5%88%99%E6%97%A0%E8%AE%BA%E5%AD%97%E5%85%B8%E4%B8%AD%E6%9C%89%E6%97%A0%E6%AD%A4%E9%94%AE%E9%83%BD%E4%B8%8D%E4%BC%9A%E6%8A%A5%E9%94%99">设置第二个参数则无论字典中有无此键都不会报错</a></li>
+<li><a href="#dicpopage">dic.pop('age')</a></li>
+<li><a href="#ret-dicpopage">ret = dic.pop('age')</a></li>
+<li><a href="#ret-dicpophobby%E6%B2%A1%E6%9C%89%E6%AD%A4%E9%94%AE">ret = dic.pop('hobby','没有此键')</a></li>
+<li><a href="#printret">print(ret)</a></li>
+<li><a href="#printdic-5">print(dic)</a></li>
+<li><a href="#clear-%E6%B8%85%E7%A9%BA">clear  清空  **</a></li>
+<li><a href="#dicclear">dic.clear()</a></li>
+<li><a href="#printdic-6">print(dic)</a></li>
+<li><a href="#del">del  **</a></li>
+<li><a href="#del-dicage"># del dic['age']</a></li>
+<li><a href="#del-dicage1">del dic['age1']</a></li>
+<li><a href="#printdic-7">print(dic)</a></li>
+<li><a href="#%E6%94%B9">改</a></li>
+<li><a href="#dicname-alex">dic['name'] = 'alex'</a></li>
+<li><a href="#printdic-8">print(dic)</a></li>
+<li><a href="#%E6%9F%A5">查</a></li>
+<li><a href="#printdichobby_list">print(dic['hobby_list'])</a></li>
+<li><a href="#printdichobby_list1">print(dic['hobby_list1'])</a></li>
+<li><a href="#get">get  ***</a></li>
+<li><a href="#l1-dicgethobby_list">l1 = dic.get('hobby_list')</a></li>
+<li><a href="#l1-dicgethobby_list1%E6%B2%A1%E6%9C%89%E6%AD%A4%E9%94%AEsb-%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE%E8%BF%94%E5%9B%9E%E5%80%BC">l1 = dic.get('hobby_list1','没有此键sb')  # 可以设置返回值</a></li>
+<li><a href="#printl1">print(l1)</a></li>
+<li><a href="#%E4%B8%89%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84">三个特殊的</a></li>
+<li><a href="#keys-values-items">keys() values() items()</a></li>
+<li><a href="#printdickeystypedickeys">print(dic.keys(),type(dic.keys()))</a></li>
+<li><a href="#%E5%8F%AF%E4%BB%A5%E8%BD%AC%E5%8C%96%E6%88%90%E5%88%97%E8%A1%A8">可以转化成列表</a></li>
+<li><a href="#printlistdickeys">print(list(dic.keys()))</a></li>
+<li><a href="#for-key-in-dickeys">for key in dic.keys():</a></li>
+<li><a href="#printkey">print(key)</a></li>
+<li><a href="#for-key-in-dic">for key in dic:</a></li>
+<li><a href="#printkey-2">print(key)</a></li>
+<li><a href="#values">values()</a></li>
+<li><a href="#printdicvalues">print(dic.values())</a></li>
+<li><a href="#printlistdicvalues">print(list(dic.values()))</a></li>
+<li><a href="#for-value-in-dicvalues">for value in dic.values():</a></li>
+<li><a href="#printvalue">print(value)</a></li>
+<li><a href="#items">items()</a></li>
+<li><a href="#printdicitems">print(dic.items())</a></li>
+<li><a href="#for-keyvalue-in-dicitems">for key,value in dic.items():</a></li>
+<li><a href="#printkeyvalue">print(key,value)</a></li>
+<li><a href="#ab-name-%E5%A4%AA%E7%99%BD">a,b = ('name', '太白')</a></li>
+<li><a href="#printab">print(a,b)</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></li>
+<li><a href="#a-18">a = 18</a></li>
+<li><a href="#b-12">b = 12</a></li>
+<li><a href="#ab-ba">a,b = b,a</a></li>
+<li><a href="#ab-1218"># a,b = 12,18</a></li>
+<li><a href="#printab-2">print(a,b)</a></li>
+<li><a href="#%E8%AF%B7%E5%9C%A8%E5%AD%97%E5%85%B8%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E9%94%AE%E5%80%BC%E5%AF%B9k4-v4%E8%BE%93%E5%87%BA%E6%B7%BB%E5%8A%A0%E5%90%8E%E7%9A%84%E5%AD%97%E5%85%B8">请在字典中添加一个键值对，&quot;k4&quot;: &quot;v4&quot;，输出添加后的字典</a></li>
+<li><a href="#%E8%AF%B7%E5%9C%A8%E4%BF%AE%E6%94%B9%E5%AD%97%E5%85%B8%E4%B8%AD-k1-%E5%AF%B9%E5%BA%94%E7%9A%84%E5%80%BC%E4%B8%BA-alex%E8%BE%93%E5%87%BA%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84%E5%AD%97%E5%85%B8">请在修改字典中 &quot;k1&quot; 对应的值为 &quot;alex&quot;，输出修改后的字典</a></li>
+<li><a href="#%E8%AF%B7%E5%9C%A8k3%E5%AF%B9%E5%BA%94%E7%9A%84%E5%80%BC%E4%B8%AD%E8%BF%BD%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0-44%E8%BE%93%E5%87%BA%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84%E5%AD%97%E5%85%B8">请在k3对应的值中追加一个元素 44，输出修改后的字典</a></li>
+<li><a href="#printdick3">print(dic['k3'])</a></li>
+<li><a href="#l1-dicgetk3">l1 = dic.get('k3')</a></li>
+<li><a href="#printl1-2">print(l1)</a></li>
+<li><a href="#dicgetk3append44">dic.get('k3').append(44)</a></li>
+<li><a href="#printdic-9">print(dic)</a></li>
+<li><a href="#%E8%AF%B7%E5%9C%A8k3%E5%AF%B9%E5%BA%94%E7%9A%84%E5%80%BC%E7%9A%84%E7%AC%AC-1-%E4%B8%AA%E4%BD%8D%E7%BD%AE%E6%8F%92%E5%85%A5%E4%B8%AA%E5%85%83%E7%B4%A0-18%E8%BE%93%E5%87%BA%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84%E5%AD%97%E5%85%B8">请在k3对应的值的第 1 个位置插入个元素 18，输出修改后的字典</a></li>
+<li><a href="#1-%E8%8E%B7%E5%8F%96%E6%B1%AA%E5%B3%B0%E7%9A%84%E5%90%8D%E5%AD%97">1. 获取汪峰的名字。</a></li>
+<li></li>
+<li><a href="#2%E8%8E%B7%E5%8F%96%E8%BF%99%E4%B8%AA%E5%AD%97%E5%85%B8name%E5%9B%BD%E9%99%85%E7%AB%A0age38">2.获取这个字典：{'name':'国际章','age':38}。</a></li>
+<li></li>
+<li><a href="#3-%E8%8E%B7%E5%8F%96%E6%B1%AA%E5%B3%B0%E5%A6%BB%E5%AD%90%E7%9A%84%E5%90%8D%E5%AD%97">3. 获取汪峰妻子的名字。</a></li>
+<li><a href="#4-%E8%8E%B7%E5%8F%96%E6%B1%AA%E5%B3%B0%E7%9A%84%E7%AC%AC%E4%B8%89%E4%B8%AA%E5%AD%A9%E5%AD%90%E5%90%8D%E5%AD%97">4. 获取汪峰的第三个孩子名字。</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/day04/">
+              <h3 class="post-title">
+                day04
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

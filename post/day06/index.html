@@ -1,0 +1,509 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>day06(深浅copy 集合) | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1587616761066">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="day06(深浅copy 集合) | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="01 今日内容大纲
+
+is == id 用法
+代码块
+同一代码块下的缓存机制
+不同代码块下的缓存机制（小数据池）
+总结
+集合（了解）
+深浅copy
+02 昨日回顾以及作业讲解
+字典初始：
+查询速度快，{'name': '太白'}, 存储大量..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1587616761066" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              day06(深浅copy 集合)
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-23
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>01 今日内容大纲</p>
+<ol>
+<li>is == id 用法</li>
+<li>代码块</li>
+<li>同一代码块下的缓存机制</li>
+<li>不同代码块下的缓存机制（小数据池）</li>
+<li>总结</li>
+<li>集合（了解）</li>
+<li>深浅copy<br>
+02 昨日回顾以及作业讲解</li>
+<li>字典初始：<br>
+查询速度快，{'name': '太白'}, 存储大量的关联型数据。<br>
+键：必须是不可变的数据类型（int，str，bool，tuple），唯一的。<br>
+值：任意数据类型，对象。<br>
+字典3.5x 之前无序的，3.6x 按照初始时的顺序排列，3.7之后有序的。</li>
+<li>增删改查：<br>
+增：setdefualt(), dic['age'] = 18<br>
+删：pop 键(可以设置返回值)。clear 清空，del dic['name']<br>
+改：dic['name'] = 'wusir'<br>
+dic['name'] dic.get('name') dic.keys() dic.values() dic.items()</li>
+<li>字典的嵌套。<br>
+03 具体内容</li>
+<li>id is ==</li>
+</ol>
+<h1 id="id-身份证号">id 身份证号</h1>
+<h1 id="i-100">i = 100</h1>
+<h1 id="s-alex">s = 'alex'</h1>
+<h1 id="printidi">print(id(i))</h1>
+<h1 id="printids">print(id(s))</h1>
+<h1 id="比较的是两边的值是否相等">== 比较的是两边的值是否相等</h1>
+<h1 id="l1-1-2-3">l1 = [1, 2, 3]</h1>
+<h1 id="l2-1-2-3">l2 = [1, 2, 3]</h1>
+<h1 id="printl1-l2">print(l1 == l2)</h1>
+<h1 id="s1-alex">s1 = 'alex'</h1>
+<h1 id="s2-alex">s2 = 'alex '</h1>
+<h1 id="prints1-s2">print(s1 == s2)</h1>
+<h1 id="is-判断的是内存地址是否相同">is 判断的是内存地址是否相同</h1>
+<h1 id="l1-1-2-3-2">l1 = [1, 2, 3]</h1>
+<ol start="2">
+<li>代码块<br>
+代码块：我们所有的代码都需要依赖代码块执行。<br>
+一个文件就是一个代码块。<br>
+交互式命令下一行就是一个代码块。</li>
+<li>两个机制： 同一个代码块下，有一个机制。不同的代码块下，遵循另一个机制。</li>
+<li>同一个代码块下的缓存机制。<br>
+前提条件：同一个代码块内。</li>
+</ol>
+<h1 id="l2-1-2-3-2">l2 = [1, 2, 3]</h1>
+<h1 id="printidl1">print(id(l1))</h1>
+<h1 id="printidl2">print(id(l2))</h1>
+<h1 id="printl1-is-l2">print(l1 is l2)</h1>
+<p>s1 = 'alex'<br>
+s2 = 'alex'<br>
+print(id(s1))<br>
+print(id(s2))<br>
+print(s1 is s2)</p>
+<h1 id="id-相同值一定相同">id 相同，值一定相同</h1>
+<h1 id="值相同id不一定相同">值相同，id不一定相同</h1>
+<p>机制内容：pass<br>
+适用的对象： int bool str<br>
+具体细则：所有的数字，bool，几乎所有的字符串。<br>
+优点：提升性能，节省内存。<br>
+5. 不同代码块下的缓存机制： 小数据池。<br>
+前提条件：不同代码块内。<br>
+机制内容：pass<br>
+适用的对象： int bool str<br>
+具体细则：-5~256数字，bool，满足规则的字符串。<br>
+优点：提升性能，节省内存。</p>
+<h1 id="i1-1000">i1 = 1000</h1>
+<h1 id="i2-1000">i2 = 1000</h1>
+<h1 id="i3-1000">i3 = 1000</h1>
+<h1 id="l1-123">l1 = [1,2,3]</h1>
+<h1 id="l2-123">l2 = [1,2,3]</h1>
+<h1 id="printidl1-2">print(id(l1))</h1>
+<h1 id="printidl2-2">print(id(l2))</h1>
+<h1 id="printidi1">print(id(i1))</h1>
+<h1 id="printidi2">print(id(i2))</h1>
+<h1 id="printidi3">print(id(i3))</h1>
+<p>i = 800<br>
+i1 = 800<br>
+s1 = 'hfdjka6757fdslslgaj@!#fkdjlsafjdskl;fjds中国'<br>
+s2 = 'hfdjka6757fdslslgaj@!#fkdjlsafjdskl;fjds中国'<br>
+print(i is i1)<br>
+print(s1 is s2)</p>
+<ol>
+<li>总结：+</li>
+<li>面试题考。</li>
+<li>回答的时候一定要分清楚：同一个代码块下适用一个缓存机制。不同的代码块下适用另一个缓存机制（小<br>
+数据池）</li>
+<li>小数据池：数字的范围是-5~256.</li>
+<li>缓存机制的优点：提升性能，节省内存。</li>
+<li>python基础数据类型之：集合 set。容器型的数据类型，它要求它里面的元素是不可变的数据，但是它本身是<br>
+可变的数据类型。集合是无序的。{}。<br>
+集合的作用：<br>
+列表的去重。<br>
+关系测试： 交集，并集，差集，.....<br>
+pass</li>
+</ol>
+<h1 id="集合的创建">集合的创建：</h1>
+<h1 id="set1-set1-3-barry-false">set1 = set({1, 3, 'Barry', False})</h1>
+<h1 id="set1-1-3-太白金星-4-alex-false-武大">set1 = {1, 3, '太白金星', 4, 'alex', False, '武大'}</h1>
+<h1 id="printset1">print(set1)</h1>
+<h1 id="空集合">空集合：</h1>
+<h1 id="print-type-空字典">print({}, type({})) # 空字典</h1>
+<h1 id="set1-set">set1 = set()</h1>
+<h1 id="printset1-2">print(set1)</h1>
+<h1 id="集合的有效性测试">集合的有效性测试</h1>
+<h1 id="set1-123-3-name-alex">set1 = {[1,2,3], 3, {'name': 'alex'}}</h1>
+<h1 id="printset1-3">print(set1)</h1>
+<h1 id="set1-太白金星-景女神-武大-三粗-alexsb-吴老师">set1 = {'太白金星', '景女神', '武大', '三粗', 'alexsb', '吴老师'}</h1>
+<h1 id="增">增：</h1>
+<h1 id="add">add</h1>
+<h1 id="set1addxx">set1.add('xx')</h1>
+<h1 id="printset1-4">print(set1)</h1>
+<h1 id="update迭代着增加">update迭代着增加</h1>
+<h1 id="set1updatefdsafgsd">set1.update('fdsafgsd')</h1>
+<h1 id="printset1-5">print(set1)</h1>
+<h1 id="删">删</h1>
+<h1 id="remove">remove</h1>
+<h1 id="remove-按照元素删除">remove 按照元素删除</h1>
+<h1 id="set1removealexsb">set1.remove('alexsb')</h1>
+<h1 id=""></h1>
+<h1 id="printset1-6">print(set1)</h1>
+<h1 id="pop-随即删除">pop 随即删除</h1>
+<h1 id="set1pop">set1.pop()</h1>
+<h1 id="printset1-7">print(set1)</h1>
+<h1 id="变相改值">变相改值</h1>
+<h1 id="set1remove太白金星">set1.remove('太白金星')</h1>
+<h1 id="set1add男神">set1.add('男神')</h1>
+<h1 id="printset1-8">print(set1)</h1>
+<p>#关系测试：***</p>
+<h1 id="交集">交集</h1>
+<h1 id="set1-1-2-3-4-5">set1 = {1, 2, 3, 4, 5}</h1>
+<h1 id="set2-4-5-6-7-8">set2 = {4, 5, 6, 7, 8}</h1>
+<h1 id="printset1-set2">print(set1 &amp; set2)</h1>
+<h1 id="并集">并集：</h1>
+<h1 id="printset1-set2-2">print(set1 | set2)</h1>
+<h1 id="差集-">差集 -</h1>
+<h1 id="printset1-set2-3">print(set1 - set2)</h1>
+<h1 id="反交集">反交集</h1>
+<h1 id="printset1-set2-4">print(set1 ^ set2)</h1>
+<h1 id="子集">子集</h1>
+<h1 id="set1-123">set1 = {1,2,3}</h1>
+<h1 id="set2-123456">set2 = {1,2,3,4,5,6}</h1>
+<h1 id="printset1-set2-5"># print(set1 &lt; set2)</h1>
+<h1 id="-2"></h1>
+<h1 id="超集"># 超集</h1>
+<h1 id="printset2-set1">print(set2 &gt; set1)</h1>
+<h1 id="列表的去重">列表的去重 ***</h1>
+<h1 id="l1-1太白-1-2-2-太白2-6-6-6-3-太白-4-5">l1 = [1,'太白', 1, 2, 2, '太白',2, 6, 6, 6, 3, '太白', 4, 5, ]</h1>
+<h1 id="set1-setl1">set1 = set(l1)</h1>
+<h1 id="l1-listset1">l1 = list(set1)</h1>
+<ol start="3">
+<li>深浅copy（面试会考）</li>
+</ol>
+<h1 id="printl1">print(l1)</h1>
+<h1 id="用处数据之间的关系列表去重">用处：数据之间的关系，列表去重。</h1>
+<h1 id="赋值运算">赋值运算</h1>
+<h1 id="l1-1-2-3-22-33">l1 = [1, 2, 3, [22, 33]]</h1>
+<h1 id="l2-l1">l2 = l1</h1>
+<h1 id="l1append666">l1.append(666)</h1>
+<h1 id="printl1-2">print(l1)</h1>
+<h1 id="printl2">print(l2)</h1>
+<h1 id="浅copy">浅copy</h1>
+<h1 id="l1-1-2-3-22-33-2">l1 = [1, 2, 3, [22, 33]]</h1>
+<h1 id="l2-l1copy">l2 = l1.copy()</h1>
+<h1 id="l1append666-2">l1.append(666)</h1>
+<h1 id="printl1idl1">print(l1,id(l1))</h1>
+<h1 id="printl2idl2">print(l2,id(l2))</h1>
+<h1 id="l1-1-2-3-22-33-3">l1 = [1, 2, 3, [22, 33]]</h1>
+<h1 id="l2-l1copy-2">l2 = l1.copy()</h1>
+<h1 id="l1-1append666">l1[-1].append(666)</h1>
+<h1 id="printidl1-1">print(id(l1[-1]))</h1>
+<h1 id="printidl2-1">print(id(l2[-1]))</h1>
+<h1 id="printidl10">print(id(l1[0]))</h1>
+<h1 id="printidl20">print(id(l2[0]))</h1>
+<h1 id="printl1-3">print(l1)</h1>
+<h1 id="printl2-2">print(l2)</h1>
+<h1 id="l1-1-2-3-22-33-4">l1 = [1, 2, 3, [22, 33]]</h1>
+<h1 id="l2-l1copy-3">l2 = l1.copy()</h1>
+<h1 id="l10-90">l1[0] = 90</h1>
+<h1 id="printl1-4">print(l1)</h1>
+<h1 id="printl2-3">print(l2)</h1>
+<h1 id="深copy">深copy</h1>
+<h1 id="import-copy">import copy</h1>
+<h1 id="l1-1-2-3-22-33-5">l1 = [1, 2, 3, [22, 33]]</h1>
+<h1 id="l2-copydeepcopyl1">l2 = copy.deepcopy(l1)</h1>
+<h1 id="printidl1-3"># print(id(l1))</h1>
+<h1 id="printidl2-3"># print(id(l2))</h1>
+<h1 id="l1-1append666-2">l1[-1].append(666)</h1>
+<h1 id="printl1-5">print(l1)</h1>
+<h1 id="printl2-4">print(l2)</h1>
+<h1 id="相关面试题">相关面试题；</h1>
+<h1 id="l1-1-2-3-22-33-6">l1 = [1, 2, 3, [22, 33]]</h1>
+<h1 id="l2-l1-2">l2 = l1[:]</h1>
+<h1 id="l1-1append666-3">l1[-1].append(666)</h1>
+<h1 id="printl1-6">print(l1)</h1>
+<h1 id="printl2-5">print(l2)</h1>
+<h1 id="浅copy-list-dict-嵌套的可变的数据类型是同一个">浅copy： list dict: 嵌套的可变的数据类型是同一个。</h1>
+<h1 id="深copy-list-dict-嵌套的可变的数据类型不是同一个">深copy： list dict: 嵌套的可变的数据类型不是同一个 。</h1>
+<p>04 今日总结<br>
+id is == 三个方法要会用，知道是做什么的。<br>
+回答的时候一定要分清楚：同一个代码块下适用一个缓存机制。不同的代码块下适用另一个缓存机制（小数据<br>
+池）<br>
+小数据池：数字的范围是-5~256.<br>
+缓存机制的优点：提升性能，节省内存。<br>
+集合：列表去重，关系测试。<br>
+深浅copy：理解浅copy，深浅copy,课上练习题整明白。<br>
+05 预习内容<br>
+数据类型的补充以及编码的进阶：https://www.cnblogs.com/jin-xin/articles/10577131.html</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#id-%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7">id 身份证号</a></li>
+<li><a href="#i-100">i = 100</a></li>
+<li><a href="#s-alex">s = 'alex'</a></li>
+<li><a href="#printidi">print(id(i))</a></li>
+<li><a href="#printids">print(id(s))</a></li>
+<li><a href="#%E6%AF%94%E8%BE%83%E7%9A%84%E6%98%AF%E4%B8%A4%E8%BE%B9%E7%9A%84%E5%80%BC%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89">== 比较的是两边的值是否相等</a></li>
+<li><a href="#l1-1-2-3">l1 = [1, 2, 3]</a></li>
+<li><a href="#l2-1-2-3">l2 = [1, 2, 3]</a></li>
+<li><a href="#printl1-l2">print(l1 == l2)</a></li>
+<li><a href="#s1-alex">s1 = 'alex'</a></li>
+<li><a href="#s2-alex">s2 = 'alex '</a></li>
+<li><a href="#prints1-s2">print(s1 == s2)</a></li>
+<li><a href="#is-%E5%88%A4%E6%96%AD%E7%9A%84%E6%98%AF%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C">is 判断的是内存地址是否相同</a></li>
+<li><a href="#l1-1-2-3-2">l1 = [1, 2, 3]</a></li>
+<li><a href="#l2-1-2-3-2">l2 = [1, 2, 3]</a></li>
+<li><a href="#printidl1">print(id(l1))</a></li>
+<li><a href="#printidl2">print(id(l2))</a></li>
+<li><a href="#printl1-is-l2">print(l1 is l2)</a></li>
+<li><a href="#id-%E7%9B%B8%E5%90%8C%E5%80%BC%E4%B8%80%E5%AE%9A%E7%9B%B8%E5%90%8C">id 相同，值一定相同</a></li>
+<li><a href="#%E5%80%BC%E7%9B%B8%E5%90%8Cid%E4%B8%8D%E4%B8%80%E5%AE%9A%E7%9B%B8%E5%90%8C">值相同，id不一定相同</a></li>
+<li><a href="#i1-1000">i1 = 1000</a></li>
+<li><a href="#i2-1000">i2 = 1000</a></li>
+<li><a href="#i3-1000">i3 = 1000</a></li>
+<li><a href="#l1-123">l1 = [1,2,3]</a></li>
+<li><a href="#l2-123">l2 = [1,2,3]</a></li>
+<li><a href="#printidl1-2">print(id(l1))</a></li>
+<li><a href="#printidl2-2">print(id(l2))</a></li>
+<li><a href="#printidi1">print(id(i1))</a></li>
+<li><a href="#printidi2">print(id(i2))</a></li>
+<li><a href="#printidi3">print(id(i3))</a></li>
+<li><a href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%88%9B%E5%BB%BA">集合的创建：</a></li>
+<li><a href="#set1-set1-3-barry-false">set1 = set({1, 3, 'Barry', False})</a></li>
+<li><a href="#set1-1-3-%E5%A4%AA%E7%99%BD%E9%87%91%E6%98%9F-4-alex-false-%E6%AD%A6%E5%A4%A7">set1 = {1, 3, '太白金星', 4, 'alex', False, '武大'}</a></li>
+<li><a href="#printset1">print(set1)</a></li>
+<li><a href="#%E7%A9%BA%E9%9B%86%E5%90%88">空集合：</a></li>
+<li><a href="#print-type-%E7%A9%BA%E5%AD%97%E5%85%B8">print({}, type({})) # 空字典</a></li>
+<li><a href="#set1-set">set1 = set()</a></li>
+<li><a href="#printset1-2">print(set1)</a></li>
+<li><a href="#%E9%9B%86%E5%90%88%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7%E6%B5%8B%E8%AF%95">集合的有效性测试</a></li>
+<li><a href="#set1-123-3-name-alex">set1 = {[1,2,3], 3, {'name': 'alex'}}</a></li>
+<li><a href="#printset1-3">print(set1)</a></li>
+<li><a href="#set1-%E5%A4%AA%E7%99%BD%E9%87%91%E6%98%9F-%E6%99%AF%E5%A5%B3%E7%A5%9E-%E6%AD%A6%E5%A4%A7-%E4%B8%89%E7%B2%97-alexsb-%E5%90%B4%E8%80%81%E5%B8%88">set1 = {'太白金星', '景女神', '武大', '三粗', 'alexsb', '吴老师'}</a></li>
+<li><a href="#%E5%A2%9E">增：</a></li>
+<li><a href="#add">add</a></li>
+<li><a href="#set1addxx">set1.add('xx')</a></li>
+<li><a href="#printset1-4">print(set1)</a></li>
+<li><a href="#update%E8%BF%AD%E4%BB%A3%E7%9D%80%E5%A2%9E%E5%8A%A0">update迭代着增加</a></li>
+<li><a href="#set1updatefdsafgsd">set1.update('fdsafgsd')</a></li>
+<li><a href="#printset1-5">print(set1)</a></li>
+<li><a href="#%E5%88%A0">删</a></li>
+<li><a href="#remove">remove</a></li>
+<li><a href="#remove-%E6%8C%89%E7%85%A7%E5%85%83%E7%B4%A0%E5%88%A0%E9%99%A4">remove 按照元素删除</a></li>
+<li><a href="#set1removealexsb">set1.remove('alexsb')</a></li>
+<li></li>
+<li><a href="#printset1-6">print(set1)</a></li>
+<li><a href="#pop-%E9%9A%8F%E5%8D%B3%E5%88%A0%E9%99%A4">pop 随即删除</a></li>
+<li><a href="#set1pop">set1.pop()</a></li>
+<li><a href="#printset1-7">print(set1)</a></li>
+<li><a href="#%E5%8F%98%E7%9B%B8%E6%94%B9%E5%80%BC">变相改值</a></li>
+<li><a href="#set1remove%E5%A4%AA%E7%99%BD%E9%87%91%E6%98%9F">set1.remove('太白金星')</a></li>
+<li><a href="#set1add%E7%94%B7%E7%A5%9E">set1.add('男神')</a></li>
+<li><a href="#printset1-8">print(set1)</a></li>
+<li><a href="#%E4%BA%A4%E9%9B%86">交集</a></li>
+<li><a href="#set1-1-2-3-4-5">set1 = {1, 2, 3, 4, 5}</a></li>
+<li><a href="#set2-4-5-6-7-8">set2 = {4, 5, 6, 7, 8}</a></li>
+<li><a href="#printset1-set2">print(set1 &amp; set2)</a></li>
+<li><a href="#%E5%B9%B6%E9%9B%86">并集：</a></li>
+<li><a href="#printset1-set2-2">print(set1 | set2)</a></li>
+<li><a href="#%E5%B7%AE%E9%9B%86-">差集 -</a></li>
+<li><a href="#printset1-set2-3">print(set1 - set2)</a></li>
+<li><a href="#%E5%8F%8D%E4%BA%A4%E9%9B%86">反交集</a></li>
+<li><a href="#printset1-set2-4">print(set1 ^ set2)</a></li>
+<li><a href="#%E5%AD%90%E9%9B%86">子集</a></li>
+<li><a href="#set1-123">set1 = {1,2,3}</a></li>
+<li><a href="#set2-123456">set2 = {1,2,3,4,5,6}</a></li>
+<li><a href="#printset1-set2-5"># print(set1 &lt; set2)</a></li>
+<li></li>
+<li><a href="#%E8%B6%85%E9%9B%86"># 超集</a></li>
+<li><a href="#printset2-set1">print(set2 &gt; set1)</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8%E7%9A%84%E5%8E%BB%E9%87%8D">列表的去重 ***</a></li>
+<li><a href="#l1-1%E5%A4%AA%E7%99%BD-1-2-2-%E5%A4%AA%E7%99%BD2-6-6-6-3-%E5%A4%AA%E7%99%BD-4-5">l1 = [1,'太白', 1, 2, 2, '太白',2, 6, 6, 6, 3, '太白', 4, 5, ]</a></li>
+<li><a href="#set1-setl1">set1 = set(l1)</a></li>
+<li><a href="#l1-listset1">l1 = list(set1)</a></li>
+<li><a href="#printl1">print(l1)</a></li>
+<li><a href="#%E7%94%A8%E5%A4%84%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%E5%88%97%E8%A1%A8%E5%8E%BB%E9%87%8D">用处：数据之间的关系，列表去重。</a></li>
+<li><a href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97">赋值运算</a></li>
+<li><a href="#l1-1-2-3-22-33">l1 = [1, 2, 3, [22, 33]]</a></li>
+<li><a href="#l2-l1">l2 = l1</a></li>
+<li><a href="#l1append666">l1.append(666)</a></li>
+<li><a href="#printl1-2">print(l1)</a></li>
+<li><a href="#printl2">print(l2)</a></li>
+<li><a href="#%E6%B5%85copy">浅copy</a></li>
+<li><a href="#l1-1-2-3-22-33-2">l1 = [1, 2, 3, [22, 33]]</a></li>
+<li><a href="#l2-l1copy">l2 = l1.copy()</a></li>
+<li><a href="#l1append666-2">l1.append(666)</a></li>
+<li><a href="#printl1idl1">print(l1,id(l1))</a></li>
+<li><a href="#printl2idl2">print(l2,id(l2))</a></li>
+<li><a href="#l1-1-2-3-22-33-3">l1 = [1, 2, 3, [22, 33]]</a></li>
+<li><a href="#l2-l1copy-2">l2 = l1.copy()</a></li>
+<li><a href="#l1-1append666">l1[-1].append(666)</a></li>
+<li><a href="#printidl1-1">print(id(l1[-1]))</a></li>
+<li><a href="#printidl2-1">print(id(l2[-1]))</a></li>
+<li><a href="#printidl10">print(id(l1[0]))</a></li>
+<li><a href="#printidl20">print(id(l2[0]))</a></li>
+<li><a href="#printl1-3">print(l1)</a></li>
+<li><a href="#printl2-2">print(l2)</a></li>
+<li><a href="#l1-1-2-3-22-33-4">l1 = [1, 2, 3, [22, 33]]</a></li>
+<li><a href="#l2-l1copy-3">l2 = l1.copy()</a></li>
+<li><a href="#l10-90">l1[0] = 90</a></li>
+<li><a href="#printl1-4">print(l1)</a></li>
+<li><a href="#printl2-3">print(l2)</a></li>
+<li><a href="#%E6%B7%B1copy">深copy</a></li>
+<li><a href="#import-copy">import copy</a></li>
+<li><a href="#l1-1-2-3-22-33-5">l1 = [1, 2, 3, [22, 33]]</a></li>
+<li><a href="#l2-copydeepcopyl1">l2 = copy.deepcopy(l1)</a></li>
+<li><a href="#printidl1-3"># print(id(l1))</a></li>
+<li><a href="#printidl2-3"># print(id(l2))</a></li>
+<li><a href="#l1-1append666-2">l1[-1].append(666)</a></li>
+<li><a href="#printl1-5">print(l1)</a></li>
+<li><a href="#printl2-4">print(l2)</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98">相关面试题；</a></li>
+<li><a href="#l1-1-2-3-22-33-6">l1 = [1, 2, 3, [22, 33]]</a></li>
+<li><a href="#l2-l1-2">l2 = l1[:]</a></li>
+<li><a href="#l1-1append666-3">l1[-1].append(666)</a></li>
+<li><a href="#printl1-6">print(l1)</a></li>
+<li><a href="#printl2-5">print(l2)</a></li>
+<li><a href="#%E6%B5%85copy-list-dict-%E5%B5%8C%E5%A5%97%E7%9A%84%E5%8F%AF%E5%8F%98%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%90%8C%E4%B8%80%E4%B8%AA">浅copy： list dict: 嵌套的可变的数据类型是同一个。</a></li>
+<li><a href="#%E6%B7%B1copy-list-dict-%E5%B5%8C%E5%A5%97%E7%9A%84%E5%8F%AF%E5%8F%98%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%90%8C%E4%B8%80%E4%B8%AA">深copy： list dict: 嵌套的可变的数据类型不是同一个 。</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/day05/">
+              <h3 class="post-title">
+                day05
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

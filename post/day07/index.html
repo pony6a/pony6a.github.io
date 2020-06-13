@@ -1,0 +1,505 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>day07 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1592018738053">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="day07 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="01 今日内容大纲
+
+基础数据类型的补充
+数据类型之间的转换
+编码的进阶
+02 昨日内容回顾以及作业讲解
+id == is：
+== ：数值是否相同 is：内存地址，id 获取对象的内存地址
+代码块：一个文件，交互式命令一行就是一个代码块。
+..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1592018738053" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              day07
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-23
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>01 今日内容大纲</p>
+<ol>
+<li>基础数据类型的补充</li>
+<li>数据类型之间的转换</li>
+<li>编码的进阶<br>
+02 昨日内容回顾以及作业讲解</li>
+<li>id == is：<br>
+== ：数值是否相同 is：内存地址，id 获取对象的内存地址</li>
+<li>代码块：一个文件，交互式命令一行就是一个代码块。</li>
+<li>同一代码块下缓存机制（字符串驻留机制）：<br>
+所有数字，bool 几乎所有的字符串<br>
+优点：提升性能，节省内存空间。</li>
+<li>不同代码块的缓存机制（小数据池）：在内存中开辟两个空间，一个空间存储-5~256的int，一个空间存储一定<br>
+规则的字符串，如果你的代码中遇到了满足条件的数据，直接引用提前创建的。<br>
+-5~256 int，bool，满足一定规则的字符串。<br>
+优点：提升性能，节省内存空间。</li>
+<li>集合：列表去重，关系测试 交并差。</li>
+<li>深浅copy：<br>
+浅copy：在内存中开辟一个新的空间存放copy的对象（列表，字典），但是里面的所有元素与被copy对象<br>
+的里面的元素共用一个。<br>
+03 具体内容<br>
+数据类型的补充<br>
+str</li>
+</ol>
+<h1 id="str-补充的方法练习一遍就行">str ：补充的方法练习一遍就行。</h1>
+<h1 id="s1-taibai">s1 = 'taiBAi'</h1>
+<h1 id="capitalize-首字母大写其余变小写">capitalize 首字母大写，其余变小写</h1>
+<h1 id="prints1capitalize">print(s1.capitalize())</h1>
+<h1 id="swapcase-大小写翻转">swapcase 大小写翻转</h1>
+<h1 id="prints1swapcase">print(s1.swapcase())</h1>
+<h1 id="title">title</h1>
+<h1 id="msg-taibai-say3hi">msg= 'taibai say3hi'</h1>
+<h1 id="printmsgtitle-每个单词的首字母大写">print(msg.title()) #每个单词的首字母大写</h1>
+<p>元组<br>
+列表<br>
+s1 = 'barry'</p>
+<h1 id="居中">居中</h1>
+<h1 id="prints1center20">print(s1.center(20))</h1>
+<h1 id="prints1center20-2">print(s1.center(20,'*'))</h1>
+<h1 id="find-通过元素找索引找到第一个就返回找不到-返回-1">find :通过元素找索引，找到第一个就返回，找不到 返回-1</h1>
+<h1 id="index通过元素找索引找到第一个就返回找不到-报错">index:通过元素找索引，找到第一个就返回，找不到 报错</h1>
+<h1 id="prints1finda">print(s1.find('a'))</h1>
+<h1 id="prints1findr">print(s1.find('r'))</h1>
+<h1 id="prints1findo">print(s1.find('o'))</h1>
+<h1 id="prints1indexo">print(s1.index('o'))</h1>
+<h1 id="tuple">tuple</h1>
+<h1 id="元组中如果只有一个元素并且没有逗号那么它不是元组它与改元素的数据类型一致">元组中如果只有一个元素，并且没有逗号，那么它不是元组，它与改元素的数据类型一致。 ***</h1>
+<h1 id="tu1-234">tu1 = (2,3,4)</h1>
+<h1 id="tu1-2">tu1 = (2)</h1>
+<h1 id="tu1-太白">tu1 = ('太白')</h1>
+<h1 id="tu1-123">tu1 = ([1,2,3])</h1>
+<h1 id="tu1-1">tu1 = (1,)</h1>
+<h1 id="printtu1typetu1">print(tu1,type(tu1))</h1>
+<h1 id="tu-12333223">tu = (1,2,3,3,3,2,2,3,)</h1>
+<h1 id="count-计数"># count 计数</h1>
+<h1 id="printtucount3">print(tu.count(3))</h1>
+<h1 id="tu-太白-日天-太白">tu = ('太白', '日天', '太白')</h1>
+<h1 id="index"># index</h1>
+<h1 id="printtuindex太白">print(tu.index('太白'))</h1>
+<h1 id="l1-太白-123-女神-大壮">l1 = ['太白', '123', '女神', '大壮']</h1>
+<h1 id="count-pass">count pass</h1>
+<h1 id="index-2">index</h1>
+<h1 id="printl1index大壮">print(l1.index('大壮'))</h1>
+<h1 id="sort">sort **</h1>
+<h1 id="l1-5-4-3-7-8-6-1-9">l1 = [5, 4, 3, 7, 8, 6, 1, 9]</h1>
+<h1 id="l1sort-默认从小到大排序"># l1.sort() # 默认从小到大排序</h1>
+<h1 id="l1sortreversetrue-从大到小排序"># l1.sort(reverse=True) # 从大到小排序 **</h1>
+<h1 id="l1reverse-反转">l1.reverse() # 反转 **</h1>
+<h1 id="printl1">print(l1)</h1>
+<h1 id="列表可以相加">列表可以相加</h1>
+<h1 id="l1-1-2-3">l1 = [1, 2, 3]</h1>
+<h1 id="l2-1-2-3-太白-123-女神">l2 = [1, 2, 3, '太白', '123', '女神']</h1>
+<h1 id="printl1-l2">print(l1 + l2)</h1>
+<h1 id="列表与数字相乘">列表与数字相乘</h1>
+<h1 id="l1-1-daf-3">l1 = [1, 'daf', 3]</h1>
+<h1 id="l2-l13">l2 = l1*3</h1>
+<h1 id="printl2">print(l2)</h1>
+<p>字典<br>
+l1 = [11, 22, 33, 44, 55]</p>
+<h1 id="索引为奇数对应的元素删除不能一个一个删除此l1只是举个例子里面的元素不定">索引为奇数对应的元素删除（不能一个一个删除，此l1只是举个例子，里面的元素不定）。</h1>
+<h1 id="重要">*** 重要</h1>
+<h1 id="正常思路">正常思路：</h1>
+<h1 id="先将所有的索引整出来">先将所有的索引整出来。</h1>
+<h1 id="加以判断index-2-1-popindex"># 加以判断，index % 2 == 1： pop（index）</h1>
+<h1 id="for-index-in-rangelenl1">for index in range(len(l1)):</h1>
+<h1 id="if-index-2-1">if index % 2 == 1:</h1>
+<h1 id="l1popindex">l1.pop(index)</h1>
+<h1 id="printl1-2">print(l1)</h1>
+<h1 id="列表的特性">列表的特性：</h1>
+<h1 id="l1-11-22-33-44-55">l1 = [11, 22, 33, 44, 55]</h1>
+<h1 id="最简单的">最简单的：</h1>
+<h1 id="del-l112">del l1[1::2]</h1>
+<h1 id="printl1-3">print(l1)</h1>
+<h1 id="l1-11-22-33-44-55-2">l1 = [11, 22, 33, 44, 55]</h1>
+<h1 id="倒序法删除元素"># 倒序法删除元素</h1>
+<h1 id="for-index-in-rangelenl1-1-1-1">for index in range(len(l1)-1,-1,-1):</h1>
+<h1 id="if-index-2-1-2">if index % 2 == 1:</h1>
+<h1 id="l1popindex-2">l1.pop(index)</h1>
+<h1 id="printl1-4">print(l1)</h1>
+<h1 id="思维置换">思维置换</h1>
+<h1 id="l1-11-22-33-44-55-3">l1 = [11, 22, 33, 44, 55]</h1>
+<h1 id="new_l1">new_l1 = []</h1>
+<h1 id="for-index-in-rangelenl1-2">for index in range(len(l1)):</h1>
+<h1 id="if-index-2-0">if index % 2 ==0:</h1>
+<h1 id="new_l1appendl1index">new_l1.append(l1[index])</h1>
+<h1 id="printnew_l1"># print(new_l1)</h1>
+<h1 id="l1-new_l1">l1 = new_l1</h1>
+<h1 id="printl1-5">print(l1)</h1>
+<h1 id="循环一个列表的时最好不要改变列表的大小这样会影响你的最终的结果">循环一个列表的时，最好不要改变列表的大小，这样会影响你的最终的结果。</h1>
+<h1 id="字典的补充">字典的补充</h1>
+<h1 id="update">update ***</h1>
+<h1 id="dic-name-太白-age-18">dic = {'name': '太白', 'age': 18}</h1>
+<h1 id="dicupdatehobby运动-hight175"># dic.update(hobby='运动', hight='175')</h1>
+<h1 id="dicupdatename太白金星"># dic.update(name='太白金星')</h1>
+<h1 id="dicupdate1-a2-b3-c4-d-面试会考">dic.update([(1, 'a'),(2, 'b'),(3, 'c'),(4, 'd')]) # 面试会考</h1>
+<h1 id="printdic">print(dic)</h1>
+<h1 id="dic1-namejinage18sexmale">dic1 = {&quot;name&quot;:&quot;jin&quot;,&quot;age&quot;:18,&quot;sex&quot;:&quot;male&quot;}</h1>
+<h1 id="dic2-namealexweight75">dic2 = {&quot;name&quot;:&quot;alex&quot;,&quot;weight&quot;:75}</h1>
+<h1 id="dic1updatedic2-更新有则覆盖无责添加">dic1.update(dic2) # 更新，有则覆盖，无责添加</h1>
+<h1 id="printdic1-name-alex-age-18-sex-male-weight-75">print(dic1) # {'name': 'alex', 'age': 18, 'sex': 'male', 'weight': 75}</h1>
+<h1 id="printdic2">print(dic2)</h1>
+<p>数据类型的转换<br>
+数据类型的分类（了解）<br>
+编码的进阶<br>
+ASCII码：包含英文字母，数字，特殊字符与01010101对应关系。<br>
+a 01000001 一个字符一个字节表示。<br>
+GBK：只包含本国文字（以及英文字母，数字，特殊字符）与0101010对应关系。<br>
+a 01000001 ascii码中的字符：一个字符一个字节表示。<br>
+中 01001001 01000010 中文：一个字符两个字节表示。<br>
+Unicode：包含全世界所有的文字与二进制0101001的对应关系。<br>
+a 01000001 01000010 01000011 00000001<br>
+b 01000001 01000010 01100011 00000001</p>
+<h1 id="fromkeys">fromkeys</h1>
+<h1 id="dic-dictfromkeysabc-100">dic = dict.fromkeys('abc', 100)</h1>
+<h1 id="dic-dictfromkeys1-2-3-alex">dic = dict.fromkeys([1, 2, 3], 'alex')</h1>
+<h1 id="坑值共有一个面试题">坑：值共有一个,面试题</h1>
+<h1 id="dic-dictfromkeys123">dic = dict.fromkeys([1,2,3],[])</h1>
+<h1 id="dic1append666">dic[1].append(666)</h1>
+<h1 id="printdic-2">print(dic)</h1>
+<p>dic = {'k1': '太白', 'k2': 'barry', 'k3': '白白', 'age': 18}</p>
+<h1 id="将字典中键含有k元素的键值对删除">将字典中键含有'k'元素的键值对删除。</h1>
+<h1 id="for-key-in-dic">for key in dic:</h1>
+<h1 id="if-k-in-key">if 'k' in key:</h1>
+<h1 id="dicpopkey">dic.pop(key)</h1>
+<h1 id="printdic-3">print(dic)</h1>
+<h1 id="循环一个字典时如果改变这个字典的大小就会报错">循环一个字典时，如果改变这个字典的大小，就会报错。</h1>
+<h1 id="l1">l1 = []</h1>
+<h1 id="for-key-in-dic-2">for key in dic:</h1>
+<h1 id="if-k-in-key-2">if 'k' in key:</h1>
+<h1 id="l1appendkey">l1.append(key)</h1>
+<h1 id="printl1-6">print(l1)</h1>
+<h1 id="for-i-in-l1">for i in l1:</h1>
+<h1 id="dicpopi">dic.pop(i)</h1>
+<h1 id="printdic-4">print(dic)</h1>
+<h1 id="for-key-in-listdickeys-k1-k2-k3age">for key in list(dic.keys()): # ['k1', 'k2', 'k3','age']</h1>
+<h1 id="if-k-in-key-3">if 'k' in key:</h1>
+<h1 id="dicpopkey-2">dic.pop(key)</h1>
+<h1 id="printdic-5">print(dic)</h1>
+<h1 id="0setnone-转换成bool值为false">0,''(),[],{},set(),None 转换成bool值为False</h1>
+<p>中 01001001 01000010 01100011 00000001<br>
+UTF-8:包含全世界所有的文字与二进制0101001的对应关系（最少用8位一个字节表示一个字符）。<br>
+a 01000001 ascii码中的字符：一个字符一个字节表示。<br>
+To 01000001 01000010 (欧洲文字：葡萄牙，西班牙等)一个字符两个字节表示。<br>
+中 01001001 01000010 01100011 亚洲文字；一个字符三个字节表示。</p>
+<ol>
+<li>不同的密码本之间能否互相识别？不能。</li>
+<li>数据在内存中全部是以Unicode编码的，但是当你的数据用于网络传输或者存储到硬盘中，必须是以非<br>
+Unicode编码（utf-8,gbk等等）。<br>
+英文：<br>
+str： 'hello '<br>
+内存中的编码方式： Unicode<br>
+表现形式： 'hello'<br>
+bytes ：<br>
+内存中的编码方式： 非Unicode<br>
+表现形式：b'hello'<br>
+中文：<br>
+str：<br>
+内存中的编码方式： Unicode<br>
+表现形式：'中国'<br>
+bytes ：<br>
+内存中的编码方式： 非Unicode # Utf-8<br>
+表现形式：b'\xe4\xb8\xad\xe5\x9b\xbd'</li>
+</ol>
+<h1 id="str-bytes">str ---&gt; bytes\</h1>
+<h1 id="s1-中国">s1 = '中国'</h1>
+<h1 id="b1-s1encodeutf-8-编码">b1 = s1.encode('utf-8') # 编码</h1>
+<h1 id="printb1typeb1-bxe4xb8xadxe5x9bxbd">print(b1,type(b1)) # b'\xe4\xb8\xad\xe5\x9b\xbd'</h1>
+<h1 id="b1-s1encodegbk-编码-bxd6xd0xb9xfa-class-bytes"># b1 = s1.encode('gbk') # 编码 # b'\xd6\xd0\xb9\xfa' &lt;class 'bytes'&gt;</h1>
+<h1 id="bytes-str"># bytes----&gt;str</h1>
+<h1 id="b1-bxe4xb8xadxe5x9bxbd">b1 = b'\xe4\xb8\xad\xe5\x9b\xbd'</h1>
+<h1 id="s2-b1decodeutf-8-解码">s2 = b1.decode('utf-8') # 解码</h1>
+<h1 id="prints2">print(s2)</h1>
+<p>04 今日总结<br>
+数据类型的补充： list（sort,revrse,列表的相加，乘，循环问题），dict （update 循环问题） ***<br>
+编码的进阶：<br>
+bytes为什么存在？<br>
+str ---&gt;bytes(Unicode ---&gt; 非Unicode)<br>
+gbk &lt;-----&gt; utf-8<br>
+05 预习内容<br>
+预习内容：<br>
+文件操作，博客地址：http://www.cnblogs.com/jin-xin/articles/8183203.html</p>
+<h1 id="gbk-utf-8">gbk ---&gt; utf-8</h1>
+<p>b1 = b'\xd6\xd0\xb9\xfa'<br>
+s = b1.decode('gbk')</p>
+<h1 id="prints">print(s)</h1>
+<p>b2 = s.encode('utf-8')<br>
+print(b2) # b'\xe4\xb8\xad\xe5\x9b\xbd'</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#str-%E8%A1%A5%E5%85%85%E7%9A%84%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0%E4%B8%80%E9%81%8D%E5%B0%B1%E8%A1%8C">str ：补充的方法练习一遍就行。</a></li>
+<li><a href="#s1-taibai">s1 = 'taiBAi'</a></li>
+<li><a href="#capitalize-%E9%A6%96%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%86%99%E5%85%B6%E4%BD%99%E5%8F%98%E5%B0%8F%E5%86%99">capitalize 首字母大写，其余变小写</a></li>
+<li><a href="#prints1capitalize">print(s1.capitalize())</a></li>
+<li><a href="#swapcase-%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BF%BB%E8%BD%AC">swapcase 大小写翻转</a></li>
+<li><a href="#prints1swapcase">print(s1.swapcase())</a></li>
+<li><a href="#title">title</a></li>
+<li><a href="#msg-taibai-say3hi">msg= 'taibai say3hi'</a></li>
+<li><a href="#printmsgtitle-%E6%AF%8F%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%A6%96%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%86%99">print(msg.title()) #每个单词的首字母大写</a></li>
+<li><a href="#%E5%B1%85%E4%B8%AD">居中</a></li>
+<li><a href="#prints1center20">print(s1.center(20))</a></li>
+<li><a href="#prints1center20-2">print(s1.center(20,'*'))</a></li>
+<li><a href="#find-%E9%80%9A%E8%BF%87%E5%85%83%E7%B4%A0%E6%89%BE%E7%B4%A2%E5%BC%95%E6%89%BE%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%B0%B1%E8%BF%94%E5%9B%9E%E6%89%BE%E4%B8%8D%E5%88%B0-%E8%BF%94%E5%9B%9E-1">find :通过元素找索引，找到第一个就返回，找不到 返回-1</a></li>
+<li><a href="#index%E9%80%9A%E8%BF%87%E5%85%83%E7%B4%A0%E6%89%BE%E7%B4%A2%E5%BC%95%E6%89%BE%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%B0%B1%E8%BF%94%E5%9B%9E%E6%89%BE%E4%B8%8D%E5%88%B0-%E6%8A%A5%E9%94%99">index:通过元素找索引，找到第一个就返回，找不到 报错</a></li>
+<li><a href="#prints1finda">print(s1.find('a'))</a></li>
+<li><a href="#prints1findr">print(s1.find('r'))</a></li>
+<li><a href="#prints1findo">print(s1.find('o'))</a></li>
+<li><a href="#prints1indexo">print(s1.index('o'))</a></li>
+<li><a href="#tuple">tuple</a></li>
+<li><a href="#%E5%85%83%E7%BB%84%E4%B8%AD%E5%A6%82%E6%9E%9C%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E5%B9%B6%E4%B8%94%E6%B2%A1%E6%9C%89%E9%80%97%E5%8F%B7%E9%82%A3%E4%B9%88%E5%AE%83%E4%B8%8D%E6%98%AF%E5%85%83%E7%BB%84%E5%AE%83%E4%B8%8E%E6%94%B9%E5%85%83%E7%B4%A0%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%80%E8%87%B4">元组中如果只有一个元素，并且没有逗号，那么它不是元组，它与改元素的数据类型一致。 ***</a></li>
+<li><a href="#tu1-234">tu1 = (2,3,4)</a></li>
+<li><a href="#tu1-2">tu1 = (2)</a></li>
+<li><a href="#tu1-%E5%A4%AA%E7%99%BD">tu1 = ('太白')</a></li>
+<li><a href="#tu1-123">tu1 = ([1,2,3])</a></li>
+<li><a href="#tu1-1">tu1 = (1,)</a></li>
+<li><a href="#printtu1typetu1">print(tu1,type(tu1))</a></li>
+<li><a href="#tu-12333223">tu = (1,2,3,3,3,2,2,3,)</a></li>
+<li><a href="#count-%E8%AE%A1%E6%95%B0"># count 计数</a></li>
+<li><a href="#printtucount3">print(tu.count(3))</a></li>
+<li><a href="#tu-%E5%A4%AA%E7%99%BD-%E6%97%A5%E5%A4%A9-%E5%A4%AA%E7%99%BD">tu = ('太白', '日天', '太白')</a></li>
+<li><a href="#index"># index</a></li>
+<li><a href="#printtuindex%E5%A4%AA%E7%99%BD">print(tu.index('太白'))</a></li>
+<li><a href="#l1-%E5%A4%AA%E7%99%BD-123-%E5%A5%B3%E7%A5%9E-%E5%A4%A7%E5%A3%AE">l1 = ['太白', '123', '女神', '大壮']</a></li>
+<li><a href="#count-pass">count pass</a></li>
+<li><a href="#index-2">index</a></li>
+<li><a href="#printl1index%E5%A4%A7%E5%A3%AE">print(l1.index('大壮'))</a></li>
+<li><a href="#sort">sort **</a></li>
+<li><a href="#l1-5-4-3-7-8-6-1-9">l1 = [5, 4, 3, 7, 8, 6, 1, 9]</a></li>
+<li><a href="#l1sort-%E9%BB%98%E8%AE%A4%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%E6%8E%92%E5%BA%8F"># l1.sort() # 默认从小到大排序</a></li>
+<li><a href="#l1sortreversetrue-%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F%E6%8E%92%E5%BA%8F"># l1.sort(reverse=True) # 从大到小排序 **</a></li>
+<li><a href="#l1reverse-%E5%8F%8D%E8%BD%AC">l1.reverse() # 反转 **</a></li>
+<li><a href="#printl1">print(l1)</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8%E5%8F%AF%E4%BB%A5%E7%9B%B8%E5%8A%A0">列表可以相加</a></li>
+<li><a href="#l1-1-2-3">l1 = [1, 2, 3]</a></li>
+<li><a href="#l2-1-2-3-%E5%A4%AA%E7%99%BD-123-%E5%A5%B3%E7%A5%9E">l2 = [1, 2, 3, '太白', '123', '女神']</a></li>
+<li><a href="#printl1-l2">print(l1 + l2)</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E4%B9%98">列表与数字相乘</a></li>
+<li><a href="#l1-1-daf-3">l1 = [1, 'daf', 3]</a></li>
+<li><a href="#l2-l13">l2 = l1*3</a></li>
+<li><a href="#printl2">print(l2)</a></li>
+<li><a href="#%E7%B4%A2%E5%BC%95%E4%B8%BA%E5%A5%87%E6%95%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E5%85%83%E7%B4%A0%E5%88%A0%E9%99%A4%E4%B8%8D%E8%83%BD%E4%B8%80%E4%B8%AA%E4%B8%80%E4%B8%AA%E5%88%A0%E9%99%A4%E6%AD%A4l1%E5%8F%AA%E6%98%AF%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%8D%E5%AE%9A">索引为奇数对应的元素删除（不能一个一个删除，此l1只是举个例子，里面的元素不定）。</a></li>
+<li><a href="#%E9%87%8D%E8%A6%81">*** 重要</a></li>
+<li><a href="#%E6%AD%A3%E5%B8%B8%E6%80%9D%E8%B7%AF">正常思路：</a></li>
+<li><a href="#%E5%85%88%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84%E7%B4%A2%E5%BC%95%E6%95%B4%E5%87%BA%E6%9D%A5">先将所有的索引整出来。</a></li>
+<li><a href="#%E5%8A%A0%E4%BB%A5%E5%88%A4%E6%96%ADindex-2-1-popindex"># 加以判断，index % 2 == 1： pop（index）</a></li>
+<li><a href="#for-index-in-rangelenl1">for index in range(len(l1)):</a></li>
+<li><a href="#if-index-2-1">if index % 2 == 1:</a></li>
+<li><a href="#l1popindex">l1.pop(index)</a></li>
+<li><a href="#printl1-2">print(l1)</a></li>
+<li><a href="#%E5%88%97%E8%A1%A8%E7%9A%84%E7%89%B9%E6%80%A7">列表的特性：</a></li>
+<li><a href="#l1-11-22-33-44-55">l1 = [11, 22, 33, 44, 55]</a></li>
+<li><a href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84">最简单的：</a></li>
+<li><a href="#del-l112">del l1[1::2]</a></li>
+<li><a href="#printl1-3">print(l1)</a></li>
+<li><a href="#l1-11-22-33-44-55-2">l1 = [11, 22, 33, 44, 55]</a></li>
+<li><a href="#%E5%80%92%E5%BA%8F%E6%B3%95%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"># 倒序法删除元素</a></li>
+<li><a href="#for-index-in-rangelenl1-1-1-1">for index in range(len(l1)-1,-1,-1):</a></li>
+<li><a href="#if-index-2-1-2">if index % 2 == 1:</a></li>
+<li><a href="#l1popindex-2">l1.pop(index)</a></li>
+<li><a href="#printl1-4">print(l1)</a></li>
+<li><a href="#%E6%80%9D%E7%BB%B4%E7%BD%AE%E6%8D%A2">思维置换</a></li>
+<li><a href="#l1-11-22-33-44-55-3">l1 = [11, 22, 33, 44, 55]</a></li>
+<li><a href="#new_l1">new_l1 = []</a></li>
+<li><a href="#for-index-in-rangelenl1-2">for index in range(len(l1)):</a></li>
+<li><a href="#if-index-2-0">if index % 2 ==0:</a></li>
+<li><a href="#new_l1appendl1index">new_l1.append(l1[index])</a></li>
+<li><a href="#printnew_l1"># print(new_l1)</a></li>
+<li><a href="#l1-new_l1">l1 = new_l1</a></li>
+<li><a href="#printl1-5">print(l1)</a></li>
+<li><a href="#%E5%BE%AA%E7%8E%AF%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8%E7%9A%84%E6%97%B6%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E6%94%B9%E5%8F%98%E5%88%97%E8%A1%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E8%BF%99%E6%A0%B7%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%BD%A0%E7%9A%84%E6%9C%80%E7%BB%88%E7%9A%84%E7%BB%93%E6%9E%9C">循环一个列表的时，最好不要改变列表的大小，这样会影响你的最终的结果。</a></li>
+<li><a href="#%E5%AD%97%E5%85%B8%E7%9A%84%E8%A1%A5%E5%85%85">字典的补充</a></li>
+<li><a href="#update">update ***</a></li>
+<li><a href="#dic-name-%E5%A4%AA%E7%99%BD-age-18">dic = {'name': '太白', 'age': 18}</a></li>
+<li><a href="#dicupdatehobby%E8%BF%90%E5%8A%A8-hight175"># dic.update(hobby='运动', hight='175')</a></li>
+<li><a href="#dicupdatename%E5%A4%AA%E7%99%BD%E9%87%91%E6%98%9F"># dic.update(name='太白金星')</a></li>
+<li><a href="#dicupdate1-a2-b3-c4-d-%E9%9D%A2%E8%AF%95%E4%BC%9A%E8%80%83">dic.update([(1, 'a'),(2, 'b'),(3, 'c'),(4, 'd')]) # 面试会考</a></li>
+<li><a href="#printdic">print(dic)</a></li>
+<li><a href="#dic1-namejinage18sexmale">dic1 = {&quot;name&quot;:&quot;jin&quot;,&quot;age&quot;:18,&quot;sex&quot;:&quot;male&quot;}</a></li>
+<li><a href="#dic2-namealexweight75">dic2 = {&quot;name&quot;:&quot;alex&quot;,&quot;weight&quot;:75}</a></li>
+<li><a href="#dic1updatedic2-%E6%9B%B4%E6%96%B0%E6%9C%89%E5%88%99%E8%A6%86%E7%9B%96%E6%97%A0%E8%B4%A3%E6%B7%BB%E5%8A%A0">dic1.update(dic2) # 更新，有则覆盖，无责添加</a></li>
+<li><a href="#printdic1-name-alex-age-18-sex-male-weight-75">print(dic1) # {'name': 'alex', 'age': 18, 'sex': 'male', 'weight': 75}</a></li>
+<li><a href="#printdic2">print(dic2)</a></li>
+<li><a href="#fromkeys">fromkeys</a></li>
+<li><a href="#dic-dictfromkeysabc-100">dic = dict.fromkeys('abc', 100)</a></li>
+<li><a href="#dic-dictfromkeys1-2-3-alex">dic = dict.fromkeys([1, 2, 3], 'alex')</a></li>
+<li><a href="#%E5%9D%91%E5%80%BC%E5%85%B1%E6%9C%89%E4%B8%80%E4%B8%AA%E9%9D%A2%E8%AF%95%E9%A2%98">坑：值共有一个,面试题</a></li>
+<li><a href="#dic-dictfromkeys123">dic = dict.fromkeys([1,2,3],[])</a></li>
+<li><a href="#dic1append666">dic[1].append(666)</a></li>
+<li><a href="#printdic-2">print(dic)</a></li>
+<li><a href="#%E5%B0%86%E5%AD%97%E5%85%B8%E4%B8%AD%E9%94%AE%E5%90%AB%E6%9C%89k%E5%85%83%E7%B4%A0%E7%9A%84%E9%94%AE%E5%80%BC%E5%AF%B9%E5%88%A0%E9%99%A4">将字典中键含有'k'元素的键值对删除。</a></li>
+<li><a href="#for-key-in-dic">for key in dic:</a></li>
+<li><a href="#if-k-in-key">if 'k' in key:</a></li>
+<li><a href="#dicpopkey">dic.pop(key)</a></li>
+<li><a href="#printdic-3">print(dic)</a></li>
+<li><a href="#%E5%BE%AA%E7%8E%AF%E4%B8%80%E4%B8%AA%E5%AD%97%E5%85%B8%E6%97%B6%E5%A6%82%E6%9E%9C%E6%94%B9%E5%8F%98%E8%BF%99%E4%B8%AA%E5%AD%97%E5%85%B8%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%B0%B1%E4%BC%9A%E6%8A%A5%E9%94%99">循环一个字典时，如果改变这个字典的大小，就会报错。</a></li>
+<li><a href="#l1">l1 = []</a></li>
+<li><a href="#for-key-in-dic-2">for key in dic:</a></li>
+<li><a href="#if-k-in-key-2">if 'k' in key:</a></li>
+<li><a href="#l1appendkey">l1.append(key)</a></li>
+<li><a href="#printl1-6">print(l1)</a></li>
+<li><a href="#for-i-in-l1">for i in l1:</a></li>
+<li><a href="#dicpopi">dic.pop(i)</a></li>
+<li><a href="#printdic-4">print(dic)</a></li>
+<li><a href="#for-key-in-listdickeys-k1-k2-k3age">for key in list(dic.keys()): # ['k1', 'k2', 'k3','age']</a></li>
+<li><a href="#if-k-in-key-3">if 'k' in key:</a></li>
+<li><a href="#dicpopkey-2">dic.pop(key)</a></li>
+<li><a href="#printdic-5">print(dic)</a></li>
+<li><a href="#0setnone-%E8%BD%AC%E6%8D%A2%E6%88%90bool%E5%80%BC%E4%B8%BAfalse">0,''(),[],{},set(),None 转换成bool值为False</a></li>
+<li>[str ---&gt; bytes](#str-bytes)</li>
+<li><a href="#s1-%E4%B8%AD%E5%9B%BD">s1 = '中国'</a></li>
+<li><a href="#b1-s1encodeutf-8-%E7%BC%96%E7%A0%81">b1 = s1.encode('utf-8') # 编码</a></li>
+<li><a href="#printb1typeb1-bxe4xb8xadxe5x9bxbd">print(b1,type(b1)) # b'\xe4\xb8\xad\xe5\x9b\xbd'</a></li>
+<li><a href="#b1-s1encodegbk-%E7%BC%96%E7%A0%81-bxd6xd0xb9xfa-class-bytes"># b1 = s1.encode('gbk') # 编码 # b'\xd6\xd0\xb9\xfa' &lt;class 'bytes'&gt;</a></li>
+<li><a href="#bytes-str"># bytes----&gt;str</a></li>
+<li><a href="#b1-bxe4xb8xadxe5x9bxbd">b1 = b'\xe4\xb8\xad\xe5\x9b\xbd'</a></li>
+<li><a href="#s2-b1decodeutf-8-%E8%A7%A3%E7%A0%81">s2 = b1.decode('utf-8') # 解码</a></li>
+<li><a href="#prints2">print(s2)</a></li>
+<li><a href="#gbk-utf-8">gbk ---&gt; utf-8</a></li>
+<li><a href="#prints">print(s)</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/day06/">
+              <h3 class="post-title">
+                day06(深浅copy 集合)
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

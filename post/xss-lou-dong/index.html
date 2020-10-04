@@ -2,23 +2,16 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>day03（for循环） | pony686</title>
+<title>xss漏洞 | pony686</title>
 <link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://itxz.fun/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="day03（for循环） | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="xss漏洞 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="s1 = '老男孩edu'
-print('老' in s1)
-print('老男' in s1)
-print('老ed' in s1)
-print('老ed' not in s1)
-s1 = '老男孩教育最好的讲师：太白'
-'''
-老   ..." />
+    <meta name="description" content="XSS（cross-site script）跨站脚本自1996年诞生以来，一直被OWASP(open web application security project) 评为十大安全漏洞中的第二威胁漏洞。也有黑客把xss当做新型的“缓冲区溢..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,82 +74,70 @@ s1 = '老男孩教育最好的讲师：太白'
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              day03（for循环）
+              xss漏洞
             </h2>
             <div class="post-info">
               <span>
-                2020-04-22
+                2020-09-16
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="s1-老男孩edu">s1 = '老男孩edu'</h1>
-<h1 id="print老-in-s1">print('老' in s1)</h1>
-<h1 id="print老男-in-s1">print('老男' in s1)</h1>
-<h1 id="print老ed-in-s1">print('老ed' in s1)</h1>
-<h1 id="print老ed-not-in-s1">print('老ed' not in s1)</h1>
-<p>s1 = '老男孩教育最好的讲师：太白'<br>
-'''<br>
-老      s1[0]<br>
-男      s1[1]<br>
-孩      s1[2]<br>
-教      s1[3]<br>
-育      ....<br>
-最<br>
-...<br>
-'''</p>
-<h1 id="0~12">0~12</h1>
-<h1 id="len-获取可迭代对象的元素总个数">len :获取可迭代对象的元素总个数</h1>
-<h1 id="printlens1">print(len(s1))</h1>
-<h1 id="s1-老男孩教育最好的讲师太白">s1 = '老男孩教育最好的讲师：太白'</h1>
-<h1 id="index-0">index = 0</h1>
-<h1 id="while-index-lens1">while index &lt; len(s1):</h1>
-<h1 id="prints1index">print(s1[index])</h1>
-<h1 id="index-1">index += 1</h1>
-<h1 id="for-循环">for 循环</h1>
-<p>'''<br>
-有限循环<br>
-for 变量 in iterable:<br>
-pass<br>
-'''<br>
-s1 = '老男孩教育最好的讲师：太白'</p>
-<h1 id="for-i-in-s1">for i in s1:</h1>
-<h1 id="printi">print(i)</h1>
-<p>for i in s1:<br>
-print(i)<br>
-if i == '好':<br>
-break</p>
-<h1 id="break-continue">break continue</h1>
-<h1 id="for-else-while-else用法一样">for else: while else:用法一样。</h1>
+                <p>XSS（cross-site script）跨站脚本自1996年诞生以来，一直被OWASP(open web application security project) 评为十大安全漏洞中的第二威胁漏洞。也有黑客把xss当做新型的“缓冲区溢出攻击”，而JavaScript是新型的shellcode。<br>
+2011年6月份，国内最火的信息发布平台“新浪微博”爆发了xss蠕虫攻击，仅持续16分钟，感染用户近33000个，危害十分严重。<br>
+xss最大的特点就是能注入恶意的代码到用户浏览器的网页上，从而达到劫持用户会话的目的。</p>
+<p>什么是跨站脚本？<br>
+是一种经常出现在web应用程序中的计算机安全漏洞，是由于web应用程序对用户的输入过滤不严而产生的。攻击者利用网站漏洞把恶意的脚本代码注入到网页中，当其他用户浏览这些网页时，就会执行其中的恶意代码，对受害用户可能采用cookie资料窃取，会话劫持，钓鱼欺骗等攻击手段。<br>
+跨站脚本实例</p>
+<html>
+<head>xss test</head>
+<body>
+<script>alert("xss")</script>
+</body>
+</html>
+这段代码使用alert函数来执行打开一个消息框，消息框中显示xss信息
+使用xss弹出恶意警告框，代码为：
+<script>alert("xss")</script>
+xss输入也可能是html代码段，如果使网页不停的刷新，代码为
+<meta http-equiv="refresh" content="0;">
+嵌入其他网站链接的代码为：
+<iframe src=http://cracer.com width=0 height=0></iframe>
+<p>网络钓鱼，包括盗取各类的用户账号<br>
+窃取用户cookie<br>
+窃取用户浏览请回话<br>
+强制弹出广告页面、刷流量<br>
+网页挂马<br>
+提升用户权限，进一步渗透网站<br>
+传播跨站脚本蠕虫等</p>
+<p>Xss分类<br>
+反射型XSS<br>
+DOM型xss<br>
+存储型XSS</p>
+<p>反射型跨站脚本也称作非持久型、参数型跨站脚本、这类型的脚本是最常见的 ，也是使用最为广泛的一种，主要用于将恶意的脚本附加到URL地址的参数中<br>
+例如<br>
+http://www.cracer.com/search.php?key=&quot;&gt;<script>alert(&quot;xss&quot;)</script><br>
+一般使用的将构造好的URL发给受害者，是受害者点击触发，而且只执行一次，非持久化。</p>
+<p>存在xss漏洞<br>
+bc<br>
+qp<br>
+zjp<br>
+测管理员经常上线的站点<br>
+借助社工 让管理员登陆后台触发漏洞<br>
+cookie 盗取   欺骗管理份登陆后台<br>
+黑帽seo js代码</p>
+<p>快照劫持 页面跳转 蜘蛛劫持 钓鱼 等一系列攻击<br>
+根目录/首页 head 头标签里面的script代码<br>
+global.ass<br>
+self.xss</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9edu">s1 = '老男孩edu'</a></li>
-<li><a href="#print%E8%80%81-in-s1">print('老' in s1)</a></li>
-<li><a href="#print%E8%80%81%E7%94%B7-in-s1">print('老男' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-in-s1">print('老ed' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-not-in-s1">print('老ed' not in s1)</a></li>
-<li><a href="#0~12">0~12</a></li>
-<li><a href="#len-%E8%8E%B7%E5%8F%96%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%83%E7%B4%A0%E6%80%BB%E4%B8%AA%E6%95%B0">len :获取可迭代对象的元素总个数</a></li>
-<li><a href="#printlens1">print(len(s1))</a></li>
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9%E6%95%99%E8%82%B2%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AE%B2%E5%B8%88%E5%A4%AA%E7%99%BD">s1 = '老男孩教育最好的讲师：太白'</a></li>
-<li><a href="#index-0">index = 0</a></li>
-<li><a href="#while-index-lens1">while index &lt; len(s1):</a></li>
-<li><a href="#prints1index">print(s1[index])</a></li>
-<li><a href="#index-1">index += 1</a></li>
-<li><a href="#for-%E5%BE%AA%E7%8E%AF">for 循环</a></li>
-<li><a href="#for-i-in-s1">for i in s1:</a></li>
-<li><a href="#printi">print(i)</a></li>
-<li><a href="#break-continue">break continue</a></li>
-<li><a href="#for-else-while-else%E7%94%A8%E6%B3%95%E4%B8%80%E6%A0%B7">for else: while else:用法一样。</a></li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -165,9 +146,9 @@ break</p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://itxz.fun/post/day03strandqie-pian/">
+            <a href="https://itxz.fun/post/16-bian-ji-qi-lou-dong/">
               <h3 class="post-title">
-                day03(str&amp;&amp;切片)
+                16编辑器漏洞
               </h3>
             </a>
           </div>

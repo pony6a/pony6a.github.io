@@ -2,23 +2,20 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>day03（for循环） | pony686</title>
+<title>文件上传漏洞 | pony686</title>
 <link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://itxz.fun/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="day03（for循环） | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="文件上传漏洞 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="s1 = '老男孩edu'
-print('老' in s1)
-print('老男' in s1)
-print('老ed' in s1)
-print('老ed' not in s1)
-s1 = '老男孩教育最好的讲师：太白'
-'''
-老   ..." />
+    <meta name="description" content="我们讲的上传是上传脚本
+iis5.6.0 容器:
+1.目录解析漏洞 /a.asp/x.jpg
+2.分号解析漏洞：uploadfiles/x.asax x.asax  也能识别aps文件
+iis7./7.5/8.x/10.x 　服务器０８　２..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,82 +78,69 @@ s1 = '老男孩教育最好的讲师：太白'
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              day03（for循环）
+              文件上传漏洞
             </h2>
             <div class="post-info">
               <span>
-                2020-04-22
+                2020-09-13
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="s1-老男孩edu">s1 = '老男孩edu'</h1>
-<h1 id="print老-in-s1">print('老' in s1)</h1>
-<h1 id="print老男-in-s1">print('老男' in s1)</h1>
-<h1 id="print老ed-in-s1">print('老ed' in s1)</h1>
-<h1 id="print老ed-not-in-s1">print('老ed' not in s1)</h1>
-<p>s1 = '老男孩教育最好的讲师：太白'<br>
-'''<br>
-老      s1[0]<br>
-男      s1[1]<br>
-孩      s1[2]<br>
-教      s1[3]<br>
-育      ....<br>
-最<br>
-...<br>
-'''</p>
-<h1 id="0~12">0~12</h1>
-<h1 id="len-获取可迭代对象的元素总个数">len :获取可迭代对象的元素总个数</h1>
-<h1 id="printlens1">print(len(s1))</h1>
-<h1 id="s1-老男孩教育最好的讲师太白">s1 = '老男孩教育最好的讲师：太白'</h1>
-<h1 id="index-0">index = 0</h1>
-<h1 id="while-index-lens1">while index &lt; len(s1):</h1>
-<h1 id="prints1index">print(s1[index])</h1>
-<h1 id="index-1">index += 1</h1>
-<h1 id="for-循环">for 循环</h1>
-<p>'''<br>
-有限循环<br>
-for 变量 in iterable:<br>
-pass<br>
-'''<br>
-s1 = '老男孩教育最好的讲师：太白'</p>
-<h1 id="for-i-in-s1">for i in s1:</h1>
-<h1 id="printi">print(i)</h1>
-<p>for i in s1:<br>
-print(i)<br>
-if i == '好':<br>
-break</p>
-<h1 id="break-continue">break continue</h1>
-<h1 id="for-else-while-else用法一样">for else: while else:用法一样。</h1>
+                <p>我们讲的上传是上传脚本<br>
+iis5.6.0 容器:<br>
+1.目录解析漏洞 /a.asp/x.jpg<br>
+2.分号解析漏洞：uploadfiles/x.asax x.asax  也能识别aps文件<br>
+iis7./7.5/8.x/10.x 　服务器０８　２０１２　２０１６<br>
+如果开启了ｆａｓｔ－ｃｇｉ模板<br>
+ｕｐｌｏａｄｆｉｌｅｓ／ｘ．ｊｐｇ<br>
+ｕｐｌｏａｄｆｉｌｅｓ／ｘ．ｊｐｇ／．ａｓｐ　配合ｆｃｋ编辑器使用<br>
+ｘ．ｐｈｐ％００．ｊｐｇ　ＩＩＳ７．ｘ　０８　ｎｇｉｎｘ版本固定漏洞<br>
+ａｐａｃｈｅ：<br>
+ｘ．ｐｈｐ．ｚｚｚ　配合黑名单利用<br>
+ｘ．ｐｈｐ．<br>
+ｘ．ｐｈｐ．ｊｐｇ　也能解析成ｐｈｐ脚本<br>
+ｘ．ｐｈｐ．ｊｐｇ？ｓｉｄ＝１２３　这种居多</p>
+<p>%00  截断<br>
+::$data 截断php文件<br>
+cracer.com/upoloadfiles/x.asp/20200510123123.jpg</p>
+<p>03+iis.6<br>
+08+ii7.0/7.5<br>
+2012 iis8.0<br>
+2016 iis10.x</p>
+<p>php.3 可以解析<br>
+phtml<br>
+iis10.0<br>
+x.jpg</p>
+<p>文件上传后发生改变<br>
+时间戳命名居多<br>
++白名单来限制上传<br>
+asp  无明显</p>
+<ol>
+<li>
+<p>通过前台图片分析上传路径</p>
+</li>
+<li>
+<p>爆破工具进行爆破文件名称</p>
+<p>metinfo<br>
+uploadfile/20123123.jpg/.php<br>
+awvs扫描到了一个上传接口 上传简历 招聘地方<br>
+上传成功没回显示<br>
+1.下载metinfocms 本地复现<br>
+2,分析文件名命名规则<br>
+3.burp抓包爆破[,]获取图片地址</p>
+</li>
+</ol>
+<p>crcaer.com/uploadfiles/20200510123123.jpg</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9edu">s1 = '老男孩edu'</a></li>
-<li><a href="#print%E8%80%81-in-s1">print('老' in s1)</a></li>
-<li><a href="#print%E8%80%81%E7%94%B7-in-s1">print('老男' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-in-s1">print('老ed' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-not-in-s1">print('老ed' not in s1)</a></li>
-<li><a href="#0~12">0~12</a></li>
-<li><a href="#len-%E8%8E%B7%E5%8F%96%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%83%E7%B4%A0%E6%80%BB%E4%B8%AA%E6%95%B0">len :获取可迭代对象的元素总个数</a></li>
-<li><a href="#printlens1">print(len(s1))</a></li>
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9%E6%95%99%E8%82%B2%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AE%B2%E5%B8%88%E5%A4%AA%E7%99%BD">s1 = '老男孩教育最好的讲师：太白'</a></li>
-<li><a href="#index-0">index = 0</a></li>
-<li><a href="#while-index-lens1">while index &lt; len(s1):</a></li>
-<li><a href="#prints1index">print(s1[index])</a></li>
-<li><a href="#index-1">index += 1</a></li>
-<li><a href="#for-%E5%BE%AA%E7%8E%AF">for 循环</a></li>
-<li><a href="#for-i-in-s1">for i in s1:</a></li>
-<li><a href="#printi">print(i)</a></li>
-<li><a href="#break-continue">break continue</a></li>
-<li><a href="#for-else-while-else%E7%94%A8%E6%B3%95%E4%B8%80%E6%A0%B7">for else: while else:用法一样。</a></li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -165,9 +149,9 @@ break</p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://itxz.fun/post/day03strandqie-pian/">
+            <a href="https://itxz.fun/post/jiao-ben-mu-ma-gong-zuo-de-yuan-li/">
               <h3 class="post-title">
-                day03(str&amp;&amp;切片)
+                脚本木马工作的原理
               </h3>
             </a>
           </div>

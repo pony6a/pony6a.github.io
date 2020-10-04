@@ -2,23 +2,23 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>day03（for循环） | pony686</title>
+<title>22 权限提升讲解 | pony686</title>
 <link rel="shortcut icon" href="https://itxz.fun/favicon.ico?v=1601777037443">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://itxz.fun/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="day03（for循环） | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="22 权限提升讲解 | pony686 - Atom Feed" href="https://itxz.fun/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="s1 = '老男孩edu'
-print('老' in s1)
-print('老男' in s1)
-print('老ed' in s1)
-print('老ed' not in s1)
-s1 = '老男孩教育最好的讲师：太白'
-'''
-老   ..." />
+    <meta name="description" content="各种漏洞拿到shell
+获取webshell权限，可以对网站任意修改
+获取服务的管理员权限（系统权限）
+1.网络服务用户权限
+2.webshell（对网站修改）
+3.(系统权限)（管理权限 system rootquan）
+提权 提升权限
+..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,82 +81,61 @@ s1 = '老男孩教育最好的讲师：太白'
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              day03（for循环）
+              22 权限提升讲解
             </h2>
             <div class="post-info">
               <span>
-                2020-04-22
+                2020-09-30
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="s1-老男孩edu">s1 = '老男孩edu'</h1>
-<h1 id="print老-in-s1">print('老' in s1)</h1>
-<h1 id="print老男-in-s1">print('老男' in s1)</h1>
-<h1 id="print老ed-in-s1">print('老ed' in s1)</h1>
-<h1 id="print老ed-not-in-s1">print('老ed' not in s1)</h1>
-<p>s1 = '老男孩教育最好的讲师：太白'<br>
-'''<br>
-老      s1[0]<br>
-男      s1[1]<br>
-孩      s1[2]<br>
-教      s1[3]<br>
-育      ....<br>
-最<br>
-...<br>
-'''</p>
-<h1 id="0~12">0~12</h1>
-<h1 id="len-获取可迭代对象的元素总个数">len :获取可迭代对象的元素总个数</h1>
-<h1 id="printlens1">print(len(s1))</h1>
-<h1 id="s1-老男孩教育最好的讲师太白">s1 = '老男孩教育最好的讲师：太白'</h1>
-<h1 id="index-0">index = 0</h1>
-<h1 id="while-index-lens1">while index &lt; len(s1):</h1>
-<h1 id="prints1index">print(s1[index])</h1>
-<h1 id="index-1">index += 1</h1>
-<h1 id="for-循环">for 循环</h1>
-<p>'''<br>
-有限循环<br>
-for 变量 in iterable:<br>
-pass<br>
-'''<br>
-s1 = '老男孩教育最好的讲师：太白'</p>
-<h1 id="for-i-in-s1">for i in s1:</h1>
-<h1 id="printi">print(i)</h1>
-<p>for i in s1:<br>
-print(i)<br>
-if i == '好':<br>
-break</p>
-<h1 id="break-continue">break continue</h1>
-<h1 id="for-else-while-else用法一样">for else: while else:用法一样。</h1>
+                <p>各种漏洞拿到shell<br>
+获取webshell权限，可以对网站任意修改<br>
+获取服务的管理员权限（系统权限）<br>
+1.网络服务用户权限<br>
+2.webshell（对网站修改）<br>
+3.(系统权限)（管理权限 system rootquan）</p>
+<p>提权 提升权限</p>
+<p>ASP/php 匿名权限</p>
+<p>ASPx USER权限</p>
+<p>jsp 通常是系统权限</p>
+<p>注意： 在脚本允许的情况下可以变换脚本提权</p>
+<p>收集信息<br>
+内外网<br>
+服务器系统和版本 位数<br>
+服务器的补丁情况<br>
+服务器的安装软件情况<br>
+服务器的防护软件情况<br>
+端口情况<br>
+支持脚本情况<br>
+...........<br>
+信息收集常用命令<br>
+windows：<br>
+ipconfig /all 查看当前ip<br>
+net user 查看当前服务器账号情况<br>
+netstat -ano 查看当前服务器端口开放情况<br>
+ver 查看当前服务器操作系统<br>
+systeminfo 查看当前服务器配置信息（补丁情况）<br>
+tasklist /svc 查看当前服务器进程情况<br>
+taskkill -PID pid号 结束某个pid号的进程<br>
+taskkill /im qq.exe /f  结束qq进程<br>
+net user cracer cracer /add 添加一个用户名为cracer密码为cracer的用户<br>
+net localgroup administrators cracer /add 将用户cracer添加到管理员组<br>
+whoami 查看当前操作用户（当前权限）<br>
+linux：</p>
+<p>ls -al 查看当前目录下的文件和文件夹</p>
+<p>pwd 查看当前操作路径</p>
+<p>uname -a 查看当前服务器内核信息</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9edu">s1 = '老男孩edu'</a></li>
-<li><a href="#print%E8%80%81-in-s1">print('老' in s1)</a></li>
-<li><a href="#print%E8%80%81%E7%94%B7-in-s1">print('老男' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-in-s1">print('老ed' in s1)</a></li>
-<li><a href="#print%E8%80%81ed-not-in-s1">print('老ed' not in s1)</a></li>
-<li><a href="#0~12">0~12</a></li>
-<li><a href="#len-%E8%8E%B7%E5%8F%96%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%83%E7%B4%A0%E6%80%BB%E4%B8%AA%E6%95%B0">len :获取可迭代对象的元素总个数</a></li>
-<li><a href="#printlens1">print(len(s1))</a></li>
-<li><a href="#s1-%E8%80%81%E7%94%B7%E5%AD%A9%E6%95%99%E8%82%B2%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AE%B2%E5%B8%88%E5%A4%AA%E7%99%BD">s1 = '老男孩教育最好的讲师：太白'</a></li>
-<li><a href="#index-0">index = 0</a></li>
-<li><a href="#while-index-lens1">while index &lt; len(s1):</a></li>
-<li><a href="#prints1index">print(s1[index])</a></li>
-<li><a href="#index-1">index += 1</a></li>
-<li><a href="#for-%E5%BE%AA%E7%8E%AF">for 循环</a></li>
-<li><a href="#for-i-in-s1">for i in s1:</a></li>
-<li><a href="#printi">print(i)</a></li>
-<li><a href="#break-continue">break continue</a></li>
-<li><a href="#for-else-while-else%E7%94%A8%E6%B3%95%E4%B8%80%E6%A0%B7">for else: while else:用法一样。</a></li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -165,9 +144,9 @@ break</p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://itxz.fun/post/day03strandqie-pian/">
+            <a href="https://itxz.fun/post/18php-chang-jian-de-lou-dong/">
               <h3 class="post-title">
-                day03(str&amp;&amp;切片)
+                18php 常见的漏洞
               </h3>
             </a>
           </div>
